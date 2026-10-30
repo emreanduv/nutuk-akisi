@@ -24,6 +24,7 @@
     <div class="band-right"><span class="sess" id="sess">BAĞLANIYOR</span><time id="clock">--:--</time></div>
     <nav class="tabs" id="tabs" role="tablist">
       <button class="on" data-tab="metin" role="tab">📜 Metinler</button>
+      <button data-tab="tam" role="tab">📖 Tam Metin</button>
       <button data-tab="kesfet" role="tab">✨ Keşfet</button>
       <button data-tab="kadro" role="tab">🎖️ Kadro</button>
       <button data-tab="kron" role="tab">⏳ Kronoloji</button>
@@ -40,6 +41,8 @@
       <div class="chips" id="kinds"></div>
       <div class="cards" id="list"></div>
     </section>
+
+    <section class="pane" id="p-tam"></section>
 
     <section class="pane" id="p-kesfet">
       <label class="kf-bildirim"><input type="checkbox" id="bildirim"><span><b>🔔 Her sabah günün sözü</b><small>Saat 09.00'da Nutuk'tan ve söylevlerden bir özgün cümle</small></span></label>
@@ -73,7 +76,7 @@
       <div class="cards" id="saved"></div>
     </section>
 
-    <p class="legal"><strong>Bir Mr. Anduv! yapımıdır.</strong> Nutuk Akışı bağımsız bir eğitim ve keşif uygulamasıdır. Atatürk'ün eserleri kamu malıdır; tırnak içindeki özgün satırlar Nutuk (1927) ve Atatürk'ün söylev ve demeçlerinden alınmıştır, altlarındaki karşılıklar bu uygulama için yazılmış sadeleştirmelerdir. Düz satırlar olayları günümüz Türkçesiyle anlatır. Tam metin için Vikikaynak ve Atatürk'ün Bütün Eserleri'ne bakılmalıdır. Wikipedia özetleri ve görselleri kendi lisanslarıyla gösterilir.</p>
+    <p class="legal"><strong>Bir Mr. Anduv! yapımıdır.</strong> Nutuk Akışı bağımsız bir eğitim ve keşif uygulamasıdır. Atatürk'ün eserleri kamu malıdır; tırnak içindeki özgün satırlar Nutuk (1927) ve Atatürk'ün söylev ve demeçlerinden alınmıştır, altlarındaki karşılıklar bu uygulama için yazılmış sadeleştirmelerdir. Düz satırlar olayları günümüz Türkçesiyle anlatır. Nutuk'un tam metni Tam Metin sekmesindedir (Vikikaynak, 1927 baskısı). Wikipedia özetleri ve görselleri kendi lisanslarıyla gösterilir.</p>
   </main>
 
   <div class="ticker"><b class="tk-label">🇹🇷 KRONOLOJİ</b><div class="tk-win"><div class="tk-track" id="track"></div></div></div>
@@ -88,6 +91,7 @@
 <script src="config.js"></script>
 <script src="common.js?v=1"></script>
 <script src="app.js?v=1"></script>
+<script src="tam.js?v=1"></script>
 <script src="yayin.js?v=1"></script>
 <script>NA.start();</script>
 </body>

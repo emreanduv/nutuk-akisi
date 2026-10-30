@@ -48,16 +48,18 @@ def tum_sayfalar():
         c = {"apcontinue": r["continue"]["apcontinue"]}
 
 
-ALT = re.compile(r"\[\[\s*/([^|\]]+)\|([^\]]+)\]\]")
+ALT = re.compile(r"\[\[\s*((?:Nutuk/\d+\. bölüm)?)/([^|\]]+)\|([^\]]+)\]\]")
 
 
-def alt_baglantilar(wt):
-    """İçindekiler tablosundaki [[/alt sayfa|başlık]] bağlantıları ve önündeki harf (A., B., …)."""
+def alt_baglantilar(wt, kendi=""):
+    """İçindekiler tablosundaki [[/alt sayfa|başlık]] (ya da [[Nutuk/N. bölüm/alt sayfa|…]]) bağlantıları ve önündeki harf (A., B., …)."""
     out = []
     for satir in wt.split("\n"):
+        if re.match(r"^\s*\|\s*(önceki|sonraki|başlık|bölüm)\s*=", satir): continue
         for m in ALT.finditer(satir):
+            if m.group(1) and m.group(1) != kendi: continue
             harf = re.search(r"\|\s*([A-ZÇĞİÖŞÜ]{1,3}|[IVXLC]+)\.\s*\|\|", satir)
-            out.append((m.group(1).strip(), sade_satir(m.group(2)), harf.group(1) if harf else ""))
+            out.append((m.group(2).strip(), sade_satir(m.group(3)), harf.group(1) if harf else ""))
     return out
 
 
@@ -141,6 +143,7 @@ def duz(wt):
         notlar.append(m.group(1)); return f" [{len(notlar)}]"
     s = re.sub(r"<ref[^>/]*>([\s\S]*?)</ref>", ref, s)
     s = re.sub(r"<ref[^>]*/>", "", s)
+    s = re.sub(r"\[\[(?:[^|\]\[]*\|)?([^\]\[]+)\]\]", r"\1", s)  # bağlantılar şablonlardan önce: içlerindeki | şablonu bölmesin
     s = re.sub(r"<references\s*/?>|\{\{\s*(reflist|kaynakça|notlar)[^}]*\}\}", "", s, flags=re.I)
     s = sablonlar(s)
     s = tablo(s)
@@ -185,6 +188,47 @@ def icerik_ham(basliklar):
     return {b: _ham[b] for b in basliklar if b in _ham}
 
 
+class _HtmlMetin(__import__("html.parser").parser.HTMLParser):
+    BLOK = {"p", "div", "br", "tr", "li", "h1", "h2", "h3", "h4", "h5", "table", "dd", "dt", "blockquote", "center"}
+    def __init__(self):
+        super().__init__(); self.par, self.cur, self.gizli, self.notlar, self.notta = [], [], 0, [], 0
+    def _kes(self):
+        t = re.sub(r"\s+", " ", "".join(self.cur)).strip()
+        if t: (self.notlar if self.notta else self.par).append(t)
+        self.cur = []
+    def handle_starttag(self, tag, a):
+        a = dict(a); cls = a.get("class") or ""
+        if tag in ("style", "script") or "ws-noexport" in cls or "pagenum" in cls or "mw-editsection" in cls or a.get("id") == "toc": self.gizli += 1; return
+        if tag == "ol" and "references" in cls: self._kes(); self.notta += 1
+        if tag in self.BLOK: self._kes()
+        if tag in ("td", "th") and self.cur: self.cur.append(" · ")
+    def handle_endtag(self, tag):
+        if tag in ("style", "script") and self.gizli: self.gizli -= 1; return
+        if tag in self.BLOK: self._kes()
+        if tag == "ol" and self.notta: self._kes(); self.notta -= 1
+    def handle_startendtag(self, tag, a): self.handle_starttag(tag, a)
+    def handle_data(self, d):
+        if not self.gizli: self.cur.append(d)
+
+
+def html_duz(h):
+    h = re.sub(r'<span[^>]*class="[^"]*(pagenum|ws-pagenum)[^"]*"[^>]*>.*?</span>', "", h, flags=re.S)
+    h = re.sub(r'<sup[^>]*class="reference"[^>]*>.*?</sup>', "", h, flags=re.S)
+    p = _HtmlMetin(); p.feed(h); p._kes()
+    P = [re.sub(r"\[\s*\d+\s*\]$", "", x).strip() for x in p.par]
+    P = [x for x in P if x and not re.fullmatch(r"[\s·|—-]+|\[?\d+\]?", x)]
+    return P, p.notlar
+
+
+def html_al(basliklar):
+    out = {}
+    for b in basliklar:
+        r = api(action="parse", page=b, prop="text", disablelimitreport=1, disableeditsection=1)
+        out["html:" + b] = r.get("parse", {}).get("text", "")
+        time.sleep(0.2)
+    return out
+
+
 def main():
     import gzip
     if os.path.exists(HAM):
@@ -199,7 +243,7 @@ def main():
     plan, kullanilan = [], set(["Nutuk"] + bolum_basliklari)
     for (t, baslik, romen), tam in zip(bolum_bag, bolum_basliklari):
         wt = bolum_wt.get(tam, "")
-        kisim = [(tam + "/" + a, b, h) for a, b, h in alt_baglantilar(wt)] or [(tam, baslik, "")]
+        kisim = [(tam + "/" + a, b, h) for a, b, h in alt_baglantilar(wt, tam)] or [(tam, baslik, "")]
         on = sade_satir(sablonlar(re.sub(r"\{\|[\s\S]*?\|\}", "", wt)))
         plan.append({"no": int(t.split(".")[0]), "romen": romen, "baslik": baslik, "sayfa": tam, "kisimlar": kisim, "on": on})
         kullanilan.update(k[0] for k in kisim)
@@ -210,6 +254,9 @@ def main():
     wt0 = dict(bolum_wt)
     print(f"▸ {len(tum)} sayfa indiriliyor…")
     wt = {**icerik_ham(tum), **wt0}
+    gerek = [t for t, v in wt.items() if "<pages" in v and "html:" + t not in _ham]
+    if gerek and not os.environ.get("YEREL"):
+        print(f"▸ {len(gerek)} sayfa PDF dökümünden (işlenmiş hâli) alınıyor…"); _ham.update(html_al(gerek))
     gzip.open(HAM, "wt", encoding="utf-8").write(json.dumps(_ham, ensure_ascii=False))
 
     # İçindekilerde olmayan sayfaları "sonraki" zincirine göre yerine koy
@@ -232,9 +279,15 @@ def main():
         ks = []
         for sayfa, baslik, harf in b["kisimlar"]:
             if sayfa not in wt: eksik.append(sayfa); continue
-            p, n = duz(wt[sayfa])
+            p, n = html_duz(_ham["html:" + sayfa]) if "<pages" in wt[sayfa] and _ham.get("html:" + sayfa) else duz(wt[sayfa])
+            if not p: continue
+            parca = sayfa.split("/")
+            if len(parca) > 3: baslik = f"{parca[2]} ({parca[3]})"  # Vesika 97/b → Vesika 97 (b)
             karakter += sum(map(len, p))
-            ks.append({"id": f"{b['no']}-{len(ks) + 1}", "harf": harf, "baslik": baslik, "p": p, **({"notlar": n} if n else {})})
+            ks.append({"id": f"{b['no']}-{len(ks) + 1}", "harf": harf, "baslik": baslik, "w": sayfa[len("Nutuk/"):], "p": p, **({"notlar": n} if n else {})})
+        if all(re.match(r"^Vesika \d+", k["baslik"]) for k in ks):  # vesikalar numara sırasıyla
+            ks.sort(key=lambda k: (int(re.search(r"\d+", k["baslik"]).group()), k["baslik"]))
+            for i, k in enumerate(ks): k["id"] = f"{b['no']}-{i + 1}"
         cikti.append({"no": b["no"], "romen": b["romen"], "baslik": b["baslik"], "kisimlar": ks})
     cikti.sort(key=lambda b: b["no"])
 
