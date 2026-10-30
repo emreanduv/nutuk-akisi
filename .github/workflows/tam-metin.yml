@@ -1,0 +1,18 @@
+name: Nutuk tam metin (Vikikaynak)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  indir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vikikaynak'tan indir ve düz metne çevir
+        run: python3 tools/tam_metin.py
+      - name: Depoya kaydet
+        run: |
+          git config user.name "Mr. Anduv!"
+          git config user.email "emreanduvart@gmail.com"
+          git add www/data/nutuk-tam.json tools/tam_metin_ozet.json
+          git diff --cached --quiet && echo "değişiklik yok" || (git commit -m "Nutuk tam metni Vikikaynak'tan güncellendi" && git push)
