@@ -91,7 +91,10 @@ def _sablon(m):
     if ad in SIL or ad.startswith("eser") or ad.startswith("dhr") or ad.startswith("pd"): return ""
     if ad in BICIM or ad.startswith("x-") or ad.startswith("float") or ad.startswith("center") or ad.startswith("block"):
         return konum[-1] if konum else ""
-    if ad in ("br", "nl"): return "\n"
+    if ad in ("br", "nl") or ad.startswith("col-"): return "\n\n"
+    if ad in ("alıntı", "quote", "blockquote", "söz", "osmanlıca", "dipnot metni"):
+        return "\n\n" + (konum[0] if konum else "") + "\n\n"
+    if ad in ("'", "kesme"): return "'"
     if ad in ("tire", "dash", "em dash", "--"): return "—"
     if ad in ("...", "elips", "noktalar"): return "…"
     BILINMEYEN[ad] += 1
@@ -172,26 +175,42 @@ def duz(wt):
     return paragraflar, notlar
 
 
+HAM = os.path.join(ROOT, "tools", "nutuk-ham.json.gz")
+_ham = {}
+
+
+def icerik_ham(basliklar):
+    eksik = [b for b in basliklar if b not in _ham]
+    if eksik and not os.environ.get("YEREL"): _ham.update(icerik(eksik))
+    return {b: _ham[b] for b in basliklar if b in _ham}
+
+
 def main():
+    import gzip
+    if os.path.exists(HAM):
+        _ham.update(json.load(gzip.open(HAM, "rt", encoding="utf-8")))
     print("▸ İçindekiler…")
-    hepsi = tum_sayfalar()
-    kok = icerik(["Nutuk"])["Nutuk"]
+    hepsi = _ham.get("__liste__") or tum_sayfalar()
+    _ham["__liste__"] = hepsi
+    kok = icerik_ham(["Nutuk"])["Nutuk"]
     bolum_bag = [(t, b, h) for t, b, h in alt_baglantilar(kok) if re.match(r"^\d+\. bölüm$", t)]
     bolum_basliklari = ["Nutuk/" + t for t, _, _ in bolum_bag]
-    bolum_wt = icerik(bolum_basliklari)
+    bolum_wt = icerik_ham(bolum_basliklari)
     plan, kullanilan = [], set(["Nutuk"] + bolum_basliklari)
     for (t, baslik, romen), tam in zip(bolum_bag, bolum_basliklari):
         wt = bolum_wt.get(tam, "")
-        kisim = [(tam + "/" + a, b, h) for a, b, h in alt_baglantilar(wt)]
+        kisim = [(tam + "/" + a, b, h) for a, b, h in alt_baglantilar(wt)] or [(tam, baslik, "")]
         on = sade_satir(sablonlar(re.sub(r"\{\|[\s\S]*?\|\}", "", wt)))
         plan.append({"no": int(t.split(".")[0]), "romen": romen, "baslik": baslik, "sayfa": tam, "kisimlar": kisim, "on": on})
         kullanilan.update(k[0] for k in kisim)
     yetim = [t for t in hepsi if t not in kullanilan]
     print(f"  {len(plan)} bölüm · {sum(len(b['kisimlar']) for b in plan)} kısım içindekilerde · {len(yetim)} içindekilerde yok")
 
-    tum = [k[0] for b in plan for k in b["kisimlar"]] + yetim
+    tum = [k[0] for b in plan for k in b["kisimlar"] if k[0] not in bolum_wt] + yetim
+    wt0 = dict(bolum_wt)
     print(f"▸ {len(tum)} sayfa indiriliyor…")
-    wt = icerik(tum)
+    wt = {**icerik_ham(tum), **wt0}
+    gzip.open(HAM, "wt", encoding="utf-8").write(json.dumps(_ham, ensure_ascii=False))
 
     # İçindekilerde olmayan sayfaları "sonraki" zincirine göre yerine koy
     for b in plan:

@@ -14,5 +14,5 @@ jobs:
         run: |
           git config user.name "Mr. Anduv!"
           git config user.email "emreanduvart@gmail.com"
-          git add www/data/nutuk-tam.json tools/tam_metin_ozet.json
+          git add www/data/nutuk-tam.json tools/tam_metin_ozet.json tools/nutuk-ham.json.gz
           git diff --cached --quiet && echo "değişiklik yok" || (git commit -m "Nutuk tam metni Vikikaynak'tan güncellendi" && git push)
