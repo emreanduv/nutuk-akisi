@@ -87,7 +87,7 @@
         ${w ? `<h4>📖 Wikipedia (${w.lang === 'tr' ? 'Türkçe' : 'İngilizce'})</h4><div class="wk">${w.thumb ? `<img src="${esc(w.thumb)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<p>${esc(w.extract)}</p></div>` : ''}
         <div class="sh-actions">
           <button data-save="${esc(t.id)}">${isSaved(t.id) ? '★ Kayıtlı' : '☆ Kaydet'}</button>
-          ${v && v.url ? `<a class="btn" href="${esc(v.url)}" target="_blank" rel="noopener">Tam metin · Vikikaynak ↗</a>` : ''}
+          ${v && v.title && /^Nutuk\//.test(v.title) ? `<button data-tamw="${esc(v.title)}">📖 Nutuk'ta oku</button>` : v && v.url ? `<a class="btn" href="${esc(v.url)}" target="_blank" rel="noopener">Tam metin · Vikikaynak ↗</a>` : ''}
           ${w && w.url ? `<a class="btn" href="${esc(w.url)}" target="_blank" rel="noopener">Wikipedia ↗</a>` : ''}
           <button data-share="${esc(t.id)}">📤 Paylaş</button>
         </div>
@@ -110,6 +110,7 @@
     const t = e.target.closest('[data-t]'); if(t){ e.preventDefault(); openMetin(t.dataset.t); return; }
     const g = e.target.closest('[data-g]'); if(g){ openKadro(g.dataset.g); return; }
     const s = e.target.closest('[data-save]'); if(s){ toggleSave(s.dataset.save); openMetin(s.dataset.save); return; }
+    const tw = e.target.closest('[data-tamw]'); if(tw && NA.tamAcW){ $('#sheet').close(); NA.tamAcW(tw.dataset.tamw); return; }
     const sh = e.target.closest('[data-share]');
     if(sh){
       const t = NA.metin(sh.dataset.share), O = NA.originals(t);

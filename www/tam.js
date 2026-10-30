@@ -18,6 +18,7 @@
       T = d; T.sira = [];
       T.bolumler.forEach(b => b.kisimlar.forEach(k => { k.b = b; k.i = T.sira.length; T.sira.push(k); }));
       T.harita = Object.fromEntries(T.sira.map(k => [k.id, k]));
+      T.vesika = Object.fromEntries(T.sira.filter(k => /^Vesika \d+$/.test(k.baslik)).map(k => [k.baslik.slice(7), k.id]));
       return T;
     });
     return yukleniyor;
@@ -72,7 +73,8 @@
     const k = T.harita[id]; if(!k) return;
     aktif = k;
     const onc = T.sira[k.i - 1], snr = T.sira[k.i + 1], q = norm(araQ.trim());
-    const isaretle = (p, j) => { const h = esc(p); if(para == null || j !== para || q.length < 3) return h; const n = norm(p), at = n.indexOf(q); return at < 0 ? h : esc(p.slice(0, at)) + '<mark>' + esc(p.slice(at, at + q.length)) + '</mark>' + esc(p.slice(at + q.length)); };
+    const vs = (h) => h.replace(/(Vesika(?:lar)?\s*:?\s*)((?:\d+(?:\s*(?:,|ve|-)\s*)?)+)/g, (m, a, nums) => a + nums.replace(/\d+/g, n => T.vesika[n] ? `<button class="vs" data-tam="${T.vesika[n]}">${n}</button>` : n));
+    const isaretle = (p, j) => { const h = esc(p); if(para == null || j !== para || q.length < 3) return vs(h); const n = norm(p), at = n.indexOf(q); return at < 0 ? vs(h) : esc(p.slice(0, at)) + '<mark>' + esc(p.slice(at, at + q.length)) + '</mark>' + esc(p.slice(at + q.length)); };
     pane.innerHTML = `
       <div class="tm-bar-ust"><button data-tam-geri>← İçindekiler</button><span>${esc(k.b.romen)}. bölüm · ${k.i + 1}/${T.sira.length}</span><button data-boyut="-1" aria-label="Yazıyı küçült">A−</button><button data-boyut="1" aria-label="Yazıyı büyüt">A+</button></div>
       <article class="tm-oku" style="font-size:${st.boyut}px">
@@ -116,5 +118,6 @@
     yukle().then(liste).catch(() => { pane.innerHTML = '<div class="empty">Tam metin açılamadı.</div>'; });
   }
   document.getElementById('tabs').addEventListener('click', (e) => { const b = e.target.closest('button[data-tab]'); if(b && b.dataset.tab === 'tam') ac(); });
+  NA.tamAcW = (w) => { document.querySelector('#tabs [data-tab="tam"]').click(); yukle().then(() => { const k = T.sira.find(x => 'Nutuk/' + x.w === w); if(k) oku(k.id); }); };
   NA.tamAc = (id) => { document.querySelector('#tabs [data-tab="tam"]').click(); yukle().then(() => oku(id)); };
 })();

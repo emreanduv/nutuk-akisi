@@ -196,17 +196,28 @@ class _HtmlMetin(__import__("html.parser").parser.HTMLParser):
         t = re.sub(r"\s+", " ", "".join(self.cur)).strip()
         if t: (self.notlar if self.notta else self.par).append(t)
         self.cur = []
+    BOS = {"br", "img", "hr", "wbr", "meta", "link", "input"}
     def handle_starttag(self, tag, a):
         a = dict(a); cls = a.get("class") or ""
-        if tag in ("style", "script") or "ws-noexport" in cls or "pagenum" in cls or "mw-editsection" in cls or a.get("id") == "toc": self.gizli += 1; return
-        if tag == "ol" and "references" in cls: self._kes(); self.notta += 1
+        if tag not in self.BOS:
+            self.yigin = getattr(self, "yigin", []); self.yigin.append(tag)
+            if not self.gizli and (tag in ("style", "script") or "ws-noexport" in cls or "pagenum" in cls or "mw-editsection" in cls or a.get("id") == "toc"):
+                self.gizli = len(self.yigin)
+        if self.gizli: return
+        if tag == "ol" and "references" in cls: self._kes(); self.notta = len(self.yigin)
         if tag in self.BLOK: self._kes()
         if tag in ("td", "th") and self.cur: self.cur.append(" · ")
     def handle_endtag(self, tag):
-        if tag in ("style", "script") and self.gizli: self.gizli -= 1; return
-        if tag in self.BLOK: self._kes()
-        if tag == "ol" and self.notta: self._kes(); self.notta -= 1
-    def handle_startendtag(self, tag, a): self.handle_starttag(tag, a)
+        y = getattr(self, "yigin", [])
+        if tag in self.BOS or tag not in y: return
+        while y:
+            t = y.pop()
+            if self.gizli and len(y) < self.gizli: self.gizli = 0
+            elif not self.gizli and t in self.BLOK: self._kes()
+            if self.notta and len(y) < self.notta: self._kes(); self.notta = 0
+            if t == tag: break
+    def handle_startendtag(self, tag, a):
+        if tag == "br" and not self.gizli: self._kes()
     def handle_data(self, d):
         if not self.gizli: self.cur.append(d)
 
