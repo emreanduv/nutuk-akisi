@@ -1,0 +1,993 @@
+{
+ "_not": "Nutuk Akışı metin arşivi. satirlar: düz metin = günümüz Türkçesiyle anlatım; {\"o\": özgün söz, \"s\": bugünün Türkçesiyle} = Atatürk'ün kendi sözü. Özgün satırlar Vikikaynak'la karşılaştırılır (python3 araclar/tani.py). bolum: Nutuk dizisindeki sıra. vk: Vikikaynak'ta aranacak sayfa adı. Yeni metin eklemek için bir nesneyi kopyala, kaydet; sunucuyu yeniden başlatmaya gerek yok.",
+ "metinler": [
+  {
+   "id": "samsun",
+   "bolum": 1,
+   "tur": "Nutuk",
+   "simge": "🚢",
+   "baslik": "Samsun'a Çıkış: Vaziyet ve Manzara-i Umumiye",
+   "eser": "Nutuk (1927) · ilk sayfa",
+   "tarih": "1919-05-19",
+   "yer": "Samsun",
+   "dinleyen": "CHF II. Büyük Kongresi · Ankara, 15 Ekim 1927",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Damat Ferit Paşa",
+    "Vahdettin"
+   ],
+   "satirlar": [
+    {
+     "o": "1335 senesi Mayıs'ının on dokuzuncu günü Samsun'a çıktım.",
+     "s": "19 Mayıs 1919'da Samsun'a çıktım. (1335, o günlerde kullanılan Rumi takvimde 1919'dur.)"
+    },
+    {
+     "o": "Vaziyet ve manzara-i umumiye:",
+     "s": "Genel durum ve görünüş şuydu:"
+    },
+    {
+     "o": "Osmanlı Devleti'nin dahil bulunduğu grup, Harb-i Umumi'de mağlup olmuş,",
+     "s": "Osmanlı Devleti'nin içinde bulunduğu ittifak, Birinci Dünya Savaşı'nda yenilmişti,"
+    },
+    {
+     "o": "Osmanlı ordusu her tarafta zedelenmiş, şeraiti ağır bir mütarekename imzalanmış.",
+     "s": "ordu her cephede yıpranmış, ağır şartlı bir ateşkes imzalanmıştı."
+    },
+    {
+     "o": "Büyük Harbin uzun seneleri zarfında, millet yorgun ve fakir bir halde.",
+     "s": "Uzun savaş yılları boyunca millet yorulmuş, yoksullaşmıştı."
+    },
+    {
+     "o": "Millet ve memleketi Harb-i Umumi'ye sevk edenler, kendi hayatları endişesine düşerek memleketten firar etmişler.",
+     "s": "Milleti savaşa sokanlar kendi canlarının derdine düşüp ülkeden kaçmıştı."
+    },
+    {
+     "o": "Ordunun elinden esliha ve cephanesi alınmış ve alınmakta.",
+     "s": "Ordunun silahı ve cephanesi elinden alınmış, alınmaya devam ediyordu."
+    },
+    "Dört gün önce, 15 Mayıs'ta Yunan ordusu İzmir'e çıkmıştı. Adana'da Fransızlar, Antep–Maraş–Urfa hattında İngilizler, Antalya ve Konya'da İtalyanlar vardı."
+   ],
+   "ne": "Nutuk'un ünlü ilk cümlesi ve 1919 baharında yurdun içinde bulunduğu durum.",
+   "bilgi": "Nutuk'un ilk cümlesinde tarih Rumi takvimle yazılır: 1335. O yıllarda Osmanlı'da Rumi takvim kullanılıyordu; 1 Ocak 1926'da uluslararası takvime geçildi. Mustafa Kemal 16 Mayıs 1919'da İstanbul'dan Bandırma Vapuru ile yola çıktı.",
+   "wiki": {
+    "tr": "Samsun'a çıkış",
+    "en": "Atatürk's landing at Samsun"
+   },
+   "vk": "Nutuk/1. bölüm/Samsun'a çıktığım gün umumî vaziyet ve manzara",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "tek-karar",
+   "bolum": 2,
+   "tur": "Nutuk",
+   "simge": "⚖️",
+   "baslik": "Bir Tek Karar Vardı",
+   "eser": "Nutuk (1927)",
+   "tarih": "1919-05-20",
+   "yer": "Samsun · Havza",
+   "dinleyen": "CHF II. Büyük Kongresi · Ankara, 15 Ekim 1927",
+   "kisiler": [
+    "Mustafa Kemal"
+   ],
+   "satirlar": [
+    "Kurtuluş için o günlerde üç görüş ortaya atılıyordu.",
+    "Birincisi İngiliz himayesini istemek, ikincisi Amerikan mandasını kabul etmekti.",
+    "Üçüncüsü ise her bölgenin kendi başının çaresine bakmasıydı.",
+    "Mustafa Kemal bunların hiçbirini kabul etmedi: hepsi milletin bağımsızlığını gözden çıkarıyordu.",
+    {
+     "o": "Efendiler, bu vaziyet karşısında bir tek karar vardı.",
+     "s": "Arkadaşlar, bu durum karşısında tek bir karar vardı."
+    },
+    {
+     "o": "O da hâkimiyet-i milliyeye müstenid, bilâkayd ü şart müstakil yeni bir Türk Devleti tesis etmek!",
+     "s": "O da millet egemenliğine dayanan, kayıtsız şartsız bağımsız yeni bir Türk devleti kurmaktı!"
+    },
+    "Nutuk'a göre bu karar İstanbul'dan çıkmadan önce düşünülmüş, Samsun'da Anadolu toprağına ayak basar basmaz uygulanmaya başlanmıştı."
+   ],
+   "ne": "Manda ve himaye tartışmalarına karşı tam bağımsızlık kararı.",
+   "bilgi": "'Manda', bir ülkenin yönetiminin büyük bir devlete emanet edilmesi demekti. Sivas Kongresi'nde manda fikri kesin olarak reddedildi.",
+   "wiki": {
+    "tr": "Manda ve himaye",
+    "en": "League of Nations mandate"
+   },
+   "vk": "Nutuk/1. bölüm/Benim kararım",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "amasya",
+   "bolum": 3,
+   "tur": "Genelge",
+   "simge": "📜",
+   "baslik": "Amasya Genelgesi: Milletin İstiklalini Yine Milletin Azmi Kurtaracak",
+   "eser": "Nutuk (1927) · Amasya Tamimi",
+   "tarih": "1919-06-22",
+   "yer": "Amasya",
+   "dinleyen": "Bütün sivil ve askerî makamlara gizli genelge",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Rauf (Orbay)",
+    "Ali Fuat (Cebesoy)",
+    "Refet (Bele)",
+    "Kâzım Karabekir"
+   ],
+   "satirlar": [
+    "Havza'da halkı mitinglerle uyandıran Mustafa Kemal, Amasya'da silah arkadaşlarıyla buluştu.",
+    {
+     "o": "Vatanın tamamiyeti, milletin istiklali tehlikededir.",
+     "s": "Vatanın bütünlüğü, milletin bağımsızlığı tehlikededir."
+    },
+    {
+     "o": "Hükümet-i merkeziye deruhde ettiği mes'ûliyetin icâbâtını ifa edememektedir.",
+     "s": "İstanbul hükümeti üstlendiği sorumluluğun gereklerini yerine getirememektedir."
+    },
+    {
+     "o": "Milletin istiklalini yine milletin azim ve kararı kurtaracaktır.",
+     "s": "Milletin bağımsızlığını yine milletin azmi ve kararlılığı kurtaracaktır."
+    },
+    "Bütün yurdu temsil edecek millî bir kongrenin Sivas'ta toplanması kararlaştırıldı.",
+    "Genelgeyi Mustafa Kemal ile Rauf, Ali Fuat ve Refet beyler imzaladı; Kâzım Karabekir telgrafla katıldı."
+   ],
+   "ne": "Millî Mücadele'nin amacını, gerekçesini ve yöntemini ilk kez birlikte açıklayan belge.",
+   "bilgi": "Amasya Genelgesi gizli bir genelgeydi ama ilk kez 'millet' kendi kaderinin sahibi olarak ilan ediliyordu. Bu yüzden Kurtuluş Savaşı'nın 'ihtilal beyannamesi' diye anılır.",
+   "wiki": {
+    "tr": "Amasya Genelgesi",
+    "en": "Amasya Circular"
+   },
+   "vk": "Nutuk/2. bölüm/Sivas'ta umumi bir millî heyet toplama kararı",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "istifa",
+   "bolum": 4,
+   "tur": "Telgraf",
+   "simge": "📡",
+   "baslik": "Askerlikten İstifa: Milletin Bir Ferdi Olarak",
+   "eser": "Nutuk (1927)",
+   "tarih": "1919-07-08",
+   "yer": "Erzurum",
+   "dinleyen": "Telgrafla İstanbul'a ve kolordulara",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Kâzım Karabekir"
+   ],
+   "satirlar": [
+    "İstanbul hükümeti Mustafa Kemal'i görevden almış, hemen geri dönmesini istiyordu.",
+    "8 Temmuz 1919 gecesi Erzurum'da telgraf başına geçti.",
+    "Hem resmî görevinden hem de askerlikten istifa ettiğini bildirdi.",
+    "Artık ne rütbesi ne makamı vardı; mücadeleye milletin bir ferdi olarak devam edecekti.",
+    "En sevdiği mesleği, askerliği, davası uğruna bırakmıştı.",
+    "XV. Kolordu Komutanı Kâzım Karabekir onu tutuklamadı; aksine emrinde olduğunu bildirdi."
+   ],
+   "ne": "Bütün resmî sıfatlarını bırakıp sivil olarak mücadeleye devam etme kararı.",
+   "bilgi": "Millî Mücadele büyük ölçüde telgrafla yönetildi. Nutuk, şifreli telgraflarla, emirlerle ve cevaplarla dolu bir kitaptır; Mustafa Kemal ve arkadaşları nice geceyi telgraf başında geçirdi.",
+   "wiki": {
+    "tr": "Erzurum Kongresi",
+    "en": "Erzurum Congress"
+   },
+   "vk": "Nutuk/2. bölüm/Resmî sıfat ve salâhiyetleri bırakarak milletin şefkat ve civanmertliğine güvenmek ve vicdani vazifeye devam etmek kararı",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "erzurum",
+   "bolum": 5,
+   "tur": "Kongre",
+   "simge": "🏔️",
+   "baslik": "Erzurum Kongresi: Vatan Bir Bütündür",
+   "eser": "Nutuk (1927)",
+   "tarih": "1919-07-23",
+   "yer": "Erzurum",
+   "dinleyen": "Doğu illerinin temsilcileri",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Kâzım Karabekir",
+    "Rauf (Orbay)"
+   ],
+   "satirlar": [
+    "23 Temmuz 1919'da doğu illerinin temsilcileri Erzurum'da toplandı.",
+    "Mustafa Kemal kongre başkanı seçildi.",
+    "Karar: Millî sınırlar içinde vatan bir bütündür, parçalanamaz.",
+    "Her türlü yabancı işgaline ve müdahalesine karşı millet hep birlikte direnecektir.",
+    "İstanbul hükümeti vatanı koruyamazsa geçici bir hükümet kurulacaktır.",
+    "Manda ve himaye kabul edilemez.",
+    {
+     "o": "Kuvâ-yı milliyeyi âmil ve irâde-i milliyeyi hâkim kılmak esastır.",
+     "s": "Millî kuvvetleri etken, millet iradesini egemen kılmak esastır."
+    },
+    "Kongre 7 Ağustos'ta dağıldı; seçilen Temsil Heyeti'nin başında Mustafa Kemal vardı."
+   ],
+   "ne": "Bölgesel olarak toplanan ama bütün vatan için karar alan ilk kongre.",
+   "bilgi": "Erzurum Kongresi'nin 'millî sınırlar' kararı, Misak-ı Millî'nin ilk taslağı sayılır.",
+   "wiki": {
+    "tr": "Erzurum Kongresi",
+    "en": "Erzurum Congress"
+   },
+   "vk": "Nutuk/2. bölüm/Erzurum Kongresi beyannamesi ve kararları",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "sivas",
+   "bolum": 6,
+   "tur": "Kongre",
+   "simge": "🤝",
+   "baslik": "Sivas Kongresi: Bütün Cemiyetler Tek Çatı Altında",
+   "eser": "Nutuk (1927)",
+   "tarih": "1919-09-04",
+   "yer": "Sivas",
+   "dinleyen": "Anadolu ve Rumeli'den delegeler",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Damat Ferit Paşa"
+   ],
+   "satirlar": [
+    "4 Eylül 1919'da Anadolu ve Rumeli'nin her yanından gelen delegeler Sivas'ta toplandı.",
+    "Bütün millî cemiyetler 'Anadolu ve Rumeli Müdafaa-i Hukuk Cemiyeti' adı altında birleştirildi.",
+    "Erzurum'da konan ilke burada bütün yurt için tekrarlandı: millî kuvvetler etken, millet iradesi egemen olacaktı.",
+    "Manda ve himaye fikri kesin olarak reddedildi.",
+    "İstanbul hükümetinin kongreyi dağıtma girişimleri boşa çıktı; Anadolu, İstanbul ile telgraf bağlantısını kesti.",
+    "Ekim başında Damat Ferit hükümeti düştü. Anadolu artık tek ses konuşuyordu."
+   ],
+   "ne": "Millî Mücadele'nin bütün yurdu kapsayan örgütü burada kuruldu.",
+   "bilgi": "Kongre günlerinde Mustafa Kemal ve arkadaşları sabahlara kadar telgraf başında kaldı. Telgraf hatları o günlerin 'canlı yayını' gibiydi.",
+   "wiki": {
+    "tr": "Sivas Kongresi",
+    "en": "Sivas Congress"
+   },
+   "vk": "Nutuk/2. bölüm/Sivas Kongresi açılıyor",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "ankara",
+   "bolum": 7,
+   "tur": "Nutuk",
+   "simge": "🏛️",
+   "baslik": "Ankara'ya Geliş: Mücadelenin Kalbi",
+   "eser": "Nutuk (1927)",
+   "tarih": "1919-12-27",
+   "yer": "Ankara",
+   "dinleyen": "CHF II. Büyük Kongresi · Ankara, 1927",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Temsil Heyeti"
+   ],
+   "satirlar": [
+    "Temsil Heyeti 27 Aralık 1919'da Ankara'ya geldi.",
+    "Ankara demiryoluna bağlıydı, İstanbul'a yeterince yakın, cepheye yeterince uzaktı.",
+    "Halk, seymenler ve efeler Heyet'i coşkuyla karşıladı.",
+    "Küçük bir Anadolu kasabası birkaç yıl içinde yeni devletin başkenti olacaktı."
+   ],
+   "ne": "Temsil Heyeti'nin Ankara'yı merkez seçmesi.",
+   "bilgi": "Ankara 13 Ekim 1923'te resmen başkent ilan edildi. Cumhuriyet'in ilanından iki hafta önce.",
+   "wiki": {
+    "tr": "Temsil Heyeti",
+    "en": "Representative Committee"
+   },
+   "vk": "Nutuk/4. bölüm/Ankara'ya geliş",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "misak",
+   "bolum": 8,
+   "tur": "Nutuk",
+   "simge": "🗺️",
+   "baslik": "Misak-ı Millî ve İstanbul'un İşgali",
+   "eser": "Nutuk (1927)",
+   "tarih": "1920-03-16",
+   "yer": "İstanbul · Ankara",
+   "dinleyen": "CHF II. Büyük Kongresi · Ankara, 1927",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Rauf (Orbay)"
+   ],
+   "satirlar": [
+    "Son Osmanlı Mebusan Meclisi, 28 Ocak 1920'de Misak-ı Millî'yi (Millî Ant) kabul etti.",
+    "Buna göre ateşkes imzalandığında elde kalan ve çoğunluğu Türklerin yaşadığı topraklar bölünemez bir bütündü.",
+    "İtilaf devletleri buna 16 Mart 1920'de İstanbul'u resmen işgal ederek cevap verdi.",
+    "Meclis basıldı, bazı milletvekilleri tutuklanıp Malta'ya sürüldü.",
+    "Mustafa Kemal aynı gün harekete geçti: Ankara'da olağanüstü yetkili bir meclis toplanacaktı."
+   ],
+   "ne": "Millî sınırların ilanı ve İstanbul'un işgaline Ankara'nın cevabı.",
+   "bilgi": "Misak-ı Millî, Lozan'a kadar Türk diplomasisinin pusulası oldu.",
+   "wiki": {
+    "tr": "Misak-ı Millî",
+    "en": "Misak-ı Millî"
+   },
+   "vk": "Nutuk/5. bölüm/Misak-ı Millî hazırlanıyor",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "tbmm",
+   "bolum": 9,
+   "tur": "Nutuk",
+   "simge": "🏛️",
+   "baslik": "23 Nisan 1920: Büyük Millet Meclisi Açılıyor",
+   "eser": "Nutuk (1927) · 1921 Teşkilat-ı Esasiye",
+   "tarih": "1920-04-23",
+   "yer": "Ankara",
+   "dinleyen": "Türkiye Büyük Millet Meclisi",
+   "kisiler": [
+    "Mustafa Kemal"
+   ],
+   "satirlar": [
+    "23 Nisan 1920 Cuma günü Ankara'da Türkiye Büyük Millet Meclisi açıldı.",
+    "Meclis, millet adına hem yasama hem yürütme yetkisini kendinde topladı.",
+    "Mustafa Kemal Meclis Başkanı seçildi.",
+    "Ocak 1921'de kabul edilen ilk anayasanın birinci maddesi bu ilkeyi yazdı:",
+    {
+     "o": "Hâkimiyet bilâkaydüşart milletindir.",
+     "s": "Egemenlik kayıtsız şartsız milletindir."
+    }
+   ],
+   "ne": "Millet egemenliğine dayanan yeni meclisin doğuşu.",
+   "bilgi": "Bugün TBMM Genel Kurul salonunda 'Egemenlik kayıtsız şartsız milletindir' yazar.",
+   "wiki": {
+    "tr": "Türkiye Büyük Millet Meclisi",
+    "en": "Grand National Assembly of Turkey"
+   },
+   "vk": "Nutuk/10. bölüm/Teşkilât-ı Esasiye Kanununun esas maddelerini Tevfik Paşa'ya bildirdim",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "inonu",
+   "bolum": 10,
+   "tur": "Telgraf",
+   "simge": "📡",
+   "baslik": "İnönü: Milletin Makûs Talihini de Yendiniz",
+   "eser": "İsmet Paşa'ya telgraf · 1921",
+   "tarih": "1921-03-31",
+   "yer": "Metristepe · Eskişehir",
+   "dinleyen": "Batı Cephesi Komutanı İsmet Paşa",
+   "kisiler": [
+    "Mustafa Kemal",
+    "İsmet (İnönü)"
+   ],
+   "satirlar": [
+    "Düzenli ordu ilk sınavını Batı Cephesi'nde, İsmet Paşa komutasında İnönü'de verdi.",
+    "Ocak 1921'deki Birinci İnönü zaferi Meclis'in itibarını yükseltti.",
+    "Mart sonunda Yunan ordusu yeniden saldırdı; 31 Mart 1921'de İkinci İnönü kazanıldı.",
+    "Mustafa Kemal savaş alanını Metristepe'den izledi ve İsmet Paşa'ya şu telgrafı çekti:",
+    {
+     "o": "Siz orada yalnız düşmanı değil, milletin makûs talihini de yendiniz.",
+     "s": "Siz orada yalnız düşmanı değil, milletin kötü kaderini de yendiniz."
+    }
+   ],
+   "ne": "Düzenli ordunun ilk zaferleri ve tarihe geçen telgraf.",
+   "bilgi": "İsmet Paşa, 1934'teki Soyadı Kanunu ile 'İnönü' soyadını aldı; adı bu zaferlerden gelir.",
+   "wiki": {
+    "tr": "İkinci İnönü Muharebesi",
+    "en": "Second Battle of İnönü"
+   },
+   "vk": "Nutuk/11. bölüm/İkinci İnönü Zaferi ve İsmet Paşa'nın Metristepe'de gördüğü vaziyet",
+   "dogrulama": "yaygin"
+  },
+  {
+   "id": "sakarya",
+   "bolum": 11,
+   "tur": "Emir",
+   "simge": "🛡️",
+   "baslik": "Sakarya: Hatt-ı Müdafaa Yoktur, Sath-ı Müdafaa Vardır",
+   "eser": "Nutuk (1927)",
+   "tarih": "1921-08-23",
+   "yer": "Sakarya · Polatlı",
+   "dinleyen": "Orduya",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Fevzi (Çakmak)",
+    "İsmet (İnönü)"
+   ],
+   "satirlar": [
+    "Kütahya–Eskişehir yenilgisinden sonra ordu Sakarya Nehri'nin doğusuna çekildi.",
+    "Meclis, 5 Ağustos 1921'de Mustafa Kemal'e üç aylığına Başkomutanlık yetkisi verdi.",
+    "Tekâlif-i Milliye emirleriyle halk elindekinin bir kısmını orduya verdi: çorap, çarık, buğday, at, kağnı.",
+    {
+     "o": "Hatt-ı müdafaa yoktur, sath-ı müdafaa vardır. O satıh bütün vatandır.",
+     "s": "Savunulacak bir hat yoktur, savunulacak bir alan vardır. O alan bütün vatandır."
+    },
+    {
+     "o": "Vatanın her karış toprağı, vatandaşın kanıyla ıslanmadıkça terk olunamaz.",
+     "s": "Vatanın her karışı, vatandaşın kanıyla ıslanmadıkça bırakılamaz."
+    },
+    "22 gün 22 gece süren savaş 13 Eylül 1921'de zaferle bitti.",
+    "Meclis, Mustafa Kemal'e Mareşal rütbesini ve Gazi unvanını verdi."
+   ],
+   "ne": "Savaşın dönüm noktası ve 'alan savunması' emri.",
+   "bilgi": "Sakarya'dan sonra Yunan ordusu bir daha taarruza geçemedi. Fransa ile Ankara Antlaşması (20 Ekim 1921) bu zaferin hemen ardından imzalandı.",
+   "wiki": {
+    "tr": "Sakarya Meydan Muharebesi",
+    "en": "Battle of Sakarya"
+   },
+   "vk": "Nutuk/12. bölüm/Hatt-ı müdafaa yoktur, sath-ı müdafaa vardır",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "buyuk-taarruz",
+   "bolum": 12,
+   "tur": "Emir",
+   "simge": "⚔️",
+   "baslik": "Ordular! İlk Hedefiniz Akdeniz'dir",
+   "eser": "Ordulara emir · 1 Eylül 1922",
+   "tarih": "1922-08-26",
+   "yer": "Kocatepe · Dumlupınar",
+   "dinleyen": "Orduya",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Fevzi (Çakmak)",
+    "İsmet (İnönü)",
+    "Fahrettin (Altay)"
+   ],
+   "satirlar": [
+    "26 Ağustos 1922 sabahı Kocatepe'den Büyük Taarruz başladı.",
+    "30 Ağustos'ta Dumlupınar'da Başkomutanlık Meydan Muharebesi kazanıldı.",
+    "1 Eylül'de Başkomutan orduya şu emri verdi:",
+    {
+     "o": "Ordular! İlk hedefiniz Akdeniz'dir. İleri!"
+    },
+    "9 Eylül 1922'de Türk süvarileri İzmir'e girdi.",
+    "11 Ekim'de Mudanya Ateşkesi imzalandı; Doğu Trakya savaşmadan geri alındı."
+   ],
+   "ne": "Kurtuluş Savaşı'nın son ve kesin zaferi.",
+   "bilgi": "30 Ağustos her yıl Zafer Bayramı olarak kutlanır. Fahrettin Paşa'nın süvarileri İzmir'e ilk giren birlikler arasındaydı.",
+   "wiki": {
+    "tr": "Büyük Taarruz",
+    "en": "Battle of Dumlupınar"
+   },
+   "vk": "Nutuk/13. bölüm/Ordularımız İzmir rıhtımında ilk verdiğim hedefe, Akdeniz'e vâsıl oldular",
+   "dogrulama": "yaygin"
+  },
+  {
+   "id": "saltanat",
+   "bolum": 13,
+   "tur": "Nutuk",
+   "simge": "👑",
+   "baslik": "Hâkimiyet ve Saltanat: 1 Kasım 1922",
+   "eser": "Nutuk (1927)",
+   "tarih": "1922-11-01",
+   "yer": "Ankara · TBMM",
+   "dinleyen": "TBMM komisyonu",
+   "kisiler": [
+    "Mustafa Kemal",
+    "Vahdettin"
+   ],
+   "satirlar": [
+    "Barış görüşmelerine hem Ankara'nın hem İstanbul'un çağrılması iki başlılığı sona erdirme zamanının geldiğini gösterdi.",
+    "Meclis komisyonunda tartışmalar uzayınca Mustafa Kemal söz aldı:",
+    {
+     "o": "Hâkimiyet ve saltanat hiç kimse tarafından hiç kimseye, ilim icabıdır diye, müzakere ile, münakaşa ile verilmez.",
+     "s": "Egemenlik ve hükümdarlık hiç kimseye bilim gereğidir diye, görüşmeyle, tartışmayla verilmez."
+    },
+    {
+     "o": "Hâkimiyet, saltanat, kuvvetle, kudretle ve zorla alınır.",
+     "s": "Egemenlik ve hükümdarlık güçle, kudretle ve zorla alınır."
+    },
+    "1 Kasım 1922'de saltanat kaldırıldı.",
+    "Son padişah Vahdettin 17 Kasım'da bir İngiliz savaş gemisiyle ülkeden ayrıldı."
+   ],
+   "ne": "Altı asırlık saltanatın sona erişi.",
+   "bilgi": "1299'dan 1922'ye 623 yıl süren Osmanlı saltanatı böylece resmen bitti.",
+   "wiki": {
+    "tr": "Saltanatın kaldırılması",
+    "en": "Abolition of the Ottoman sultanate"
+   },
+   "vk": "Nutuk/14. bölüm/Müşterek Encümen'e anlattığım hakikat",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "lozan",
+   "bolum": 14,
+   "tur": "Nutuk",
+   "simge": "🕊️",
+   "baslik": "Lozan: Yeni Türkiye Masada",
+   "eser": "Nutuk (1927)",
+   "tarih": "1923-07-24",
+   "yer": "Lozan (İsviçre)",
+   "dinleyen": "CHF II. Büyük Kongresi · Ankara, 1927",
+   "kisiler": [
+    "İsmet (İnönü)",
+    "Rıza Nur",
+    "Mustafa Kemal"
+   ],
+   "satirlar": [
+    "İsmet Paşa başkanlığındaki heyet Lozan'da aylarca süren pazarlıklar yürüttü.",
+    "Görüşmeler Şubat 1923'te kesildi; Nisan'da yeniden başladı.",
+    "24 Temmuz 1923'te imzalanan antlaşma yeni Türk devletini dünyaya tanıttı.",
+    "Yüzyıllık kapitülasyonlar kaldırıldı.",
+    "Musul ve Boğazlar gibi bazı konular sonraya kaldı; Boğazlar 1936 Montrö Sözleşmesi'yle tam Türk denetimine geçti."
+   ],
+   "ne": "Kurtuluş Savaşı'nın masadaki zaferi.",
+   "bilgi": "Lozan'da Türk heyetinin başında bir asker, İsmet Paşa vardı. Kulağı az duyduğu için zor anlarda 'duymamazlıktan geldiği' anlatılır.",
+   "wiki": {
+    "tr": "Lozan Antlaşması",
+    "en": "Treaty of Lausanne"
+   },
+   "vk": "Nutuk/15. bölüm/Lozan Muâhedenamesi",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "cumhuriyet",
+   "bolum": 15,
+   "tur": "Nutuk",
+   "simge": "🇹🇷",
+   "baslik": "Yarın Cumhuriyet İlân Edeceğiz!",
+   "eser": "Nutuk (1927)",
+   "tarih": "1923-10-29",
+   "yer": "Ankara · Çankaya",
+   "dinleyen": "Çankaya'da akşam yemeğindeki arkadaşları",
+   "kisiler": [
+    "Mustafa Kemal",
+    "İsmet (İnönü)",
+    "Kâzım (Özalp)",
+    "Fethi (Okyar)"
+   ],
+   "satirlar": [
+    "Ekim 1923'te bir hükümet bunalımı vardı; kabine bir türlü kurulamıyordu.",
+    "28 Ekim akşamı Çankaya'daki yemekte Mustafa Kemal arkadaşlarına şöyle dedi:",
+    {
+     "o": "Yarın Cumhuriyet ilân edeceğiz!",
+     "s": "Yarın cumhuriyeti ilan edeceğiz!"
+    },
+    "29 Ekim 1923 akşamı Meclis anayasada değişiklik yaparak cumhuriyeti ilan etti.",
+    "Aynı gece Mustafa Kemal oybirliğiyle ilk cumhurbaşkanı seçildi; İsmet Paşa başbakan oldu.",
+    "Ankara'da 101 pare top atıldı."
+   ],
+   "ne": "Cumhuriyetin ilanı gecesi.",
+   "bilgi": "Mustafa Kemal, 29 Ekim 1923 akşamı oylamaya katılan 158 milletvekilinin oybirliğiyle ilk cumhurbaşkanı seçildi.",
+   "wiki": {
+    "tr": "Cumhuriyetin ilanı",
+    "en": "Proclamation of the Republic of Turkey"
+   },
+   "vk": "Nutuk/16. bölüm/Cumhuriyetin ilânı kararını nerede ve kimlere söyledim",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "hilafet",
+   "bolum": 16,
+   "tur": "Nutuk",
+   "simge": "🏫",
+   "baslik": "3 Mart 1924: Tek Çatı Altında Eğitim",
+   "eser": "Nutuk (1927)",
+   "tarih": "1924-03-03",
+   "yer": "Ankara · TBMM",
+   "dinleyen": "TBMM",
+   "kisiler": [
+    "Mustafa Kemal"
+   ],
+   "satirlar": [
+    "3 Mart 1924'te Meclis aynı gün üç önemli kanun kabul etti.",
+    "Halifelik kaldırıldı; Osmanlı hanedanı yurt dışına çıkarıldı.",
+    "Tevhid-i Tedrisat Kanunu ile bütün okullar tek çatı altında, Maarif Vekâleti'ne bağlandı.",
+    "Şer'iye ve Evkaf Vekâleti kaldırıldı; yerine Diyanet İşleri Başkanlığı kuruldu.",
+    "Aynı yılın 20 Nisan'ında yeni anayasa kabul edildi."
+   ],
+   "ne": "Eğitim birliği ve laik devlete giden yolda büyük adım.",
+   "bilgi": "Tevhid-i Tedrisat, 'öğretimin birleştirilmesi' demektir: medrese, mektep ve yabancı okullar tek bir eğitim sistemine bağlandı.",
+   "wiki": {
+    "tr": "Tevhid-i Tedrisat Kanunu",
+    "en": "Law on Unification of Education"
+   },
+   "vk": "Nutuk/17. bölüm/Hilâfetin, Şer'iye ve Evkaf Vekâletlerinin lağvı ve tedrisatın tevhîdi kararı",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "nutuk-okunus",
+   "bolum": 17,
+   "tur": "Nutuk",
+   "simge": "🎙️",
+   "baslik": "Altı Gün, Otuz Altı Buçuk Saat: Nutuk Okunuyor",
+   "eser": "Nutuk (1927)",
+   "tarih": "1927-10-15",
+   "yer": "Ankara",
+   "dinleyen": "CHF II. Büyük Kongresi",
+   "kisiler": [
+    "Gazi Mustafa Kemal"
+   ],
+   "satirlar": [
+    "15 Ekim 1927'de Ankara'da Cumhuriyet Halk Fırkası'nın İkinci Büyük Kongresi toplandı.",
+    "Gazi kürsüye çıktı ve altı gün boyunca, toplam otuz altı buçuk saate yakın konuştu.",
+    "1919'dan 1927'ye kadar olanları belgeleriyle, telgraflarıyla, emirleriyle tek tek anlattı.",
+    "Dinleyenlerin çoğu anlatılan olayların tanığıydı; konuşma bir hesap verme gibi hazırlanmıştı.",
+    "20 Ekim 1927'de son sözlerini Türk gençliğine söyledi.",
+    "Nutuk aynı yıl Arap harfleriyle, belgeler cildiyle birlikte basıldı."
+   ],
+   "ne": "Nutuk'un kendisinin hikâyesi.",
+   "bilgi": "Gazi Nutuk'u aylar süren bir hazırlıkla, belgeleri tek tek seçerek yazdı. Bu yüzden Nutuk'un eki olan belgeler cildi yüzlerce telgraf, emir ve yazı içerir.",
+   "wiki": {
+    "tr": "Nutuk",
+    "en": "Nutuk"
+   },
+   "vk": "Nutuk",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "genclige-hitabe",
+   "bolum": 18,
+   "tur": "Hitabe",
+   "simge": "🔥",
+   "baslik": "Gençliğe Hitabe",
+   "eser": "Nutuk'un son sayfası",
+   "tarih": "1927-10-20",
+   "yer": "Ankara",
+   "dinleyen": "Türk gençliğine",
+   "kisiler": [
+    "Gazi Mustafa Kemal"
+   ],
+   "satirlar": [
+    {
+     "o": "Ey Türk gençliği! Birinci vazifen, Türk istiklalini, Türk Cumhuriyetini, ilelebet muhafaza ve müdafaa etmektir.",
+     "s": "Ey Türk gençliği! Birinci görevin, Türk bağımsızlığını, Türk Cumhuriyetini sonsuza dek korumak ve savunmaktır."
+    },
+    {
+     "o": "Mevcudiyetinin ve istikbalinin yegâne temeli budur. Bu temel, senin en kıymetli hazinendir.",
+     "s": "Varlığının ve geleceğinin tek temeli budur. Bu temel, senin en değerli hazinendir."
+    },
+    {
+     "o": "İstikbalde dahi, seni bu hazineden mahrum etmek isteyecek dahilî ve haricî bedhahların olacaktır.",
+     "s": "Gelecekte de seni bu hazineden yoksun bırakmak isteyecek iç ve dış kötü niyetliler olacaktır."
+    },
+    {
+     "o": "Bir gün, istiklal ve cumhuriyeti müdafaa mecburiyetine düşersen, vazifeye atılmak için, içinde bulunacağın vaziyetin imkân ve şeraitini düşünmeyeceksin!",
+     "s": "Bir gün bağımsızlığı ve cumhuriyeti savunmak zorunda kalırsan, göreve atılmak için içinde bulunduğun durumun olanaklarını ve koşullarını düşünmeyeceksin!"
+    },
+    {
+     "o": "Bu imkân ve şerait, çok namüsait bir mahiyette tezahür edebilir.",
+     "s": "Bu olanak ve koşullar hiç elverişli olmayabilir."
+    },
+    {
+     "o": "İstiklal ve cumhuriyetine kastedecek düşmanlar, bütün dünyada emsali görülmemiş bir galibiyetin mümessili olabilirler.",
+     "s": "Bağımsızlığına ve cumhuriyetine kastedecek düşmanlar, dünyada eşi görülmemiş bir zaferin temsilcisi olabilirler."
+    },
+    {
+     "o": "Cebren ve hile ile aziz vatanın bütün kaleleri zapt edilmiş, bütün tersanelerine girilmiş, bütün orduları dağıtılmış ve memleketin her köşesi bilfiil işgal edilmiş olabilir.",
+     "s": "Zorla ve hileyle aziz vatanın bütün kaleleri ele geçirilmiş, bütün tersanelerine girilmiş, bütün orduları dağıtılmış ve ülkenin her köşesi fiilen işgal edilmiş olabilir."
+    },
+    {
+     "o": "Bütün bu şeraitten daha elîm ve daha vahim olmak üzere, memleketin dahilinde iktidara sahip olanlar gaflet ve dalalet ve hatta hıyanet içinde bulunabilirler.",
+     "s": "Bütün bunlardan daha acı ve daha tehlikelisi, ülkenin içinde yönetimi elinde tutanlar gaflet, sapkınlık, hatta ihanet içinde olabilirler."
+    },
+    {
+     "o": "Hatta bu iktidar sahipleri şahsi menfaatlerini, müstevlilerin siyasi emelleriyle tevhid edebilirler.",
+     "s": "Hatta bu yöneticiler kişisel çıkarlarını işgalcilerin siyasi amaçlarıyla birleştirebilirler."
+    },
+    {
+     "o": "Millet, fakr u zaruret içinde harap ve bitap düşmüş olabilir.",
+     "s": "Millet yoksulluk ve sıkıntı içinde perişan ve bitkin düşmüş olabilir."
+    },
+    {
+     "o": "Ey Türk istikbalinin evladı! İşte, bu ahval ve şerait içinde dahi vazifen, Türk istiklal ve cumhuriyetini kurtarmaktır!",
+     "s": "Ey Türk geleceğinin çocuğu! İşte bu durum ve koşullar içinde bile görevin, Türk bağımsızlığını ve cumhuriyetini kurtarmaktır!"
+    },
+    {
+     "o": "Muhtaç olduğun kudret, damarlarındaki asil kanda mevcuttur!",
+     "s": "Muhtaç olduğun güç, damarlarındaki soylu kanda vardır!"
+    }
+   ],
+   "ne": "Nutuk'un son sözleri: Cumhuriyetin gençliğe emaneti.",
+   "bilgi": "Gençliğe Hitabe, Nutuk'un okunmasının son günü olan 20 Ekim 1927'de söylendi. Bugün Türkiye'deki okulların çoğunda duvarda asılıdır.",
+   "wiki": {
+    "tr": "Gençliğe Hitabe",
+    "en": "Address to the Youth"
+   },
+   "vk": "Nutuk/19. bölüm",
+   "dogrulama": "vikikaynak"
+  },
+  {
+   "id": "canakkale",
+   "tur": "Emir",
+   "simge": "🎖️",
+   "baslik": "Arıburnu: Ben Size Taarruzu Emretmiyorum",
+   "eser": "Atatürk'ün Çanakkale hatıraları",
+   "tarih": "1915-04-25",
+   "yer": "Arıburnu · Conkbayırı",
+   "dinleyen": "57. Piyade Alayı",
+   "kisiler": [
+    "Yarbay Mustafa Kemal",
+    "57. Alay"
+   ],
+   "satirlar": [
+    "25 Nisan 1915 sabahı İtilaf kuvvetleri Arıburnu'na çıktı.",
+    "19. Tümen Komutanı Yarbay Mustafa Kemal, emir beklemeden birliklerini Conkbayırı'na yöneltti.",
+    "57. Alay'a verdiği emir tarihe geçti:",
+    {
+     "o": "Ben size taarruzu emretmiyorum, ölmeyi emrediyorum.",
+     "s": "Size saldırmanızı değil, ölmeyi emrediyorum."
+    },
+    {
+     "o": "Biz ölünceye kadar geçecek zaman zarfında yerimize başka kuvvetler ve kumandanlar kaim olabilir.",
+     "s": "Biz ölene kadar geçecek sürede yerimize başka birlikler ve komutanlar gelebilir."
+    },
+    "57. Alay'ın askerlerinin çok büyük kısmı o gün şehit düştü.",
+    "Bugün Türk ordusunda 57 numaralı bir alay yoktur: numara onların anısına saklanır."
+   ],
+   "ne": "Çanakkale'de Mustafa Kemal'i tarih sahnesine çıkaran gün.",
+   "bilgi": "Ağustos 1915'teki Anafartalar ve Conkbayırı muharebelerinden sonra Mustafa Kemal 'Anafartalar Kahramanı' olarak anıldı.",
+   "wiki": {
+    "tr": "57. Piyade Alayı",
+    "en": "57th Infantry Regiment (Ottoman Empire)"
+   },
+   "vk": "Anafartalar",
+   "dogrulama": "yaygin"
+  },
+  {
+   "id": "izmir-iktisat",
+   "tur": "Söylev",
+   "simge": "🏭",
+   "baslik": "İzmir İktisat Kongresi: Askerî Zafer Yetmez",
+   "eser": "Atatürk'ün Söylev ve Demeçleri",
+   "tarih": "1923-02-17",
+   "yer": "İzmir",
+   "dinleyen": "Çiftçi, tüccar, sanayici ve işçi temsilcileri",
+   "kisiler": [
+    "Gazi Mustafa Kemal",
+    "Kâzım Karabekir"
+   ],
+   "satirlar": [
+    "Lozan görüşmeleri kesilmişti; Gazi ekonominin yol haritasını çizmek için İzmir'de bir kongre topladı.",
+    "Çiftçi, tüccar, sanayici ve işçi temsilcileri ilk kez aynı salonda buluştu.",
+    {
+     "o": "Siyasi, askerî zaferler ne kadar büyük olursa olsunlar, iktisadi zaferlerle tetviç edilmezlerse husule gelen zaferler payidar olamaz, az zamanda söner.",
+     "s": "Siyasi ve askerî zaferler ne kadar büyük olursa olsun, ekonomik zaferlerle taçlandırılmazsa kalıcı olamaz, kısa sürede söner."
+    },
+    "Kongre, yerli üretimi destekleyen kararlar aldı: 'Misak-ı İktisadi' (Ekonomi Andı) kabul edildi."
+   ],
+   "ne": "Bağımsızlığın ekonomiyle tamamlanması gerektiği fikri.",
+   "bilgi": "Kongreye yaklaşık 1.100 delege katıldı; başkanlığını Kâzım Karabekir yaptı.",
+   "wiki": {
+    "tr": "Türkiye İktisat Kongresi",
+    "en": "İzmir Economic Congress"
+   },
+   "vk": "İzmir İktisat Kongresi",
+   "dogrulama": "yaygin"
+  },
+  {
+   "id": "samsun-ogretmen",
+   "tur": "Söylev",
+   "simge": "🔬",
+   "baslik": "En Hakiki Mürşit İlimdir",
+   "eser": "Atatürk'ün Söylev ve Demeçleri",
+   "tarih": "1924-09-22",
+   "yer": "Samsun",
+   "dinleyen": "Samsun'daki öğretmenler",
+   "kisiler": [
+    "Gazi Mustafa Kemal"
+   ],
+   "satirlar": [
+    "Eylül 1924'te Karadeniz gezisindeki Gazi, Samsun'da öğretmenlerle konuştu.",
+    {
+     "o": "Dünyada her şey için, medeniyet için, hayat için, muvaffakiyet için en hakiki mürşit ilimdir, fendir.",
+     "s": "Dünyada her şey için, uygarlık için, yaşam için, başarı için en gerçek yol gösterici bilimdir, tekniktir."
+    },
+    {
+     "o": "İlim ve fennin haricinde mürşit aramak gaflettir, cehalettir, dalalettir.",
+     "s": "Bilimin ve tekniğin dışında yol gösterici aramak aymazlıktır, bilgisizliktir, doğru yoldan sapmaktır."
+    },
+    {
+     "o": "Yalnız, ilmin ve fennin yaşadığımız her dakikadaki safhalarının tekâmülünü idrak etmek ve terakkiyatını zamanında takip eylemek şarttır.",
+     "s": "Ancak bilimin ve tekniğin her an değişen gelişimini kavramak ve ilerlemelerini zamanında izlemek şarttır."
+    },
+    {
+     "o": "Bin, iki bin, binlerce sene evvelki ilim ve fen lisanının çizdiği düsturları, şu kadar bin sene sonra bugün aynen tatbik etmeye kalkışmak, elbette ilim ve fennin içinde bulunmak değildir.",
+     "s": "Binlerce yıl önceki bilimin koyduğu kuralları bugün aynen uygulamaya kalkmak, elbette bilimin içinde olmak değildir."
+    }
+   ],
+   "ne": "Bilimi rehber edinme çağrısı.",
+   "bilgi": "Bu sözün kısa hâli, 'Hayatta en hakiki mürşit ilimdir', bugün Ankara Üniversitesi Dil ve Tarih-Coğrafya Fakültesi'nin cephesinde yazılıdır.",
+   "wiki": {
+    "tr": "Hayatta en hakiki mürşit ilimdir",
+    "en": "Mustafa Kemal Atatürk"
+   },
+   "vk": "Samsun",
+   "dogrulama": "yaygin"
+  },
+  {
+   "id": "harf",
+   "tur": "Söylev",
+   "simge": "🔤",
+   "baslik": "Sarayburnu: Yeni Türk Harfleri",
+   "eser": "Atatürk'ün Söylev ve Demeçleri",
+   "tarih": "1928-08-09",
+   "yer": "İstanbul · Sarayburnu (Gülhane)",
+   "dinleyen": "Gülhane Parkı'ndaki halk",
+   "kisiler": [
+    "Gazi Mustafa Kemal"
+   ],
+   "satirlar": [
+    "9 Ağustos 1928 gecesi Gülhane Parkı'ndaki bir şenlikte Gazi kürsüye çıktı.",
+    {
+     "o": "Bizim ahenktar, zengin lisanımız yeni Türk harfleriyle kendini gösterecektir.",
+     "s": "Bizim uyumlu, zengin dilimiz yeni Türk harfleriyle kendini gösterecektir."
+    },
+    "Halka yeni harfleri çabuk öğrenmesini, kadına erkeğe, hamala sandalcıya öğretmesini istedi.",
+    "Bunu bir vatanseverlik görevi olarak görmelerini söyledi.",
+    "Okuma yazma bilenlerin bu kadar az olmasının utanılacak bir durum olduğunu vurguladı.",
+    "Gazi, ardından kara tahtanın başına geçip yeni harfleri bizzat öğretmeye başladı.",
+    "1 Kasım 1928'de Harf Kanunu kabul edildi; 1 Ocak 1929'da Millet Mektepleri açıldı."
+   ],
+   "ne": "Harf Devrimi'nin halka ilk kez anlatıldığı gece.",
+   "bilgi": "Gazi, yeni harfleri anlatmak için yurdun birçok kentinde kara tahta başında ders verdi; bu yüzden 'Başöğretmen' diye anılır.",
+   "wiki": {
+    "tr": "Harf Devrimi",
+    "en": "Turkish alphabet reform"
+   },
+   "vk": "Harf İnkılabı",
+   "dogrulama": "yaygin"
+  },
+  {
+   "id": "onuncu-yil",
+   "tur": "Söylev",
+   "simge": "🎉",
+   "baslik": "Onuncu Yıl Nutku",
+   "eser": "Atatürk'ün Söylev ve Demeçleri",
+   "tarih": "1933-10-29",
+   "yer": "Ankara · Hipodrom",
+   "dinleyen": "Bütün millete · radyodan",
+   "kisiler": [
+    "Gazi Mustafa Kemal"
+   ],
+   "satirlar": [
+    {
+     "o": "Türk Milleti! Kurtuluş savaşına başladığımızın on beşinci yılı içindeyiz.",
+     "s": "Türk Milleti! Kurtuluş Savaşı'na başladığımızın on beşinci yılındayız."
+    },
+    {
+     "o": "Bugün Cumhuriyetimizin onuncu yılını doldurduğu en büyük bayramdır. Kutlu olsun.",
+     "s": "Bugün Cumhuriyetimizin onuncu yılını doldurduğu en büyük bayramdır. Kutlu olsun."
+    },
+    {
+     "o": "Yurttaşlarım! Az zamanda çok ve büyük işler yaptık.",
+     "s": "Yurttaşlarım! Kısa sürede çok ve büyük işler yaptık."
+    },
+    {
+     "o": "Bu işlerin en büyüğü, temeli Türk kahramanlığı ve yüksek Türk kültürü olan Türkiye Cumhuriyetidir.",
+     "s": "Bu işlerin en büyüğü, temeli Türk kahramanlığı ve yüksek Türk kültürü olan Türkiye Cumhuriyetidir."
+    },
+    {
+     "o": "Fakat yaptıklarımızı asla kâfi göremeyiz. Çünkü daha çok ve daha büyüklerini yapmak mecburiyetinde ve azmindeyiz.",
+     "s": "Ama yaptıklarımızı asla yeterli göremeyiz. Çünkü daha çok ve daha büyüklerini yapmak zorundayız ve buna kararlıyız."
+    },
+    {
+     "o": "Yurdumuzu dünyanın en mamur ve en medeni memleketleri seviyesine çıkaracağız.",
+     "s": "Yurdumuzu dünyanın en bayındır ve en uygar ülkeleri düzeyine çıkaracağız."
+    },
+    {
+     "o": "Milletimizi en geniş refah vasıta ve kaynaklarına sahip kılacağız.",
+     "s": "Milletimizi en geniş refah araçlarına ve kaynaklarına kavuşturacağız."
+    },
+    {
+     "o": "Millî kültürümüzü muasır medeniyet seviyesinin üstüne çıkaracağız.",
+     "s": "Ulusal kültürümüzü çağdaş uygarlık düzeyinin üstüne çıkaracağız."
+    },
+    {
+     "o": "Bunun için, bizce zaman ölçüsü, geçmiş asırların gevşetici zihniyetine göre değil, asrımızın sürat ve hareket mefhumuna göre düşünülmelidir.",
+     "s": "Bunun için zaman ölçüsü, geçmiş yüzyılların gevşetici anlayışına göre değil, çağımızın hız ve hareket anlayışına göre düşünülmelidir."
+    },
+    {
+     "o": "Ne mutlu Türküm diyene!"
+    }
+   ],
+   "ne": "Cumhuriyet'in 10. yılında millete söylev.",
+   "bilgi": "Onuncu Yıl Nutku radyodan yayımlandı ve filmle kaydedildi; Atatürk'ün sesinden ve görüntüsünden günümüze ulaşan en tanınmış kayıtlardan biridir.",
+   "wiki": {
+    "tr": "Onuncu Yıl Nutku",
+    "en": "Tenth Year Speech"
+   },
+   "vk": "Onuncu Yıl Nutku",
+   "dogrulama": "yaygin"
+  },
+  {
+   "id": "medeni-bilgiler",
+   "tur": "Eser",
+   "simge": "📗",
+   "baslik": "Medeni Bilgiler: Cumhuriyet Fazilettir",
+   "eser": "Medeni Bilgiler (1930)",
+   "tarih": "1930-01-01",
+   "yer": "Ankara",
+   "dinleyen": "Okullar için",
+   "kisiler": [
+    "Gazi Mustafa Kemal",
+    "Afet (İnan)"
+   ],
+   "satirlar": [
+    "Gazi 1930'da vatandaşlık bilgilerini anlatan notlarını Afet Hanım'a yazdırdı.",
+    "Bu notlar 'Medeni Bilgiler' adıyla okullarda ders kitabı olarak okutuldu.",
+    "Kitapta millet, devlet, egemenlik, seçim, vergi ve hürriyet sade bir dille anlatılıyordu.",
+    "Cumhuriyetin yurttaşından beklediği şey, düşünen ve sorumluluk alan bir insandı.",
+    "Kitabın en çok alıntılanan fikri şudur: Cumhuriyet, yüksek ahlaki erdeme dayanan bir yönetimdir."
+   ],
+   "ne": "Atatürk'ün yurttaşlık bilgisi notları.",
+   "bilgi": "Atatürk'ün bu notlarının el yazısı sayfaları sonradan 'Medenî Bilgiler ve M. Kemal Atatürk'ün El Yazıları' adıyla yayımlandı.",
+   "wiki": {
+    "tr": "Medenî Bilgiler",
+    "en": "Mustafa Kemal Atatürk"
+   },
+   "vk": "Medeni Bilgiler",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "geometri",
+   "tur": "Eser",
+   "simge": "📐",
+   "baslik": "Geometri: Açı, Üçgen, Yarıçap",
+   "eser": "Geometri (1937)",
+   "tarih": "1936-12-01",
+   "yer": "Ankara · Çankaya",
+   "dinleyen": "Öğretmenler ve öğrenciler için",
+   "kisiler": [
+    "Atatürk"
+   ],
+   "satirlar": [
+    "1936–37 kışında Atatürk, geometri derslerinde kullanılacak kısa bir kitap yazdı.",
+    "Amaç, Arapça ve Farsça kökenli terimlerin yerine Türkçe karşılıklar koymaktı.",
+    "Zaviye 'açı', müselles 'üçgen', kutur 'çap', nısf-ı kutur 'yarıçap' oldu.",
+    "Ufki 'yatay', amudi 'dikey', mümas 'teğet', müsavi 'eşit' oldu.",
+    "Kitap 1937'de Kültür Bakanlığı tarafından yazar adı olmadan yayımlandı.",
+    "Bugün her öğrencinin kullandığı bu kelimelerin çoğu o küçük kitapla yaygınlaştı."
+   ],
+   "ne": "Atatürk'ün Türkçeye kazandırdığı matematik terimleri.",
+   "bilgi": "Geometri kitabı yazarı belirtilmeden basıldı; Atatürk'ün eseri olduğu sonradan açıklandı. 'Toplam, artı, eksi, çarpı, bölü' gibi kelimeler de bu dönemde yerleşti.",
+   "wiki": {
+    "tr": "Geometri (kitap)",
+    "en": "Mustafa Kemal Atatürk"
+   },
+   "vk": "Geometri/1",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "vasiyet",
+   "tur": "Belge",
+   "simge": "✍️",
+   "baslik": "Vasiyetname: Servetini Tarihe ve Dile",
+   "eser": "Atatürk'ün vasiyetnamesi",
+   "tarih": "1938-09-05",
+   "yer": "İstanbul · Dolmabahçe",
+   "dinleyen": "El yazısıyla",
+   "kisiler": [
+    "Atatürk",
+    "Makbule Hanım",
+    "İsmet İnönü"
+   ],
+   "satirlar": [
+    "Atatürk vasiyetnamesini 5 Eylül 1938'de Dolmabahçe Sarayı'nda kendi el yazısıyla yazdı.",
+    "Bütün nakit ve menkul varlığını Cumhuriyet Halk Partisi'ne bıraktı.",
+    "İş Bankası'ndaki hisselerinin gelirinden kız kardeşi Makbule'ye ve manevi evlatlarına aylık bağlanmasını istedi.",
+    "İsmet İnönü'nün çocuklarının yüksek öğrenimine de bu gelirden yardım edilmesini yazdı.",
+    "Kalan gelirin Türk Tarih Kurumu ile Türk Dil Kurumu'na eşit olarak verilmesini vasiyet etti."
+   ],
+   "ne": "Bir devlet kurucusunun servetini bilime ve dile bırakması.",
+   "bilgi": "Türk Tarih Kurumu 1931'de, Türk Dil Kurumu 1932'de Atatürk'ün önderliğinde kuruldu. Vasiyet, bu iki kurumu hayatından sonra da desteklemeyi amaçlıyordu.",
+   "wiki": {
+    "tr": "Atatürk'ün vasiyetnamesi",
+    "en": "Mustafa Kemal Atatürk"
+   },
+   "vk": "Atatürk'ün vasiyetnamesi",
+   "dogrulama": "anlatim"
+  },
+  {
+   "id": "on-kasim",
+   "tur": "Anma",
+   "simge": "🕯️",
+   "baslik": "10 Kasım 1938, Saat 09.05",
+   "eser": "Anma",
+   "tarih": "1938-11-10",
+   "yer": "İstanbul · Dolmabahçe",
+   "dinleyen": "Bütün millet",
+   "kisiler": [
+    "Atatürk"
+   ],
+   "satirlar": [
+    "10 Kasım 1938 Perşembe sabahı saat dokuzu beş geçe Atatürk Dolmabahçe Sarayı'nda hayata gözlerini yumdu.",
+    "57 yaşındaydı.",
+    "Naaşı İstanbul'da halkın önünden geçti, ardından Ankara'ya götürüldü.",
+    "21 Kasım 1938'de Etnografya Müzesi'ndeki geçici kabrine konuldu.",
+    "10 Kasım 1953'te Anıtkabir'e taşındı.",
+    "Her yıl 10 Kasım'da saat 09.05'te sirenler çalar, Türkiye bir an durur."
+   ],
+   "ne": "Ölümsüzlüğe yürüdüğü gün.",
+   "bilgi": "Dolmabahçe'deki odasında saatlerin 09.05'te durdurulduğu anlatılır; bugün o oda ziyaretçilere açıktır.",
+   "wiki": {
+    "tr": "Atatürk'ün ölümü",
+    "en": "Death and state funeral of Mustafa Kemal Atatürk"
+   },
+   "vk": "Atatürk",
+   "dogrulama": "anlatim"
+  }
+ ],
+ "_dogrulama": "30 Ekim 2026: 'vikikaynak' işaretli metinlerin bütün özgün satırları tr.wikisource.org'daki Nutuk tam metniyle harf harf karşılaştırıldı ve eşleşti. 'yaygin': özgün satırlar yaygın baskılardaki metindir, Vikikaynak'ta bulunmadığı için karşılaştırılamadı."
+}

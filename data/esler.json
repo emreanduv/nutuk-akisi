@@ -1,0 +1,254 @@
+{
+ "_not": "'Bugün ve Gazi': günün gerçek haber başlıklarını Atatürk'ün belgeli bir sözüyle eşleştirir. anahtarlar: başlıkta geçmesi gereken kelime kökleri. soz/kaynak/yil: ekranda görünen söz. metin: data/metinler.json'daki ilgili metnin kimliği (kart için, isteğe bağlı). 'hassas' listesindeki kelimeler geçen başlıklar ASLA eşleştirilmez: ölüm/kaza/şiddet ve yayının tarafsız kalması için GÜNLÜK SİYASET (parti, seçim, yargı vb.).",
+ "hassas": [
+  "öl",
+  "ölü",
+  "ölüm",
+  "hayatını kaybet",
+  "can verdi",
+  "cinayet",
+  "şehit",
+  "yaralı",
+  "kaza",
+  "intihar",
+  "taciz",
+  "istismar",
+  "tecavüz",
+  "saldırı",
+  "bomba",
+  "patlama",
+  "terör",
+  "vefat",
+  "cenaze",
+  "katliam",
+  "kayıp",
+  "göçük",
+  "enkaz",
+  "boğul",
+  "darp",
+  "bıçak",
+  "silah",
+  "kurşun",
+  "esir",
+  "rehine",
+  "şiddet",
+  "savaş",
+  "çatışma",
+  "operasyon",
+  "seçim",
+  "parti",
+  "milletvekili",
+  "bakan",
+  "cumhurbaşkan",
+  "muhalefet",
+  "iktidar",
+  "chp",
+  "akp",
+  "ak parti",
+  "mhp",
+  "iyi parti",
+  "dem parti",
+  "belediye başkan",
+  "gözaltı",
+  "tutuklan",
+  "dava",
+  "iddianame",
+  "soruşturma",
+  "savcı",
+  "mahkeme",
+  "protesto",
+  "miting",
+  "yasak",
+  "kayyum",
+  "meclis"
+ ],
+ "kurallar": [
+  {
+   "anahtarlar": [
+    "okul",
+    "öğretmen",
+    "öğrenci",
+    "sınav",
+    "eğitim",
+    "ders yılı",
+    "karne",
+    "üniversite"
+   ],
+   "soz": "Dünyada her şey için, medeniyet için, hayat için, muvaffakiyet için en hakiki mürşit ilimdir, fendir.",
+   "kaynak": "Samsun'da öğretmenlerle konuşma",
+   "yil": 1924,
+   "metin": "samsun-ogretmen",
+   "kopru": "1924'te Samsun'da öğretmenlere şöyle seslenmişti:"
+  },
+  {
+   "anahtarlar": [
+    "bilim",
+    "araştırma",
+    "keşif",
+    "laboratuvar",
+    "teknoloji",
+    "yapay zeka",
+    "uzay",
+    "teleskop",
+    "nobel",
+    "tübitak"
+   ],
+   "soz": "İlim ve fennin haricinde mürşit aramak gaflettir, cehalettir, dalalettir.",
+   "kaynak": "Samsun'da öğretmenlerle konuşma",
+   "yil": 1924,
+   "metin": "samsun-ogretmen",
+   "kopru": "Bilim haberi geldiğinde akla gelen söz:"
+  },
+  {
+   "anahtarlar": [
+    "ihracat",
+    "sanayi",
+    "fabrika",
+    "üretim",
+    "yerli üretim",
+    "yatırım",
+    "ihracatçı",
+    "organize sanayi"
+   ],
+   "soz": "Siyasi, askerî zaferler ne kadar büyük olursa olsunlar, iktisadi zaferlerle tetviç edilmezlerse husule gelen zaferler payidar olamaz, az zamanda söner.",
+   "kaynak": "İzmir İktisat Kongresi",
+   "yil": 1923,
+   "metin": "izmir-iktisat",
+   "kopru": "1923'te İzmir'de ekonomi için şöyle demişti:"
+  },
+  {
+   "anahtarlar": [
+    "çiftçi",
+    "tarım",
+    "hasat",
+    "buğday",
+    "köylü",
+    "rekolte",
+    "tohum",
+    "traktör"
+   ],
+   "soz": "Türkiye'nin sahibi ve efendisi kimdir? Onu hemen birlikte söyleyelim: Hakiki müstahsil olan köylüdür.",
+   "kaynak": "TBMM'nin üçüncü toplanma yılını açış konuşması",
+   "yil": 1922,
+   "metin": "",
+   "kopru": "1 Mart 1922'de Meclis kürsüsünden:"
+  },
+  {
+   "anahtarlar": [
+    "türkçe",
+    "dil bayramı",
+    "sözlük",
+    "kelime",
+    "türk dil kurumu",
+    "yazım kılavuzu",
+    "okuma alışkanlığı",
+    "kitap fuarı"
+   ],
+   "soz": "Bizim ahenktar, zengin lisanımız yeni Türk harfleriyle kendini gösterecektir.",
+   "kaynak": "Sarayburnu konuşması",
+   "yil": 1928,
+   "metin": "harf",
+   "kopru": "1928'de Sarayburnu'nda dil için şöyle demişti:"
+  },
+  {
+   "anahtarlar": [
+    "barış",
+    "diplomasi",
+    "dostluk",
+    "kardeş şehir",
+    "iş birliği anlaşma"
+   ],
+   "soz": "Yurtta sulh, cihanda sulh için çalışıyoruz.",
+   "kaynak": "Seçim beyannamesi",
+   "yil": 1931,
+   "metin": "",
+   "kopru": "1931'de Gazi'nin imzasıyla yayımlanan beyannameden:"
+  },
+  {
+   "anahtarlar": [
+    "genç",
+    "gençlik",
+    "gençler",
+    "olimpiyat",
+    "şampiyon",
+    "dünya birincisi",
+    "madalya"
+   ],
+   "soz": "Ey Türk gençliği! Birinci vazifen, Türk istiklalini, Türk Cumhuriyetini, ilelebet muhafaza ve müdafaa etmektir.",
+   "kaynak": "Gençliğe Hitabe",
+   "yil": 1927,
+   "metin": "genclige-hitabe",
+   "kopru": "Gençlere emanet edilen söz:"
+  },
+  {
+   "anahtarlar": [
+    "cumhuriyet bayramı",
+    "29 ekim",
+    "cumhuriyetin 10"
+   ],
+   "soz": "Bugün Cumhuriyetimizin onuncu yılını doldurduğu en büyük bayramdır. Kutlu olsun.",
+   "kaynak": "Onuncu Yıl Nutku",
+   "yil": 1933,
+   "metin": "onuncu-yil",
+   "kopru": "Cumhuriyet'in 10. yılında, aynı bayramda:"
+  },
+  {
+   "anahtarlar": [
+    "hızlı tren",
+    "demiryolu",
+    "otoyol",
+    "köprü",
+    "havalimanı",
+    "liman",
+    "metro"
+   ],
+   "soz": "Bizce zaman ölçüsü, geçmiş asırların gevşetici zihniyetine göre değil, asrımızın sürat ve hareket mefhumuna göre düşünülmelidir.",
+   "kaynak": "Onuncu Yıl Nutku",
+   "yil": 1933,
+   "metin": "onuncu-yil",
+   "kopru": "Hız ve hareket için 1933'te şöyle demişti:"
+  }
+ ],
+ "kaynaklar": [
+  {
+   "ad": "AA · Güncel",
+   "url": "https://www.aa.com.tr/tr/rss/default?cat=guncel"
+  },
+  {
+   "ad": "AA · Ekonomi",
+   "url": "https://www.aa.com.tr/tr/rss/default?cat=ekonomi"
+  },
+  {
+   "ad": "AA · Bilim",
+   "url": "https://www.aa.com.tr/tr/rss/default?cat=bilim-teknoloji"
+  },
+  {
+   "ad": "AA · Spor",
+   "url": "https://www.aa.com.tr/tr/rss/default?cat=spor"
+  },
+  {
+   "ad": "TRT Haber · Gündem",
+   "url": "https://www.trthaber.com/gundem_articles.rss"
+  },
+  {
+   "ad": "TRT Haber · Ekonomi",
+   "url": "https://www.trthaber.com/ekonomi_articles.rss"
+  },
+  {
+   "ad": "TRT Haber · Bilim",
+   "url": "https://www.trthaber.com/bilim_teknoloji_articles.rss"
+  },
+  {
+   "ad": "Habertürk · Gündem",
+   "url": "https://www.haberturk.com/rss/gundem.xml"
+  },
+  {
+   "ad": "Sözcü · Gündem",
+   "url": "https://www.sozcu.com.tr/feeds-rss-category-gundem"
+  },
+  {
+   "ad": "CNN Türk · Türkiye",
+   "url": "https://www.cnnturk.com/feed/rss/turkiye/news"
+  }
+ ]
+}

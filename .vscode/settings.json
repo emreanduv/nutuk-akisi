@@ -1,0 +1,6 @@
+{
+  "files.associations": { "*.webmanifest": "json" },
+  "json.schemas": [],
+  "editor.wordWrap": "on",
+  "files.exclude": { "**/__pycache__": true, "data/cache.json": true }
+}

@@ -1,0 +1,69 @@
+{
+  "_not": "'Doğru mu, Uydurma mı?' ara ekranı: Atatürk'e mal edilen sözler. hukum: belgeli | tartismali | belgesiz. 'kanit': nerede geçiyor ya da neden şüpheli. Yeni iddia eklerken mutlaka bir yayımlanmış kaynağa dayan.",
+  "sozler": [
+    {
+      "id": "istikbal", "hukum": "belgesiz",
+      "soz": "İstikbal göklerdedir.",
+      "nerede": "Afişler, havacılık törenleri, 2024'te uzaydan yapılan konuşma",
+      "kanit": "Çok sevilen bu söz için bugüne kadar bir tarih, yer ya da tutanak gösterilemedi. Afet İnan'ın kızı Arı İnan uzun süre aradığını ama kaydına rastlamadığını anlatmıştır; Sabiha Gökçen de sözü hatırlayamamıştır.",
+      "tarihci": "Atatürk'ün havacılığa verdiği önem belgeli; bu cümlenin ona ait olduğu ise belgeli değil.",
+      "kisaca": "Fikir onun, cümlenin kaynağı yok."
+    },
+    {
+      "id": "yurtta-sulh", "hukum": "belgeli",
+      "soz": "Yurtta sulh, cihanda sulh.",
+      "nerede": "Anayasa'nın başlangıç bölümü, okul kitapları",
+      "kanit": "20 Nisan 1931'de 'Gazi Mustafa Kemal' imzasıyla yayımlanan seçim beyannamesinde geçer: 'Yurtta sulh, cihanda sulh için çalışıyoruz.'",
+      "tarihci": "Cümle sonradan 1961 ve 1982 anayasalarının başlangıç kısmına girdi.",
+      "kisaca": "Belgeli: 20 Nisan 1931 beyannamesi."
+    },
+    {
+      "id": "johnny", "hukum": "tartismali",
+      "soz": "Johnny'lerle Mehmetçikler arasında bizim için hiçbir fark yoktur…",
+      "nerede": "Gelibolu'daki Anzak Koyu anıtı, Avustralya ve Yeni Zelanda'daki anıtlar",
+      "kanit": "Metin, 1934'te İçişleri Bakanı Şükrü Kaya'nın Anzaklara seslenişine dayandırılır. Atatürk'ün kendi ağzından ya da kaleminden bir kayıt gösterilemedi; bazı araştırmacılar metnin bugünkü hâlinin 1950'lerde ortaya çıktığını savunuyor.",
+      "tarihci": "Duygusu Atatürk'ün barış siyasetiyle uyumlu; ama 'onun sözü' demek için belge yetersiz.",
+      "kisaca": "Kaynağı dolaylı, tartışması sürüyor."
+    },
+    {
+      "id": "ne-mutlu", "hukum": "belgeli",
+      "soz": "Ne mutlu Türküm diyene!",
+      "nerede": "Dağ yamaçları, okul duvarları, törenler",
+      "kanit": "29 Ekim 1933'te Ankara'da okunan Onuncu Yıl Nutku'nun son cümlesidir; konuşma radyodan yayımlandı ve filme alındı.",
+      "tarihci": "Sözün geçtiği konuşmanın ses ve görüntü kaydı günümüze ulaştı.",
+      "kisaca": "Belgeli: Onuncu Yıl Nutku, 1933."
+    },
+    {
+      "id": "hatt-i-mudafaa", "hukum": "belgeli",
+      "soz": "Hatt-ı müdafaa yoktur, sath-ı müdafaa vardır. O satıh bütün vatandır.",
+      "nerede": "Sakarya anmaları, askerî tarih kitapları",
+      "kanit": "Sakarya Meydan Muharebesi'nde orduya verilen anlayış; Gazi bunu Nutuk'ta kendisi aktarır.",
+      "tarihci": "Nutuk'ta yer alır; Sakarya'daki savunma anlayışını özetler.",
+      "kisaca": "Belgeli: Nutuk, Sakarya bölümü."
+    },
+    {
+      "id": "mursit", "hukum": "belgeli",
+      "soz": "Hayatta en hakiki mürşit ilimdir.",
+      "nerede": "Ankara Üniversitesi DTCF cephesi, okul panoları",
+      "kanit": "Eylül 1924'te Samsun'da öğretmenlere yaptığı konuşmada geçer: 'Dünyada her şey için, medeniyet için, hayat için, muvaffakiyet için en hakiki mürşit ilimdir, fendir.'",
+      "tarihci": "Yaygın kısa hâli asıl cümlenin özetidir; anlam aynı.",
+      "kisaca": "Belgeli; kısa hâli özettir."
+    },
+    {
+      "id": "tek-oturum", "hukum": "belgesiz",
+      "soz": "Nutuk tek bir günde, bir solukta okundu.",
+      "nerede": "Sık karıştırılan bir bilgi",
+      "kanit": "Nutuk 15–20 Ekim 1927 arasında altı ayrı günde okundu; toplam süresi 36 saati aşar.",
+      "tarihci": "Tek gün değil, altı gün. Yine de dünyada tek bir hatibin yaptığı en uzun konuşmalardan biridir.",
+      "kisaca": "Yanlış: altı günde okundu."
+    },
+    {
+      "id": "geometri", "hukum": "belgeli",
+      "soz": "'Açı', 'üçgen', 'yarıçap' kelimelerini Atatürk yaygınlaştırdı.",
+      "nerede": "Matematik dersleri",
+      "kanit": "1937'de yazar adı olmadan basılan 'Geometri' kitabı Atatürk'ündür; kitapta zaviye yerine açı, müselles yerine üçgen gibi Türkçe terimler kullanıldı.",
+      "tarihci": "Kitabın yazarının Atatürk olduğu sonradan açıklandı; terimlerin bir kısmını kendisi türetti.",
+      "kisaca": "Belgeli: Geometri, 1937."
+    }
+  ]
+}

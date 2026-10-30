@@ -1,0 +1,81 @@
+{
+ "_not": "Atatürk ve Cumhuriyet tarihi gündemi (RSS). Yalnız başlığında ya da özetinde 'anahtarlar' listesinden bir kelime geçen haberler alınır; esler.json'daki 'hassas' kelimeler (siyaset, şiddet) geçenler alınmaz. robots.txt izin vermezse kaynak atlanır.",
+ "anahtarlar": [
+  "atatürk",
+  "ataturk",
+  "nutuk",
+  "mustafa kemal",
+  "anıtkabir",
+  "anitkabir",
+  "kurtuluş savaşı",
+  "milli mücadele",
+  "millî mücadele",
+  "istiklal harbi",
+  "çanakkale savaşı",
+  "çanakkale zaferi",
+  "cumhuriyet bayramı",
+  "türk tarih kurumu",
+  "türk dil kurumu",
+  "atatürk araştırma",
+  "atatürk evi",
+  "atatürk müzesi",
+  "dolmabahçe",
+  "lozan antlaşması",
+  "sakarya meydan",
+  "büyük taarruz",
+  "kocatepe",
+  "dumlupınar",
+  "19 mayıs",
+  "zafer bayramı",
+  "10 kasım",
+  "harf devrimi",
+  "gençliğe hitabe",
+  "bandırma vapuru",
+  "amasya genelgesi",
+  "erzurum kongresi",
+  "sivas kongresi",
+  "istiklal marşı"
+ ],
+ "kaynaklar": [
+  {
+   "ad": "AA · Güncel",
+   "url": "https://www.aa.com.tr/tr/rss/default?cat=guncel",
+   "dil": "tr"
+  },
+  {
+   "ad": "AA · Kültür-Sanat",
+   "url": "https://www.aa.com.tr/tr/rss/default?cat=kultur-sanat",
+   "dil": "tr"
+  },
+  {
+   "ad": "TRT Haber · Gündem",
+   "url": "https://www.trthaber.com/gundem_articles.rss",
+   "dil": "tr"
+  },
+  {
+   "ad": "TRT Haber · Kültür",
+   "url": "https://www.trthaber.com/kultur_sanat_articles.rss",
+   "dil": "tr"
+  },
+  {
+   "ad": "Habertürk · Gündem",
+   "url": "https://www.haberturk.com/rss/gundem.xml",
+   "dil": "tr"
+  },
+  {
+   "ad": "Sözcü · Gündem",
+   "url": "https://www.sozcu.com.tr/feeds-rss-category-gundem",
+   "dil": "tr"
+  },
+  {
+   "ad": "CNN Türk · Türkiye",
+   "url": "https://www.cnnturk.com/feed/rss/turkiye/news",
+   "dil": "tr"
+  },
+  {
+   "ad": "Sabah · Gündem",
+   "url": "https://www.sabah.com.tr/rss/gundem.xml",
+   "dil": "tr"
+  }
+ ]
+}

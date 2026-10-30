@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406e"/><stop offset="1" stop-color="#0c1830"/></linearGradient>
+    <radialGradient id="al" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ff5a6a"/><stop offset=".6" stop-color="#c8102e"/><stop offset="1" stop-color="#7a0a1c"/></radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="none" stroke="#e0b04a" stroke-width="10" opacity=".55"/>
+  <!-- mikrofon ayağı (kürsü) -->
+  <path d="M256 352v70M206 430h100" stroke="#e0b04a" stroke-width="18" stroke-linecap="round"/>
+  <!-- mikrofon gövdesi: al bayrak -->
+  <rect x="146" y="96" width="220" height="256" rx="110" fill="url(#al)" stroke="#fff" stroke-width="12"/>
+  <circle cx="234" cy="224" r="62" fill="#fff"/>
+  <circle cx="250" cy="224" r="50" fill="#c8102e"/>
+  <path d="M296 224L335.8 211.1L311.2 244.9L311.2 203.1L335.8 236.9Z" fill="#fff"/>
+  <!-- ses dalgaları -->
+  <path d="M110 176q-30 48 0 96M402 176q30 48 0 96" fill="none" stroke="#ffd76a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M74 150q-48 74 0 148M438 150q48 74 0 148" fill="none" stroke="#ffd76a" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+</svg>

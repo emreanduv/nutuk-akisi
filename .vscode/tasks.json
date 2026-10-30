@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "🇹🇷 Nutuk Akışı: başlat (canlı kaynaklar)", "type": "shell", "command": "python3 server.py", "options": { "cwd": "${workspaceFolder}" }, "isBackground": true, "problemMatcher": [] },
+    { "label": "🇹🇷 Nutuk Akışı: demo (internetsiz)", "type": "shell", "command": "python3 server.py --demo", "options": { "cwd": "${workspaceFolder}" }, "isBackground": true, "problemMatcher": [] },
+    { "label": "📺 Yayını tarayıcıda aç", "type": "shell", "command": "open 'http://127.0.0.1:8769/?yayin=1'", "problemMatcher": [] },
+    { "label": "🎛️ Paneli aç", "type": "shell", "command": "open 'http://127.0.0.1:8769/panel.html'", "problemMatcher": [] },
+    { "label": "🩺 Kaynakları test et + özgün satırları doğrula", "type": "shell", "command": "python3 araclar/tani.py", "options": { "cwd": "${workspaceFolder}" }, "problemMatcher": [] },
+    { "label": "🛑 8769 portunu kapat", "type": "shell", "command": "kill $(lsof -t -i:8769) || true", "problemMatcher": [] }
+  ]
+}

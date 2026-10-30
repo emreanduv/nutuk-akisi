@@ -1,0 +1,54 @@
+{
+ "_not": "Canlı yayın etkileşimi. GİZLİ BİLGİ BU DOSYAYA YAZILMAZ (depo herkese açık). YouTube sohbetini bağlamak için data/ayarlar.yerel.json oluştur: {\"youtube\": {\"apiKey\": \"…\", \"videoId\": \"…\"}} — bu dosya git'e girmez. Bağlanmazsa yayın etkilenmez; isimleri ve oyları kontrol panelinden (http://127.0.0.1:8769/panel.html) elle girebilirsin.",
+ "youtube": {
+  "apiKey": "",
+  "videoId": "",
+  "yoklamaSaniye": 20
+ },
+ "komutlar": {
+  "isim": [
+   "!isim",
+   "!ad",
+   "!adım"
+  ],
+  "oy": [
+   "!oy"
+  ]
+ },
+ "isim": {
+  "enUzun": 16,
+  "yasakli": [
+   "amk",
+   "aq",
+   "sik",
+   "siktir",
+   "amına",
+   "orospu",
+   "piç",
+   "pic",
+   "yarrak",
+   "yarak",
+   "göt",
+   "got",
+   "oç",
+   "ibne",
+   "pezevenk",
+   "kahpe",
+   "yavşak",
+   "yavsak",
+   "şerefsiz",
+   "serefsiz",
+   "gerizekalı",
+   "salak",
+   "aptal",
+   "mal",
+   "dangalak",
+   "puşt",
+   "pust",
+   "kaltak",
+   "fuck",
+   "shit",
+   "bitch"
+  ]
+ }
+}

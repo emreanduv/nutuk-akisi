@@ -1,0 +1,17 @@
+{
+  "_not": "Millî Mücadele Kadrosu ara ekranı (FM'deki kadro ekranı gibi). Tarafsız, olgusal kısa notlar. renk: kart rengi. wiki: Wikipedia sayfa adı (özet ve görsel için).",
+  "kadro": [
+    {"id": "ismet", "ad": "İsmet İnönü", "rol": "Batı Cephesi Komutanı", "simge": "🎖️", "renk": "#1f4fa0", "katki": "I. ve II. İnönü zaferleri; Lozan'da Türk heyetinin başı; ilk başbakan", "wiki": {"tr": "İsmet İnönü", "en": "İsmet İnönü"}},
+    {"id": "fevzi", "ad": "Fevzi Çakmak", "rol": "Genelkurmay Başkanı", "simge": "⭐", "renk": "#2c6b8f", "katki": "Sakarya ve Büyük Taarruz'un planlayıcılarından; 1922'de Mareşal", "wiki": {"tr": "Fevzi Çakmak", "en": "Fevzi Çakmak"}},
+    {"id": "kazim", "ad": "Kâzım Karabekir", "rol": "Doğu Cephesi Komutanı", "simge": "🏔️", "renk": "#7a4fd1", "katki": "Erzurum'da XV. Kolordu; doğu cephesinin zaferi ve Gümrü Antlaşması", "wiki": {"tr": "Kâzım Karabekir", "en": "Kâzım Karabekir"}},
+    {"id": "alifuat", "ad": "Ali Fuat Cebesoy", "rol": "Batı Cephesi (1920)", "simge": "🤝", "renk": "#3f7a3a", "katki": "Amasya Genelgesi'ni imzalayanlardan; Moskova elçisi", "wiki": {"tr": "Ali Fuat Cebesoy", "en": "Ali Fuat Cebesoy"}},
+    {"id": "rauf", "ad": "Rauf Orbay", "rol": "Denizci · Bakanlar Kurulu Bşk.", "simge": "⚓", "renk": "#0f766e", "katki": "Amasya Genelgesi'ni imzalayanlardan; Mondros'ta Osmanlı heyetinin başıydı", "wiki": {"tr": "Rauf Orbay", "en": "Rauf Orbay"}},
+    {"id": "refet", "ad": "Refet Bele", "rol": "Komutan", "simge": "🐎", "renk": "#8a5a2b", "katki": "Amasya Genelgesi'ni imzalayanlardan; Ekim 1922'de İstanbul'a giren ilk temsilci", "wiki": {"tr": "Refet Bele", "en": "Refet Bele"}},
+    {"id": "halide", "ad": "Halide Edib Adıvar", "rol": "Yazar · Onbaşı, sonra Çavuş", "simge": "✒️", "renk": "#b0306a", "katki": "Sultanahmet mitinginin hatibi; cephede görev aldı", "wiki": {"tr": "Halide Edib Adıvar", "en": "Halide Edib Adıvar"}},
+    {"id": "akif", "ad": "Mehmet Akif Ersoy", "rol": "Şair · Burdur mebusu", "simge": "🎼", "renk": "#c8102e", "katki": "İstiklal Marşı'nın şairi; marş 12 Mart 1921'de kabul edildi", "wiki": {"tr": "Mehmet Âkif Ersoy", "en": "Mehmet Akif Ersoy"}},
+    {"id": "fahrettin", "ad": "Fahrettin Altay", "rol": "Süvari Kolordusu Komutanı", "simge": "🏇", "renk": "#4b2d5c", "katki": "Büyük Taarruz'da süvarilerle düşman gerisine sızdı; İzmir'e ilk girenlerden", "wiki": {"tr": "Fahrettin Altay", "en": "Fahrettin Altay"}},
+    {"id": "karafatma", "ad": "Kara Fatma", "rol": "Milis müfrezesi komutanı", "simge": "🔥", "renk": "#9b3b2a", "katki": "Fatma Seher Erden; batı cephesinde milis birliğiyle savaştı, üsteğmenliğe yükseldi", "wiki": {"tr": "Kara Fatma", "en": "Kara Fatma"}},
+    {"id": "seyit", "ad": "Seyit Onbaşı", "rol": "Topçu · Çanakkale", "simge": "💪", "renk": "#5d6b72", "katki": "18 Mart 1915'te dev top mermisini sırtında taşıdığı anlatılan kahraman", "wiki": {"tr": "Seyit Onbaşı", "en": "Seyit Onbaşı"}},
+    {"id": "sabiha", "ad": "Sabiha Gökçen", "rol": "Pilot", "simge": "✈️", "renk": "#d0861a", "katki": "Atatürk'ün manevi kızı; ilk Türk kadın askerî pilot (1936)", "wiki": {"tr": "Sabiha Gökçen", "en": "Sabiha Gökçen"}}
+  ]
+}

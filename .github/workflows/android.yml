@@ -1,0 +1,40 @@
+name: Android (Google Play paketi)
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: "Sürüm adı (ör. 1.0.0)"
+        default: "1.0.0"
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - run: npm ci
+      - name: Uygulama içi veri paketi (data/ → www/data/corpus.json)
+        run: python3 tools/veri.py
+      - run: npx cap sync android
+      - name: AAB derle (imzasız; imza Mac'te imzala.sh ile yapılır)
+        working-directory: android
+        env:
+          VERSION_CODE: ${{ github.run_number }}
+          VERSION_NAME: ${{ inputs.version_name }}
+        run: chmod +x gradlew && ./gradlew bundleRelease --no-daemon
+      - name: Paketi builds dalına koy
+        run: |
+          OUT=nutuk-akisi-${{ inputs.version_name }}-${{ github.run_number }}-unsigned.aab
+          cp android/app/build/outputs/bundle/release/app-release.aab /tmp/$OUT
+          mkdir -p /tmp/b/android && cp /tmp/$OUT /tmp/b/android/ && cd /tmp/b
+          git init -q -b builds && git config user.name "github-actions" && git config user.email "actions@github.com"
+          git add . && git commit -qm "Android paketi $OUT"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" builds
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nutuk-akisi-${{ inputs.version_name }}-${{ github.run_number }}-unsigned.aab
+          path: android/app/build/outputs/bundle/release/app-release.aab

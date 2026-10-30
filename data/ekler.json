@@ -1,0 +1,802 @@
+{
+ "_not": "Kronoloji (alt yazı + Kronoloji ara ekranı), Biliyor muydun? notları (alt yazıya serpiştirilir), Kurtuluş Yolu haritası, Atatürk'ün Türkçesi (Geometri terimleri), Devrimler panosu, millî günler (takvimdeki geri sayım). Tarih biçimi: YYYY-AA-GG; yalnız yıl biliniyorsa YYYY.",
+ "kronoloji": [
+  {
+   "tarih": "1881",
+   "b": "Selanik",
+   "m": "Ali Rıza Efendi ile Zübeyde Hanım'ın oğlu Mustafa doğdu"
+  },
+  {
+   "tarih": "1893",
+   "b": "Askerî Rüştiye",
+   "m": "matematik öğretmeni ona 'Kemal' adını verdi"
+  },
+  {
+   "tarih": "1905-01-11",
+   "b": "Harp Akademisi",
+   "m": "Kurmay Yüzbaşı olarak mezun oldu"
+  },
+  {
+   "tarih": "1911",
+   "b": "Trablusgarp",
+   "m": "Tobruk ve Derne'de gönüllü olarak savaştı"
+  },
+  {
+   "tarih": "1915-04-25",
+   "b": "Arıburnu",
+   "m": "57. Alay'a 'Ben size ölmeyi emrediyorum' dedi"
+  },
+  {
+   "tarih": "1915-08-10",
+   "b": "Conkbayırı",
+   "m": "Anafartalar Kahramanı olarak anılmaya başladı"
+  },
+  {
+   "tarih": "1916",
+   "b": "Muş ve Bitlis",
+   "m": "doğu cephesinde iki şehir geri alındı"
+  },
+  {
+   "tarih": "1918-11-13",
+   "b": "İstanbul",
+   "m": "İtilaf donanması Boğaz'dayken İstanbul'a döndü"
+  },
+  {
+   "tarih": "1919-05-19",
+   "b": "Samsun",
+   "m": "Bandırma Vapuru'yla Samsun'a çıktı; Millî Mücadele başladı"
+  },
+  {
+   "tarih": "1919-06-22",
+   "b": "Amasya Genelgesi",
+   "m": "'Milletin istiklalini yine milletin azim ve kararı kurtaracaktır'"
+  },
+  {
+   "tarih": "1919-07-23",
+   "b": "Erzurum Kongresi",
+   "m": "'Millî sınırlar içinde vatan bir bütündür'"
+  },
+  {
+   "tarih": "1919-09-04",
+   "b": "Sivas Kongresi",
+   "m": "bütün cemiyetler tek çatı altında birleşti; manda reddedildi"
+  },
+  {
+   "tarih": "1919-12-27",
+   "b": "Ankara",
+   "m": "Temsil Heyeti Ankara'ya geldi"
+  },
+  {
+   "tarih": "1920-01-28",
+   "b": "Misak-ı Millî",
+   "m": "Mebusan Meclisi millî sınırları ilan etti"
+  },
+  {
+   "tarih": "1920-03-16",
+   "b": "İstanbul işgal edildi",
+   "m": "Meclis-i Mebusan basıldı, milletvekilleri sürgün edildi"
+  },
+  {
+   "tarih": "1920-04-23",
+   "b": "TBMM açıldı",
+   "m": "Mustafa Kemal Meclis Başkanı seçildi"
+  },
+  {
+   "tarih": "1920-08-10",
+   "b": "Sevr",
+   "m": "İstanbul hükümeti imzaladı; TBMM tanımadı"
+  },
+  {
+   "tarih": "1921-01-10",
+   "b": "I. İnönü",
+   "m": "düzenli ordunun ilk zaferi"
+  },
+  {
+   "tarih": "1921-01-20",
+   "b": "Teşkilat-ı Esasiye",
+   "m": "ilk anayasa: 'Hâkimiyet bilâkaydüşart milletindir'"
+  },
+  {
+   "tarih": "1921-03-12",
+   "b": "İstiklal Marşı",
+   "m": "Mehmet Akif'in şiiri TBMM'de kabul edildi"
+  },
+  {
+   "tarih": "1921-03-31",
+   "b": "II. İnönü",
+   "m": "'Milletin makûs talihini de yendiniz'"
+  },
+  {
+   "tarih": "1921-08-23",
+   "b": "Sakarya",
+   "m": "22 gün 22 gece süren meydan muharebesi başladı"
+  },
+  {
+   "tarih": "1921-09-19",
+   "b": "Gazi ve Mareşal",
+   "m": "TBMM, Sakarya zaferinin ardından unvanı ve rütbeyi verdi"
+  },
+  {
+   "tarih": "1922-08-26",
+   "b": "Büyük Taarruz",
+   "m": "Kocatepe'den taarruz başladı"
+  },
+  {
+   "tarih": "1922-08-30",
+   "b": "Dumlupınar",
+   "m": "Başkomutanlık Meydan Muharebesi kazanıldı"
+  },
+  {
+   "tarih": "1922-09-09",
+   "b": "İzmir",
+   "m": "Türk süvarileri İzmir'e girdi"
+  },
+  {
+   "tarih": "1922-10-11",
+   "b": "Mudanya",
+   "m": "ateşkes imzalandı; Doğu Trakya savaşsız alındı"
+  },
+  {
+   "tarih": "1922-11-01",
+   "b": "Saltanat kaldırıldı",
+   "m": "623 yıllık Osmanlı saltanatı sona erdi"
+  },
+  {
+   "tarih": "1923-02-17",
+   "b": "İzmir İktisat Kongresi",
+   "m": "Misak-ı İktisadi kabul edildi"
+  },
+  {
+   "tarih": "1923-07-24",
+   "b": "Lozan",
+   "m": "yeni Türkiye'nin tapusu imzalandı"
+  },
+  {
+   "tarih": "1923-10-13",
+   "b": "Ankara başkent",
+   "m": "Ankara resmen başkent oldu"
+  },
+  {
+   "tarih": "1923-10-29",
+   "b": "Cumhuriyet",
+   "m": "Cumhuriyet ilan edildi; Mustafa Kemal ilk cumhurbaşkanı"
+  },
+  {
+   "tarih": "1924-03-03",
+   "b": "Tevhid-i Tedrisat",
+   "m": "halifelik kaldırıldı, eğitim birleştirildi"
+  },
+  {
+   "tarih": "1924-04-20",
+   "b": "1924 Anayasası",
+   "m": "Teşkilat-ı Esasiye Kanunu kabul edildi"
+  },
+  {
+   "tarih": "1925-11-25",
+   "b": "Şapka Kanunu",
+   "m": "kılık kıyafet değişti"
+  },
+  {
+   "tarih": "1925-12-26",
+   "b": "Takvim ve saat",
+   "m": "uluslararası takvim ve saat kabul edildi"
+  },
+  {
+   "tarih": "1926-02-17",
+   "b": "Medeni Kanun",
+   "m": "kadın ve erkek kanun önünde eşit sayıldı"
+  },
+  {
+   "tarih": "1926-07-01",
+   "b": "Kabotaj",
+   "m": "kıyılarda taşımacılık hakkı Türk gemilerine geçti"
+  },
+  {
+   "tarih": "1927-10-15",
+   "b": "Nutuk",
+   "m": "Gazi altı gün sürecek büyük söylevine başladı"
+  },
+  {
+   "tarih": "1927-10-20",
+   "b": "Gençliğe Hitabe",
+   "m": "'Ey Türk gençliği!'"
+  },
+  {
+   "tarih": "1928-08-09",
+   "b": "Sarayburnu",
+   "m": "yeni harfler halka ilk kez anlatıldı"
+  },
+  {
+   "tarih": "1928-11-01",
+   "b": "Harf Devrimi",
+   "m": "yeni Türk harfleri kanunla kabul edildi"
+  },
+  {
+   "tarih": "1929-01-01",
+   "b": "Millet Mektepleri",
+   "m": "yetişkinler için okuma yazma seferberliği"
+  },
+  {
+   "tarih": "1930-04-03",
+   "b": "Kadınlara oy",
+   "m": "belediye seçimlerinde seçme ve seçilme hakkı"
+  },
+  {
+   "tarih": "1931-04-12",
+   "b": "Türk Tarih Kurumu",
+   "m": "Türk Tarihi Tetkik Cemiyeti kuruldu"
+  },
+  {
+   "tarih": "1931-04-20",
+   "b": "Yurtta sulh",
+   "m": "'Yurtta sulh, cihanda sulh için çalışıyoruz'"
+  },
+  {
+   "tarih": "1932-07-12",
+   "b": "Türk Dil Kurumu",
+   "m": "Türk Dili Tetkik Cemiyeti kuruldu"
+  },
+  {
+   "tarih": "1933-10-29",
+   "b": "Onuncu Yıl",
+   "m": "'Ne mutlu Türküm diyene!'"
+  },
+  {
+   "tarih": "1934-06-21",
+   "b": "Soyadı Kanunu",
+   "m": "herkes bir soyadı aldı"
+  },
+  {
+   "tarih": "1934-11-24",
+   "b": "Atatürk",
+   "m": "TBMM, Mustafa Kemal'e 'Atatürk' soyadını verdi"
+  },
+  {
+   "tarih": "1934-12-05",
+   "b": "Kadınlara milletvekilliği",
+   "m": "seçme ve seçilme hakkı tamamlandı"
+  },
+  {
+   "tarih": "1935-02-08",
+   "b": "İlk kadın milletvekilleri",
+   "m": "17 kadın milletvekili Meclis'e girdi"
+  },
+  {
+   "tarih": "1936-07-20",
+   "b": "Montrö",
+   "m": "Boğazlar tam Türk denetimine geçti"
+  },
+  {
+   "tarih": "1937",
+   "b": "Geometri",
+   "m": "açı, üçgen, yarıçap: Atatürk'ün Türkçe terimleri"
+  },
+  {
+   "tarih": "1938-09-05",
+   "b": "Vasiyetname",
+   "m": "servetinin gelirini Türk Tarih ve Dil kurumlarına bıraktı"
+  },
+  {
+   "tarih": "1938-11-10",
+   "b": "09.05",
+   "m": "Dolmabahçe'de hayata gözlerini yumdu"
+  },
+  {
+   "tarih": "1953-11-10",
+   "b": "Anıtkabir",
+   "m": "naaşı Anıtkabir'e taşındı"
+  }
+ ],
+ "biliyormu": [
+  "🎙️ Nutuk, 15–20 Ekim 1927 arasında 6 günde, yaklaşık 36,5 saatte okundu",
+  "🚢 Samsun'a giden Bandırma Vapuru 16 Mayıs 1919'da İstanbul'dan ayrıldı",
+  "📐 'Geometri' kitabı 1937'de yazar adı olmadan basıldı; yazarı Atatürk'tü",
+  "✍️ 'Atatürk' soyadı 24 Kasım 1934'te TBMM'nin çıkardığı özel bir kanunla verildi",
+  "⏳ Sakarya Meydan Muharebesi 22 gün 22 gece sürdü",
+  "🎼 Mehmet Akif, İstiklal Marşı yarışmasının para ödülünü kabul etmedi",
+  "🗳️ Cumhuriyet'in ilan edildiği gece 158 milletvekili oybirliğiyle Mustafa Kemal'i seçti",
+  "🔤 1 Ocak 1929'da açılan Millet Mektepleri'nde yetişkinler yeni harfleri öğrendi",
+  "🎖️ Türk ordusunda 57 numaralı alay yoktur: Çanakkale'nin anısına",
+  "🏛️ Ankara, Cumhuriyet'ten iki hafta önce, 13 Ekim 1923'te başkent oldu",
+  "👩 Kadınlar 1930'da belediye, 1933'te muhtarlık, 1934'te milletvekilliği seçimlerinde oy hakkı kazandı",
+  "🕰️ Uluslararası saat ve takvim 1 Ocak 1926'dan itibaren kullanılmaya başlandı",
+  "📏 1931'de kabul edilen Ölçüler Kanunu ile metre ve kilogram sistemine geçildi",
+  "📅 Hafta tatili 1935'te cumadan pazara alındı",
+  "👋 1934'te 'efendi, bey, paşa' gibi unvanlar kaldırıldı; yerine 'Bay' ve 'Bayan' geldi",
+  "🔬 'Hayatta en hakiki mürşit ilimdir' sözü Ankara'da DTCF binasının cephesinde yazılıdır",
+  "📡 Millî Mücadele büyük ölçüde telgrafla yönetildi; Nutuk telgraf metinleriyle doludur",
+  "📚 Atatürk'ün vasiyetiyle İş Bankası hisselerinin geliri Türk Tarih ve Türk Dil kurumlarına bırakıldı"
+ ],
+ "harita": [
+  {
+   "ad": "İstanbul",
+   "lat": 41.01,
+   "lon": 28.98,
+   "tarih": "1919-05-16",
+   "not": "Bandırma Vapuru yola çıktı",
+   "yon": "sol"
+  },
+  {
+   "ad": "Samsun",
+   "lat": 41.29,
+   "lon": 36.33,
+   "tarih": "1919-05-19",
+   "not": "Millî Mücadele başladı"
+  },
+  {
+   "ad": "Havza",
+   "lat": 40.97,
+   "lon": 35.66,
+   "tarih": "1919-05-25",
+   "not": "Halk mitinglerle uyandı",
+   "yon": "sol"
+  },
+  {
+   "ad": "Amasya",
+   "lat": 40.65,
+   "lon": 35.83,
+   "tarih": "1919-06-22",
+   "not": "Amasya Genelgesi"
+  },
+  {
+   "ad": "Erzurum",
+   "lat": 39.9,
+   "lon": 41.27,
+   "tarih": "1919-07-23",
+   "not": "Erzurum Kongresi",
+   "yon": "sol"
+  },
+  {
+   "ad": "Sivas",
+   "lat": 39.75,
+   "lon": 37.02,
+   "tarih": "1919-09-04",
+   "not": "Sivas Kongresi"
+  },
+  {
+   "ad": "Ankara",
+   "lat": 39.93,
+   "lon": 32.86,
+   "tarih": "1919-12-27",
+   "not": "Temsil Heyeti geldi; TBMM açıldı"
+  },
+  {
+   "ad": "İnönü",
+   "lat": 39.82,
+   "lon": 30.15,
+   "tarih": "1921-03-31",
+   "not": "I. ve II. İnönü zaferleri",
+   "yon": "sol"
+  },
+  {
+   "ad": "Sakarya",
+   "lat": 39.58,
+   "lon": 32.14,
+   "tarih": "1921-09-13",
+   "not": "22 gün 22 gece"
+  },
+  {
+   "ad": "Kocatepe",
+   "lat": 38.75,
+   "lon": 30.53,
+   "tarih": "1922-08-26",
+   "not": "Büyük Taarruz başladı"
+  },
+  {
+   "ad": "Dumlupınar",
+   "lat": 38.85,
+   "lon": 29.98,
+   "tarih": "1922-08-30",
+   "not": "Başkomutanlık Meydan Muharebesi",
+   "yon": "sol"
+  },
+  {
+   "ad": "İzmir",
+   "lat": 38.42,
+   "lon": 27.14,
+   "tarih": "1922-09-09",
+   "not": "Akdeniz'e ulaşıldı",
+   "yon": "sol"
+  }
+ ],
+ "sinir": {
+  "trakya": [
+   [
+    26.05,
+    40.74
+   ],
+   [
+    26.2,
+    40.05
+   ],
+   [
+    26.7,
+    40.42
+   ],
+   [
+    27.5,
+    40.98
+   ],
+   [
+    28.6,
+    40.98
+   ],
+   [
+    29.05,
+    41.22
+   ],
+   [
+    28.0,
+    41.98
+   ],
+   [
+    27.4,
+    42.05
+   ],
+   [
+    26.6,
+    41.72
+   ],
+   [
+    26.35,
+    41.25
+   ]
+  ],
+  "anadolu": [
+   [
+    29.1,
+    41.18
+   ],
+   [
+    30.4,
+    41.18
+   ],
+   [
+    31.4,
+    41.32
+   ],
+   [
+    32.4,
+    41.75
+   ],
+   [
+    33.6,
+    42.02
+   ],
+   [
+    35.1,
+    42.05
+   ],
+   [
+    35.5,
+    41.65
+   ],
+   [
+    36.4,
+    41.27
+   ],
+   [
+    37.5,
+    41.08
+   ],
+   [
+    38.4,
+    40.95
+   ],
+   [
+    39.5,
+    41.05
+   ],
+   [
+    40.5,
+    41.0
+   ],
+   [
+    41.5,
+    41.52
+   ],
+   [
+    42.5,
+    41.45
+   ],
+   [
+    43.45,
+    41.12
+   ],
+   [
+    43.65,
+    40.75
+   ],
+   [
+    44.75,
+    39.75
+   ],
+   [
+    44.4,
+    39.4
+   ],
+   [
+    44.1,
+    38.85
+   ],
+   [
+    44.3,
+    37.95
+   ],
+   [
+    44.75,
+    37.2
+   ],
+   [
+    44.2,
+    37.18
+   ],
+   [
+    42.4,
+    37.1
+   ],
+   [
+    41.2,
+    37.08
+   ],
+   [
+    40.0,
+    36.85
+   ],
+   [
+    38.4,
+    36.86
+   ],
+   [
+    37.0,
+    36.65
+   ],
+   [
+    36.6,
+    36.83
+   ],
+   [
+    36.2,
+    36.0
+   ],
+   [
+    35.85,
+    35.85
+   ],
+   [
+    36.05,
+    36.55
+   ],
+   [
+    35.6,
+    36.6
+   ],
+   [
+    34.6,
+    36.8
+   ],
+   [
+    33.9,
+    36.3
+   ],
+   [
+    32.8,
+    36.05
+   ],
+   [
+    32.0,
+    36.55
+   ],
+   [
+    30.6,
+    36.86
+   ],
+   [
+    30.4,
+    36.3
+   ],
+   [
+    29.6,
+    36.2
+   ],
+   [
+    28.9,
+    36.7
+   ],
+   [
+    28.0,
+    36.8
+   ],
+   [
+    27.4,
+    37.1
+   ],
+   [
+    27.2,
+    37.6
+   ],
+   [
+    26.4,
+    38.25
+   ],
+   [
+    26.8,
+    38.7
+   ],
+   [
+    26.7,
+    39.3
+   ],
+   [
+    26.1,
+    39.5
+   ],
+   [
+    26.2,
+    40.05
+   ],
+   [
+    26.7,
+    40.38
+   ],
+   [
+    27.5,
+    40.32
+   ],
+   [
+    28.5,
+    40.4
+   ],
+   [
+    29.0,
+    40.85
+   ]
+  ]
+ },
+ "terimler": [
+  {
+   "eski": "zaviye",
+   "yeni": "açı",
+   "not": "dik açı, dar açı, geniş açı"
+  },
+  {
+   "eski": "müselles",
+   "yeni": "üçgen",
+   "not": "eşkenar üçgen, ikizkenar üçgen"
+  },
+  {
+   "eski": "kutur",
+   "yeni": "çap",
+   "not": "çemberin iki ucunu merkezden birleştiren"
+  },
+  {
+   "eski": "nısf-ı kutur",
+   "yeni": "yarıçap",
+   "not": "merkezden çembere"
+  },
+  {
+   "eski": "mümas",
+   "yeni": "teğet",
+   "not": "eğriye tek noktada değen"
+  },
+  {
+   "eski": "müsavi",
+   "yeni": "eşit",
+   "not": "= işaretinin adı"
+  },
+  {
+   "eski": "ufki",
+   "yeni": "yatay",
+   "not": "ufuk doğrultusunda"
+  },
+  {
+   "eski": "amudi",
+   "yeni": "dikey",
+   "not": "çekül doğrultusunda"
+  },
+  {
+   "eski": "mecmu",
+   "yeni": "toplam",
+   "not": "artı, eksi, çarpı, bölü de bu dönemde"
+  },
+  {
+   "eski": "satıh",
+   "yeni": "yüzey",
+   "not": "düzlem, uzay, boyut"
+  }
+ ],
+ "devrimler": [
+  {
+   "tarih": "1922-11-01",
+   "ad": "Saltanatın kaldırılması",
+   "simge": "👑"
+  },
+  {
+   "tarih": "1923-10-29",
+   "ad": "Cumhuriyetin ilanı",
+   "simge": "🇹🇷"
+  },
+  {
+   "tarih": "1924-03-03",
+   "ad": "Tevhid-i Tedrisat",
+   "simge": "🏫"
+  },
+  {
+   "tarih": "1925-11-25",
+   "ad": "Şapka Kanunu",
+   "simge": "🎩"
+  },
+  {
+   "tarih": "1925-12-26",
+   "ad": "Uluslararası takvim ve saat",
+   "simge": "🕰️"
+  },
+  {
+   "tarih": "1926-02-17",
+   "ad": "Türk Medeni Kanunu",
+   "simge": "⚖️"
+  },
+  {
+   "tarih": "1928-11-01",
+   "ad": "Harf Devrimi",
+   "simge": "🔤"
+  },
+  {
+   "tarih": "1931-03-26",
+   "ad": "Ölçüler Kanunu: metre, kilogram",
+   "simge": "📏"
+  },
+  {
+   "tarih": "1934-06-21",
+   "ad": "Soyadı Kanunu",
+   "simge": "🪪"
+  },
+  {
+   "tarih": "1934-11-26",
+   "ad": "Unvan ve lakapların kaldırılması",
+   "simge": "👋"
+  },
+  {
+   "tarih": "1934-12-05",
+   "ad": "Kadınlara milletvekilliği hakkı",
+   "simge": "👩"
+  },
+  {
+   "tarih": "1935-05-27",
+   "ad": "Hafta tatili pazar günü",
+   "simge": "📅"
+  }
+ ],
+ "milligunler": [
+  {
+   "ay": 3,
+   "gun": 18,
+   "ad": "18 Mart"
+  },
+  {
+   "ay": 4,
+   "gun": 23,
+   "ad": "23 Nisan"
+  },
+  {
+   "ay": 5,
+   "gun": 19,
+   "ad": "19 Mayıs"
+  },
+  {
+   "ay": 8,
+   "gun": 30,
+   "ad": "30 Ağustos"
+  },
+  {
+   "ay": 10,
+   "gun": 29,
+   "ad": "29 Ekim"
+  },
+  {
+   "ay": 11,
+   "gun": 10,
+   "ad": "10 Kasım"
+  }
+ ]
+}

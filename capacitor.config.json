@@ -1,0 +1,11 @@
+{
+  "appId": "com.anduv.nutukakisi",
+  "appName": "Nutuk Akışı",
+  "webDir": "www",
+  "backgroundColor": "#132545",
+  "android": { "backgroundColor": "#132545" },
+  "ios": { "backgroundColor": "#132545", "contentInset": "never" },
+  "plugins": {
+    "LocalNotifications": { "iconColor": "#c8102e" }
+  }
+}

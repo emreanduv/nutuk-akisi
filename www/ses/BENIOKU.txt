@@ -1,0 +1,12 @@
+Sesli okuma (isteğe bağlı)
+
+Bu klasöre bir metnin kimliğiyle aynı adda ses dosyası koyarsan, yayın o metne geldiğinde satırlar inerken ses çalar
+ve ekran sesin uzunluğu kadar bekler. Kimlikler data/metinler.json'daki "id" alanıdır. Örnekler:
+
+  genclige-hitabe.mp3   → Gençliğe Hitabe
+  onuncu-yil.mp3        → Onuncu Yıl Nutku
+  samsun.mp3            → Nutuk, 1. bölüm (Samsun'a Çıkış)
+  sakarya.mp3           → Sakarya
+
+mp3, m4a, ogg ve wav olur. Radyo ve tiyatro sesinle okuduğun Nutuk bölümleri yayını en çok ayıracak şey olur.
+Not: Atatürk'ün kendi ses kayıtlarını (ör. Onuncu Yıl Nutku) kullanmadan önce kaydın yayın/kullanım haklarını kontrol et.

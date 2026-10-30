@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#132545">
+<title>Nutuk Akışı | Yayın Paneli</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="app.css?v=1">
+<style>
+  .pn-wrap{max-width:1000px;margin:0 auto;padding:14px}
+  .card{background:#fffdf8;border-radius:16px;padding:16px 18px;box-shadow:0 0 0 1px var(--line),0 3px 0 #0000000d;margin-bottom:14px}
+  .card h2{margin:0 0 10px;font:900 20px/1.1 'DM Sans',sans-serif;color:var(--deep);display:flex;align-items:center;gap:10px}
+  .card h2 small{margin-left:auto;font-size:13px;color:var(--muted);font-weight:700}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .in{flex:1;min-width:180px;border:0;border-radius:12px;padding:12px 14px;font:700 17px 'DM Sans',sans-serif;background:#fff;box-shadow:0 0 0 2px var(--line);color:var(--ink)}
+  .b{border:0;border-radius:10px;padding:11px 16px;font-weight:900;font-size:15px;background:linear-gradient(#f7f2e8,#ddd3c1);box-shadow:0 2px 0 #0003;color:var(--ink);cursor:pointer}
+  .b.go{background:linear-gradient(#ff6b7a,#c8102e);color:#fff}
+  .b.blue{background:linear-gradient(#4f6a99,#1f4fa0);color:#fff}
+  .names{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .nm{display:inline-flex;align-items:center;gap:8px;padding:6px 8px 6px 12px;border-radius:12px;background:radial-gradient(ellipse at 30% 20%,#fff8e6,#efdcae 70%);color:#2a1d0c;font-weight:800}
+  .nm i{font-style:normal;font-size:22px}.nm small{opacity:.7;font-size:12px}
+  .nm button{border:0;background:#0003;color:#fff;border-radius:8px;width:26px;height:26px;cursor:pointer}
+  .poll{display:flex;flex-direction:column;gap:8px}
+  .po{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--paper2)}
+  .po b{font:900 22px/1 'Barlow Condensed',sans-serif;color:var(--teal)}
+  select.in{min-width:240px}
+  .st{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:900;font-size:12px;color:#fff;background:#8a7a63}
+  .st.ok{background:#1f8a4c}.st.err{background:#c0262d}.st.wait{background:#c98a12}
+  .msg{margin-top:8px;font-weight:700;color:var(--orange);min-height:1.2em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+</style>
+</head>
+<body>
+<div class="app" style="padding-bottom:20px">
+  <header class="band">
+    <div class="crest" id="crest"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="43" cy="50" r="22" fill="#fff"/><circle cx="49" cy="50" r="17.6" fill="#c8102e"/><path d="M55 50L71.3 44.7L61.2 58.6L61.2 41.4L71.3 55.3Z" fill="#fff"/></svg></div>
+    <div class="brand"><h1>Nutuk <em>Akışı</em></h1><small>Yayın Paneli · isim, oylama, sahne</small></div>
+    <div class="band-right"><a class="tab-yayin" href="/?yayin=1" target="_blank" style="border-radius:10px">📺 Yayını aç</a></div>
+  </header>
+  <div class="pn-wrap">
+    <section class="card">
+      <h2>📡 YouTube sohbeti <span class="st" id="yt">—</span><small id="ytNot"></small></h2>
+      <p class="hint" style="margin:0">Bağlıysa sohbetteki <b>!isim Adın</b> ve <b>!1 / !2</b> mesajları kendiliğinden gelir. Bağlı değilse aşağıdan elle gir. Ayar: <code>data/ayarlar.json</code></p>
+    </section>
+
+    <section class="card">
+      <h2>✍️ Adını eski harflerle yaz <small>uygunsuz kelimeler süzülür · ✕ ile yayından kaldır</small></h2>
+      <div class="row"><input class="in" id="ad" placeholder="İzleyicinin adı (ör. Ayşe)" maxlength="16"><button class="b go" id="adEkle">Yaz ✍️</button></div>
+      <div class="msg" id="adMsg"></div>
+      <div class="names" id="names"></div>
+    </section>
+
+    <section class="card">
+      <h2>🗳️ Oylama <small id="pollTime"></small></h2>
+      <div class="poll" id="poll"></div>
+      <div class="row" style="margin-top:10px"><select class="in" id="o1"></select><select class="in" id="o2"></select><button class="b blue" id="pollStart">Yeni oylama başlat (2,5 dk)</button></div>
+    </section>
+
+    <section class="card">
+      <h2>🎬 Sahne <small>yayında hemen gösterir</small></h2>
+      <div class="row" style="margin-bottom:10px"><button class="b go" data-k="sonraki">▶ Sonraki mesaj</button><button class="b" data-k="alarm">🎙️ Alarm</button></div>
+      <div class="grid" id="scenes"></div>
+    </section>
+  </div>
+</div>
+<script src="config.js"></script>
+<script src="common.js?v=1"></script>
+<script>
+(function(){
+  const $ = (s) => document.querySelector(s), esc = NA.esc;
+  const SC = [['dogrumu','🔍 Doğru mu Uydurma mı'],['harita','🗺️ Kurtuluş Yolu'],['bugun','📌 Tarihte bugün'],['isim','✍️ Eski harflerle isimler'],['kadro','🎖️ Kadro'],['oylama','🗳️ Oylama'],['vecize','🗣️ Gazi\'nin sözleri'],['sayfa','📖 Nutuk\'tan bir sayfa'],['kronoloji','⏳ Kronoloji'],['terimler','📐 Atatürk\'ün Türkçesi'],['devrimler','⚖️ Devrimler'],['gundem','📰 Gündem'],['abone','👍 Abone ol']];
+  $('#scenes').innerHTML = SC.map(([k, l]) => `<button class="b" data-k="sahne:${k}">${l}</button>`).join('');
+  document.addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-k]'); if(b){ await NA.post('/api/komut', { ad:b.dataset.k }); b.textContent = '✓ ' + b.textContent.replace(/^✓ /, ''); setTimeout(() => b.textContent = b.textContent.replace(/^✓ /, ''), 1500); return; }
+    const d = e.target.closest('[data-del]'); if(d){ await NA.post('/api/isim/sil', { id:Number(d.dataset.del) }); NA.loadCanli(); return; }
+    const v = e.target.closest('[data-vote]'); if(v){ await NA.post('/api/oy', { secim:Number(v.dataset.vote) }); NA.loadCanli(); }
+  });
+  async function addName(){
+    const r = await NA.post('/api/isim', { ad:$('#ad').value });
+    $('#adMsg').textContent = r.ok ? `✓ ${r.isim.ad} yayına gönderildi` : (r.hata || 'Eklenemedi');
+    if(r.ok) $('#ad').value = '';
+    NA.loadCanli();
+  }
+  $('#adEkle').onclick = addName;
+  $('#ad').addEventListener('keydown', (e) => { if(e.key === 'Enter') addName(); });
+  $('#pollStart').onclick = async () => {
+    const r = await NA.post('/api/oylama', { secenekler:[$('#o1').value, $('#o2').value], sure:150 });
+    if(!r.ok) $('#pollTime').textContent = r.hata || 'Başlatılamadı'; NA.loadCanli();
+  };
+  let optsKey = '';
+  NA.onUpdate(() => {
+    const L = NA.state.canli || {}, Y = L.yt || {};
+    $('#yt').textContent = Y.durum || '—';
+    $('#yt').className = 'st ' + ({ 'bağlı':'ok', 'hata':'err', 'bekliyor':'wait' }[Y.durum] || '');
+    $('#ytNot').textContent = Y.not || '';
+    $('#names').innerHTML = (L.isimler || []).slice().reverse().map(n => `<span class="nm"><i class="osm" dir="rtl">${esc(NA.eskiHarf(n.ad))}</i>${esc(n.ad)} <small>${esc(n.kaynak)}</small><button data-del="${n.id}" title="Yayından kaldır">✕</button></span>`).join('') || '<span class="hint">Henüz isim yok.</span>';
+    const P = L.oylama;
+    if(P){
+      const live = P.kalan > 0;
+      $('#pollTime').textContent = live ? `${Math.floor(P.kalan / 60)}:${NA.two(Math.floor(P.kalan % 60))} kaldı` : 'bitti';
+      $('#poll').innerHTML = P.secenekler.map((id, i) => { const t = NA.metin(id); return `<div class="po"><b>!${i + 1}</b><span>${esc(t ? t.baslik : id)}${P.kazanan === i && !live ? ' 🏆' : ''}</span><b>${P.oy[i]}</b>${live ? `<button class="b" data-vote="${i + 1}">+1 oy</button>` : '<span></span>'}</div>`; }).join('');
+    } else { $('#pollTime').textContent = ''; $('#poll').innerHTML = '<span class="hint">Aktif oylama yok. Yayın oylama sahnesine gelince kendiliğinden başlar ya da aşağıdan başlat.</span>'; }
+    const T = NA.metinler(), k = T.map(t => t.id).join();
+    if(k && k !== optsKey){ optsKey = k; const o = T.map(t => `<option value="${esc(t.id)}">${esc(t.baslik)}</option>`).join(''); $('#o1').innerHTML = o; $('#o2').innerHTML = o; $('#o2').selectedIndex = 1; }
+  });
+  NA.start({ canli:true });
+})();
+</script>
+</body>
+</html>

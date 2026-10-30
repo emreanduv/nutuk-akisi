@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nutuk Akışı</string>
+    <string name="title_activity_main">Nutuk Akışı</string>
+    <string name="package_name">com.anduv.nutukakisi</string>
+    <string name="custom_url_scheme">com.anduv.nutukakisi</string>
+</resources>

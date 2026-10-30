@@ -1,0 +1,15 @@
+node_modules/
+android/.gradle/
+android/build/
+android/app/build/
+ios/App/build/
+ios/App/Pods/
+*.keystore
+*.jks
+imza-anahtari/
+ios/debug.xcconfig
+data/cache.json
+data/cache.json.tmp
+data/ayarlar.yerel.json
+__pycache__/
+.DS_Store

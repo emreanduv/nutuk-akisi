@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#132545">
+<meta name="description" content="Nutuk, Gençliğe Hitabe, söylevler ve telgraflar: Atatürk'ün sözleri özgün hâliyle ve bugünün Türkçesiyle, tek ekranda.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Nutuk Akışı | Gazi'nin Sözleri</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="app.css?v=1">
+<link rel="stylesheet" href="yayin.css?v=1">
+</head>
+<body>
+<div class="app">
+  <header class="band">
+    <div class="crest" id="crest"></div>
+    <div class="brand"><h1>Nutuk <em>Akışı</em></h1><small id="subline">Gazi'nin Sözleri</small></div>
+    <span class="demo" id="demo" hidden>DEMO</span>
+    <div class="band-right"><span class="sess" id="sess">BAĞLANIYOR</span><time id="clock">--:--</time></div>
+    <nav class="tabs" id="tabs" role="tablist">
+      <button class="on" data-tab="metin" role="tab">📜 Metinler</button>
+      <button data-tab="kesfet" role="tab">✨ Keşfet</button>
+      <button data-tab="kadro" role="tab">🎖️ Kadro</button>
+      <button data-tab="kron" role="tab">⏳ Kronoloji</button>
+      <button data-tab="kayit" role="tab">⭐ Kaydettiklerim</button>
+      <a class="tab-yayin" href="?yayin=1" title="1920×1080 yayın görünümü (OBS)">📺 Yayın</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="pane on" id="p-metin">
+      <div id="daily"></div>
+      <p class="made">Bir Mr. Anduv! yapımıdır.</p>
+      <div class="search"><input id="q" type="search" placeholder="Ara: Sakarya, Hitabe, istiklal, telgraf…" autocomplete="off"></div>
+      <div class="chips" id="kinds"></div>
+      <div class="cards" id="list"></div>
+    </section>
+
+    <section class="pane" id="p-kesfet">
+      <label class="kf-bildirim"><input type="checkbox" id="bildirim"><span><b>🔔 Her sabah günün sözü</b><small>Saat 09.00'da Nutuk'tan ve söylevlerden bir özgün cümle</small></span></label>
+      <h3 class="sec">📌 Tarihte bugün</h3><div class="tb-app" id="bugunBox"></div>
+      <h3 class="sec">📺 Nutuk Dizisi · her gün bir bölüm</h3><div class="kf-series" id="series"></div>
+      <div class="kf-name" style="margin-top:14px"><h3>✍️ Adını eski harflerle yaz</h3><input id="myName" type="text" maxlength="16" placeholder="Adın…" autocomplete="off"><div class="kf-tab" id="myTab"></div></div>
+      <h3 class="sec">🔍 Doğru mu, Uydurma mı?</h3><div class="cards" id="mythList"></div>
+      <h3 class="sec yalniz-sunucu">🗞️ Bugün ve Gazi</h3><div class="cards yalniz-sunucu" id="esleList"></div>
+      <h3 class="sec">📐 Atatürk'ün Türkçesi · Geometri (1937)</h3><div class="terms" id="terms"></div>
+      <h3 class="sec">⚖️ Devrimler</h3><div class="devs" id="devs"></div>
+    </section>
+
+    <section class="pane" id="p-kadro">
+      <div class="kadro" id="kadro"></div>
+    </section>
+
+    <section class="pane" id="p-kron">
+      <div id="timeline"></div>
+      <h3 class="sec yalniz-sunucu">📰 Gündem</h3>
+      <div class="news yalniz-sunucu" id="news"></div>
+      <details class="health yalniz-sunucu"><summary>Kaynak durumu</summary><div id="health"></div></details>
+      <h3 class="sec">ℹ️ Hakkında</h3>
+      <div class="hakkinda"><p><b>Nutuk Akışı</b> · Nutuk, Gençliğe Hitabe, söylevler ve telgraflar: özgün hâliyle ve bugünün Türkçesiyle.</p>
+        <p>Atatürk'ün eserleri kamu malıdır. Nutuk'tan alınan özgün satırlar Vikikaynak'taki tam metinle (tr.wikisource.org) harf harf karşılaştırılmıştır; "≈" ile başlayan karşılıklar ve düz anlatım satırları bu uygulama için yazılmıştır. "Tarihte bugün" Türkçe Vikipedi'den gelir.</p>
+        <p>Uygulama hiçbir kişisel veri toplamaz; kaydettiklerin yalnız bu cihazda kalır. <a href="https://emreanduv.github.io/nutuk-akisi/gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></p>
+        <p class="made">Bir Mr. Anduv! yapımıdır.</p></div>
+    </section>
+
+    <section class="pane" id="p-kayit">
+      <p class="hint" id="saveHint">Bir metni açıp ☆ ile kaydet; burada toplanır (yalnız bu cihazda saklanır).</p>
+      <div class="cards" id="saved"></div>
+    </section>
+
+    <p class="legal"><strong>Bir Mr. Anduv! yapımıdır.</strong> Nutuk Akışı bağımsız bir eğitim ve keşif uygulamasıdır. Atatürk'ün eserleri kamu malıdır; tırnak içindeki özgün satırlar Nutuk (1927) ve Atatürk'ün söylev ve demeçlerinden alınmıştır, altlarındaki karşılıklar bu uygulama için yazılmış sadeleştirmelerdir. Düz satırlar olayları günümüz Türkçesiyle anlatır. Tam metin için Vikikaynak ve Atatürk'ün Bütün Eserleri'ne bakılmalıdır. Wikipedia özetleri ve görselleri kendi lisanslarıyla gösterilir.</p>
+  </main>
+
+  <div class="ticker"><b class="tk-label">🇹🇷 KRONOLOJİ</b><div class="tk-win"><div class="tk-track" id="track"></div></div></div>
+</div>
+
+<dialog class="sheet" id="sheet">
+  <form method="dialog"><button class="x" aria-label="Kapat">×</button></form>
+  <div id="sheetBody"></div>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="config.js"></script>
+<script src="common.js?v=1"></script>
+<script src="app.js?v=1"></script>
+<script src="yayin.js?v=1"></script>
+<script>NA.start();</script>
+</body>
+</html>
