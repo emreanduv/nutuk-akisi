@@ -1,51 +1,10 @@
 {
  "bolum": 20,
- "kisim": 743,
- "paragraf": 6131,
- "karakter": 2053784,
- "bayt": 2337601,
+ "kisim": 745,
+ "paragraf": 6644,
+ "karakter": 2064877,
+ "bayt": 2351219,
  "eksik": [],
  "yerlesmeyen": [],
- "bilinmeyen_sablon": [
-  [
-   "alıntı",
-   624
-  ],
-  [
-   "col-2",
-   506
-  ],
-  [
-   "col-begin",
-   260
-  ],
-  [
-   "col-end",
-   260
-  ],
-  [
-   "col-3",
-   12
-  ],
-  [
-   "'",
-   11
-  ],
-  [
-   "col-4",
-   8
-  ],
-  [
-   "col-5",
-   5
-  ],
-  [
-   "söz",
-   2
-  ],
-  [
-   "osmanlıca",
-   1
-  ]
- ]
+ "bilinmeyen_sablon": []
 }
