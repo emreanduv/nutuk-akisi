@@ -1,6 +1,6 @@
-# Mağaza metinleri — Nutuk Akışı 1.0.1
+# Mağaza metinleri — Nutuk Akışı 1.0.2
 
-- **Paket / Bundle ID:** `com.anduv.nutukakisi` · **Sürüm:** 1.0.1
+- **Paket / Bundle ID:** `com.anduv.nutukakisi` · **Sürüm:** 1.0.2
 - **Gizlilik politikası:** https://emreanduv.github.io/nutuk-akisi/gizlilik.html
 - **Destek URL'si:** https://github.com/emreanduv/nutuk-akisi/issues
 - **Telif satırı:** 2026 Mr. Anduv!
@@ -27,6 +27,7 @@ Nutuk'u, Gençliğe Hitabe'yi ve Atatürk'ün söylevlerini özgün hâliyle oku
 • Kronoloji (1881–1953), Millî Mücadele kadrosu, Atatürk'ün Türkçesi (açı, üçgen, yarıçap…), Devrimler.
 • Adını 1928 öncesi harflerle yaz.
 • Her sabah günün sözü bildirimi (isteğe bağlı).
+• Nutuk Salonu: 1927'deki Meclis salonuna gir; VR gözlükte ya da tarayıcıda.
 • Kaydet, paylaş. İnternetsiz çalışır.
 • Reklam yok, kayıt yok, veri toplanmaz.
 

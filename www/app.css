@@ -235,3 +235,11 @@ mark{background:#f6d77a;color:inherit;border-radius:3px;padding:0 2px}
 .tm-alt button small{font-size:12px;opacity:.8}
 .tm-alt button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tm-son{grid-column:2;align-self:center;text-align:right;font-weight:800;color:var(--orange)}
+
+/* Nutuk Salonu (VR) kartı */
+.salon-kart{position:relative;display:flex;flex-direction:column;gap:5px;margin:12px 0 4px;padding:15px 44px 15px 18px;border-radius:16px;text-decoration:none;color:#fff;
+  background:radial-gradient(ellipse at 18% -30%,#4a6fb8,transparent 60%),repeating-linear-gradient(90deg,#132545 0 60px,#162b52 60px 120px);box-shadow:inset 6px 0 0 #c8102e,0 4px 0 #0c183066}
+.salon-kart .d-k{font-weight:900;font-size:12.5px;letter-spacing:.6px;color:#f2c870}
+.salon-kart b{font:900 19px/1.2 'DM Sans',sans-serif}
+.salon-kart span:not(.d-k){color:#d3def3;font-size:14px}
+.salon-kart i{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-style:normal;font-size:22px;color:#f2c870}
