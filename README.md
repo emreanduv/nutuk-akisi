@@ -136,3 +136,9 @@ araclar/tani.py        kaynak tanılama + özgün satır doğrulaması
 .vscode/tasks.json     VS Code'dan tek tıkla başlat / demo / yayını aç / paneli aç / doğrula
 MAGAZA-YOL-HARITASI.md App Store / Google Play'e giden yol
 ```
+
+## 🥽 Nutuk Salonu (VR)
+1927'deki Meclis salonu: kürsüde Nutuk'un özgün satırları ve bugünün Türkçesi, masada Kurtuluş Yolu.
+- Adres: https://emreanduv.github.io/nutuk-akisi/salon/ (Quest / Vision Pro / Android XR tarayıcısında "VR'a gir"; bilgisayar ve telefonda da gezilir)
+- Veri: `python3 tools/salon_veri.py` → `docs/salon/veri.json` (Nutuk Dizisi'nin 18 bölümü + harita)
+- three.js 0.160 sayfanın içinde (`docs/salon/vendor/`, MIT); dış bağımlılık yok, yalnız kumanda modelleri WebXR profil deposundan gelir.
