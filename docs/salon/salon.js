@@ -362,6 +362,9 @@ renderer.setAnimationLoop(() => {
 function boyut(){ camera.aspect = innerWidth / innerHeight; camera.fov = camera.aspect < 1 ? 88 : 70; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); }
 addEventListener('resize', boyut); boyut();
 
+// mağaza görselleri için kamera kancası (?cekim=1)
+if(new URLSearchParams(location.search).has('cekim')) window.__salon = { bak:(y, p) => { yaw = y; pitch = p; }, git:(x, z) => { rig.position.set(x, 0, z); }, bolumAc:(i) => bolumAc(i), ileri:(n) => { for(let k = 0; k < n; k++) git(1); }, fov:(f) => { camera.fov = f; camera.updateProjectionMatrix(); } };
+
 // ── VR düğmesi ──
 async function vrHazirla(){
   const b = $('#vr');

@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'DM Sans';font-weight:900;src:url(../../docs/salon/fonts/dm-sans-latin-900-normal.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-weight:900;src:url(../../docs/salon/fonts/dm-sans-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-024F}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}
+.k{position:relative;width:100vw;height:100vh;overflow:hidden;display:grid;place-items:center}
+.k img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 45%);filter:saturate(1.05)}
+.k::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(12,20,38,.15),rgba(12,20,38,.72) 75%)}
+.baslik{position:relative;z-index:2;display:flex;align-items:center;gap:calc(var(--s)*.32);padding:calc(var(--s)*.28) calc(var(--s)*.55);border-radius:calc(var(--s)*.3);
+  background:repeating-linear-gradient(90deg,rgba(19,37,69,.92) 0 calc(var(--s)*1.1),rgba(22,43,82,.92) calc(var(--s)*1.1) calc(var(--s)*2.2));box-shadow:0 calc(var(--s)*.08) 0 #c8102e,0 calc(var(--s)*.3) calc(var(--s)*.8) rgba(0,0,0,.55)}
+.crest{width:calc(var(--s)*1.15);height:calc(var(--s)*1.2);border-radius:22% 22% 50% 50%;background:radial-gradient(circle at 35% 30%,#ff5a6a,#c8102e 62%,#7a0a1c);box-shadow:0 0 0 calc(var(--s)*.05) #fff;display:grid;place-items:center;flex:none}
+.crest svg{width:86%;height:86%}
+h1{margin:0;font:900 var(--s)/1 'DM Sans',sans-serif;color:#fff;white-space:nowrap;letter-spacing:-.01em}
+h1 em{font-style:normal;color:#f2c870}
+.dikey .baslik{flex-direction:column;text-align:center}
+.dikey h1{line-height:1.02}
+/* logo: saydam zemin */
+.logo{background:transparent}.logo::after{display:none}.logo .baslik{background:none;box-shadow:none;padding:0}
+.logo h1{text-shadow:0 0 calc(var(--s)*.06) #0c1426,0 calc(var(--s)*.04) calc(var(--s)*.12) rgba(0,0,0,.6)}
+</style></head>
+<body>
+<div class="k" id="k"><img class="bg" id="bg" src="arka-genis.png" alt="">
+  <div class="baslik"><div class="crest"><svg viewBox="0 0 100 100"><circle cx="43" cy="50" r="22" fill="#fff"/><circle cx="49" cy="50" r="17.6" fill="#c8102e"/><path d="M55 50L71.3 44.7L61.2 58.6L61.2 41.4L71.3 55.3Z" fill="#fff"/></svg></div>
+  <h1 id="h">Nutuk <em>Salonu</em></h1></div>
+</div>
+<script>
+const q = new URLSearchParams(location.search), k = document.getElementById('k');
+document.documentElement.style.setProperty('--s', (q.get('s') || 120) + 'px');
+if(q.get('pos')) k.style.setProperty('--pos', q.get('pos'));
+if(q.get('bg')) document.getElementById('bg').src = q.get('bg');
+if(q.has('dikey')){ k.classList.add('dikey'); document.getElementById('h').innerHTML = 'Nutuk<br><em>Salonu</em>'; }
+if(q.has('logo')){ k.classList.add('logo'); document.getElementById('bg').remove(); }
+</script>
+</body></html>
