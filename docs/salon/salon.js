@@ -391,3 +391,6 @@ async function vrHazirla(){
     $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu').remove(), 9000); };
   } catch(e){ console.error(e); $('#yuk').innerHTML = '<span class="hata">Salon açılamadı. Sayfayı yenile.</span>'; }
 })();
+
+// çevrimdışı önbellek (PWA: Quest'te ana ekrana eklenebilir, internetsiz açılır)
+if('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
