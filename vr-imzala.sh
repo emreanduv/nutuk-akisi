@@ -25,7 +25,7 @@ if [ ! -f "$KS" ]; then
 fi
 
 echo "▸ GitHub'daki son imzasız Quest paketi indiriliyor…"
-NAME=$(curl -fsSL "https://api.github.com/repos/$REPO/contents/?ref=quest" \
+NAME=$(curl -fsSL "https://api.github.com/repos/$REPO/contents?ref=quest" \
   | grep -o '"name": *"[^"]*-unsigned\.apk"' | sed 's/.*"\([^"]*\.apk\)"/\1/' | sort -V | tail -1)
 [ -n "$NAME" ] || { echo "Paket bulunamadı (önce Actions › Nutuk Salonu VR iş akışını çalıştır)."; exit 1; }
 curl -fsSL -o "imza-anahtari/$NAME" "https://raw.githubusercontent.com/$REPO/quest/$NAME"
