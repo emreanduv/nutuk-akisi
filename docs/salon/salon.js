@@ -388,7 +388,15 @@ async function vrHazirla(){
     $('#bolum').onchange = (e) => bolumAc(Number(e.target.value));
     $('#ileri').onclick = () => git(1); $('#geri').onclick = () => git(-1); $('#oto').onclick = () => otoAyarla(!durum.oto);
     kur(); perdeCiz(); vurguDurak(); vrHazirla();
-    $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu').remove(), 9000); };
+    $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu') && $('#ipucu').remove(), 9000); };
+    // Quest uygulaması olarak (PWA/TWA) açıldıysa doğrudan VR'a gir — Meta mağaza kuralı: araya 2B sayfa girmesin
+    const pwaMi = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || 'getDigitalGoodsService' in window;
+    if(pwaMi && navigator.xr){
+      $('#giris').remove();
+      navigator.xr.isSessionSupported('immersive-vr').then(ok => ok && navigator.xr.requestSession('immersive-vr', { optionalFeatures:['local-floor', 'bounded-floor', 'hand-tracking', 'layers'] })
+        .then(async s => { renderer.xr.setFoveation(1); await renderer.xr.setSession(s); camera.position.set(0, 0, 0); s.addEventListener('end', () => camera.position.set(0, 1.25, 0)); })
+        .catch(() => {})); // izin verilmezse üstteki "VR'a gir" düğmesi kalır
+    }
   } catch(e){ console.error(e); $('#yuk').innerHTML = '<span class="hata">Salon açılamadı. Sayfayı yenile.</span>'; }
 })();
 

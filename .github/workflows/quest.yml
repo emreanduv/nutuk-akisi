@@ -1,0 +1,80 @@
+name: Nutuk Salonu VR (Meta Quest APK)
+# emreanduv.github.io/nutuk-salonu PWA'sını Meta'nın bubblewrap'iyle Quest uygulamasına (TWA, immersive) paketler.
+# İmzasız APK + apksigner.jar "quest" dalına yazılır; imza (nutuk-salonu-quest.jks) depoya girmez, Mac'te vr-imzala.sh ile atılır.
+on:
+  workflow_dispatch:
+    inputs:
+      version_name: { description: "Sürüm adı", default: "1.0.0" }
+      version_code: { description: "Sürüm kodu", default: "1" }
+permissions:
+  contents: write
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm i -g @meta-quest/bubblewrap-cli@1.24.1
+      - name: Bubblewrap ayarları ve TWA tanımı
+        run: |
+          mkdir -p ~/.bubblewrap proje
+          [ -e "$ANDROID_HOME/tools" ] || sudo ln -s "$ANDROID_HOME/cmdline-tools/latest" "$ANDROID_HOME/tools"
+          [ -d "$ANDROID_HOME/build-tools/34.0.0" ] || yes | sudo "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "build-tools;34.0.0" >/dev/null
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}' "$JAVA_HOME" "$ANDROID_HOME" > ~/.bubblewrap/config.json
+          cat > proje/twa-manifest.json <<JSON
+          {
+            "packageId": "com.anduv.nutuksalonu",
+            "host": "emreanduv.github.io",
+            "name": "Nutuk Salonu",
+            "launcherName": "Nutuk Salonu",
+            "display": "standalone",
+            "themeColor": "#132545",
+            "navigationColor": "#132545",
+            "navigationColorDark": "#132545",
+            "navigationDividerColor": "#132545",
+            "navigationDividerColorDark": "#132545",
+            "backgroundColor": "#0c1426",
+            "enableNotifications": false,
+            "startUrl": "/nutuk-salonu/index.html",
+            "iconUrl": "https://emreanduv.github.io/nutuk-salonu/simge-512.png",
+            "maskableIconUrl": "https://emreanduv.github.io/nutuk-salonu/simge-512.png",
+            "splashScreenFadeOutDuration": 300,
+            "signingKey": { "path": "./android.keystore", "alias": "android" },
+            "appVersionName": "${{ inputs.version_name }}",
+            "appVersionCode": ${{ inputs.version_code }},
+            "shortcuts": [],
+            "generatorApp": "bubblewrap-cli",
+            "webManifestUrl": "https://emreanduv.github.io/nutuk-salonu/manifest.webmanifest",
+            "fallbackType": "customtabs",
+            "features": {},
+            "alphaDependencies": { "enabled": false },
+            "enableSiteSettingsShortcut": false,
+            "isChromeOSOnly": false,
+            "isMetaQuest": true,
+            "horizonOSAppMode": "immersive",
+            "fullScopeUrl": "https://emreanduv.github.io/nutuk-salonu/",
+            "minSdkVersion": 29,
+            "orientation": "landscape",
+            "fingerprints": [],
+            "additionalTrustedOrigins": [],
+            "retainedBundles": [],
+            "appVersion": "${{ inputs.version_name }}"
+          }
+          JSON
+      - name: Projeyi üret ve imzasız derle
+        working-directory: proje
+        run: |
+          (yes | bubblewrap update --skipVersionUpgrade --manifest=./twa-manifest.json) 2>&1 | tee /tmp/gunluk.txt || true
+          (yes | bubblewrap build --skipSigning --manifest=./twa-manifest.json) 2>&1 | tee -a /tmp/gunluk.txt || true
+          test -f app-release-unsigned-aligned.apk
+      - name: quest dalına yaz (imzasız APK + apksigner)
+        run: |
+          mkdir -p /tmp/q && cd /tmp/q
+          cp "$GITHUB_WORKSPACE/proje/app-release-unsigned-aligned.apk" "nutuk-salonu-${{ inputs.version_name }}-${{ inputs.version_code }}-unsigned.apk"
+          cp "$ANDROID_HOME/build-tools/34.0.0/lib/apksigner.jar" apksigner.jar
+          cp /tmp/gunluk.txt gunluk.txt
+          git init -q -b quest && git config user.name "Mr. Anduv!" && git config user.email emreanduvart@gmail.com
+          git add . && git commit -qm "Nutuk Salonu VR ${{ inputs.version_name }} (${{ inputs.version_code }}) imzasız"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" quest
