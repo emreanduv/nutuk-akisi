@@ -100,6 +100,7 @@ function perdeCiz(){
   $('#alt').textContent = `${M.bolum}. bölüm · ${M.baslik}`;
 }
 function git(adim){
+  if(!V) return; // veri henüz gelmediyse (VR erken açıldıysa) tetik boşa düşsün, hata atmasın
   const M = V.metinler[durum.mi];
   durum.si += adim;
   if(durum.si >= M.satirlar.length){ if(durum.mi < V.metinler.length - 1){ durum.mi++; durum.si = -1; } else durum.si = M.satirlar.length - 1; }
@@ -371,36 +372,64 @@ async function vrHazirla(){
   if(!navigator.xr){ b.textContent = '🥽 VR yok'; b.title = 'Bu tarayıcı WebXR desteklemiyor. VR gözlüğün tarayıcısıyla aç.'; return; }
   let ok = false; try { ok = await navigator.xr.isSessionSupported('immersive-vr'); } catch(e){}
   if(!ok){ b.textContent = '🥽 VR yok'; b.title = 'VR gözlük bulunamadı. Gözlüğün tarayıcısında bu sayfayı aç.'; return; }
-  b.disabled = false; b.textContent = '🥽 VR\'a gir';
-  let oturum = null;
-  b.onclick = async () => {
-    if(oturum){ oturum.end(); return; }
-    oturum = await navigator.xr.requestSession('immersive-vr', { optionalFeatures:['local-floor', 'bounded-floor', 'hand-tracking', 'layers'] });
-    renderer.xr.setFoveation(1); await renderer.xr.setSession(oturum);
-    camera.position.set(0, 0, 0); b.textContent = '🚪 Çık';
-    oturum.addEventListener('end', () => { oturum = null; b.textContent = '🥽 VR\'a gir'; camera.position.set(0, 1.25, 0); });
-  };
+  b.disabled = false; b.textContent = renderer.xr.isPresenting ? '🚪 Çık' : '🥽 VR\'a gir';
+  b.onclick = () => { const s = renderer.xr.getSession(); if(s) s.end(); else vrBaslat(); };
 }
+
+// Tek VR giriş kapısı: düğme, giriş kartı, mağaza uygulamasının otomatik açılışı hep buradan geçer.
+// 'layers' ve 'bounded-floor' istenmez: Quest tarayıcısında bazı sürümlerde ilk karede donmaya yol açabiliyor.
+let vrIstek = null;
+function vrBaslat(){
+  if(!navigator.xr || renderer.xr.isPresenting) return Promise.resolve(false);
+  if(vrIstek) return vrIstek;
+  vrIstek = navigator.xr.requestSession('immersive-vr', { optionalFeatures:['local-floor', 'hand-tracking'] })
+    .then(async s => {
+      renderer.xr.setFoveation(1); await renderer.xr.setSession(s);
+      camera.position.set(0, 0, 0); const b = $('#vr'); if(b) b.textContent = '🚪 Çık';
+      const g = $('#giris'); if(g) g.style.display = 'none';
+      s.addEventListener('end', () => {
+        camera.position.set(0, 1.25, 0); const b2 = $('#vr'); if(b2) b2.textContent = '🥽 VR\'a gir';
+        if(PWA) kapiGoster(); // mağaza uygulamasında VR'dan çıkınca boş sayfada kalınmasın
+      });
+      return true;
+    })
+    .catch(e => { console.warn('VR açılamadı', e); if(PWA) kapiGoster(); return false; })
+    .finally(() => { vrIstek = null; });
+  return vrIstek;
+}
+const PWA = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || 'getDigitalGoodsService' in window || document.referrer.startsWith('android-app://');
+// VR'a giremezsek ekranda tek, büyük bir "Salona gir" düğmesi kalsın (tetik/dokunuş = kullanıcı etkileşimi)
+function kapiGoster(){
+  const g = $('#giris'); if(!g) return;
+  g.style.display = ''; const d = $('#basla');
+  d.innerHTML = '🥽 Salona gir'; d.disabled = false; d.onclick = () => vrBaslat();
+}
+if(navigator.xr && navigator.xr.addEventListener) navigator.xr.addEventListener('sessiongranted', () => vrBaslat());
 
 // ── başlat ──
 (async () => {
+  // Mağaza uygulaması (immersive PWA): VR oturumunu hiç beklemeden, veri yüklenmeden önce iste.
+  // Simgeye dokunmak kullanıcı etkileşimi sayılır; beklersek bu hak düşüp gözlük yükleme ekranında asılı kalabiliyor.
+  if(PWA && navigator.xr) vrBaslat();
   try {
-    await Promise.all([document.fonts.load("900 50px 'DM Sans'"), document.fonts.load("500 30px 'DM Sans'"), document.fonts.load("700 30px 'DM Sans'"), document.fonts.load("800 30px 'Barlow Condensed'")]).catch(() => {});
+    const yaziBekle = Promise.all([document.fonts.load("900 50px 'DM Sans'"), document.fonts.load("500 30px 'DM Sans'"), document.fonts.load("700 30px 'DM Sans'"), document.fonts.load("800 30px 'Barlow Condensed'")]).catch(() => {});
+    await Promise.race([yaziBekle, new Promise(r => setTimeout(r, 2500))]);
     V = await (await fetch('veri.json')).json();
     $('#bolum').innerHTML = V.metinler.map((m, i) => `<option value="${i}">${m.bolum}. ${m.baslik}</option>`).join('');
     $('#bolum').onchange = (e) => bolumAc(Number(e.target.value));
     $('#ileri').onclick = () => git(1); $('#geri').onclick = () => git(-1); $('#oto').onclick = () => otoAyarla(!durum.oto);
     kur(); perdeCiz(); vurguDurak(); vrHazirla();
-    $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu') && $('#ipucu').remove(), 9000); };
-    // Quest uygulaması olarak (PWA/TWA) açıldıysa doğrudan VR'a gir — Meta mağaza kuralı: araya 2B sayfa girmesin
-    const pwaMi = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || 'getDigitalGoodsService' in window;
-    if(pwaMi && navigator.xr){
-      $('#giris').remove();
-      navigator.xr.isSessionSupported('immersive-vr').then(ok => ok && navigator.xr.requestSession('immersive-vr', { optionalFeatures:['local-floor', 'bounded-floor', 'hand-tracking', 'layers'] })
-        .then(async s => { renderer.xr.setFoveation(1); await renderer.xr.setSession(s); camera.position.set(0, 0, 0); s.addEventListener('end', () => camera.position.set(0, 1.25, 0)); })
-        .catch(() => {})); // izin verilmezse üstteki "VR'a gir" düğmesi kalır
+    if(PWA && navigator.xr){
+      // mağaza uygulaması: kart yalnızca VR'a girilemezse görünür, düğmesi doğrudan VR'a sokar
+      if(renderer.xr.isPresenting) $('#giris').style.display = 'none'; else if(!vrIstek) kapiGoster();
+    } else {
+      $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu') && $('#ipucu').remove(), 9000); };
     }
-  } catch(e){ console.error(e); $('#yuk').innerHTML = '<span class="hata">Salon açılamadı. Sayfayı yenile.</span>'; }
+  } catch(e){
+    console.error(e);
+    if(PWA && navigator.xr) kapiGoster(); // veri yüklenemese de uygulama donmuş görünmesin
+    else { const y = $('#yuk'); if(y) y.innerHTML = '<span class="hata">Salon açılamadı. Sayfayı yenile.</span>'; }
+  }
 })();
 
 // çevrimdışı önbellek (PWA: Quest'te ana ekrana eklenebilir, internetsiz açılır)
