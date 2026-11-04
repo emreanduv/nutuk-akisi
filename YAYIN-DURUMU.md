@@ -36,4 +36,4 @@ Vikikaynak'ta olmayan (karşılaştırılamayan) özgün satırlar: Onuncu Yıl 
 - Eklenti: `@capacitor-community/in-app-review@7.1.0` (Capacitor 7 ile uyumlu; 8.0.0 Capacitor 8 ister). iş akışları `npm ci` + `cap sync` yaptığı için native projeye kendiliğinden girer. iOS mağaza yedek bağlantısı uygulama numarası bilinmediği için arama sayfası (rehber.js `MAGAZA`); numara belli olunca değiştir.
 - Gizlilik politikası (docs/gizlilik.html): sahip, işlenen/işlenmeyen veriler, barındırma, silme talebi (uygulama içi + e-posta, 30 gün), TR + EN.
 - Nutuk Salonu (emreanduv.github.io/nutuk-salonu + docs/salon kopyası): rehber + Nasıl kullanılır panosu (VR'da A/B/X/Y ya da bel hizasındaki ?), Verilerimi sil, framebuffer 0.9 + 72 Hz.
-- Derleme: Android/iOS iş akışı sürüm adı **1.0.3** (Android sürüm kodu **4**); Quest iş akışı **1.0.2 / 3**.
+- Derleme: Android/iOS iş akışı sürüm adı **1.0.3** (yapı/sürüm kodu iş akışı numarasından otomatik); Quest iş akışı **1.0.2 / 3**.
