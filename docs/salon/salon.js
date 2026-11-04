@@ -1,6 +1,7 @@
 // Nutuk Salonu — 1927 Meclis salonu, WebXR (Quest, Vision Pro, Android XR) + masaüstü/telefon. Bir Mr. Anduv! yapımıdır.
 import * as THREE from 'three';
 import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
+import { yardimKur } from './yardim.js';
 
 const $ = (s) => document.querySelector(s);
 const AY = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
@@ -130,12 +131,34 @@ const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 renderer.xr.enabled = true; renderer.xr.setReferenceSpaceType('local-floor');
+renderer.xr.setFramebufferScaleFactor(0.9); // Quest performansı: göz başına çözünürlük %90 (gölge haritası zaten yok)
 document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#1a140c'); scene.fog = new THREE.Fog('#2a2014', 14, 34);
 const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.05, 80);
 const rig = new THREE.Group(); rig.add(camera); scene.add(rig);
 const BAS = new THREE.Vector3(0, 0, -1.4); rig.position.copy(BAS); camera.position.set(0, 1.25, 0);
 const tiklanir = []; // ışınla seçilebilen nesneler
+
+// ── rehber + nasıl kullanılır + verilerimi sil (yardim.js) ──
+const SURUM = '1.0.2';
+const Y = yardimKur({ THREE, scene, camera, renderer, tiklanir, ad:'Nutuk Salonu', anahtar:'ns', surum:SURUM, onek:/^ns\./, dugmeOnu:'#vr', girisKart:'#giris .kart',
+  url:'https://emreanduv.github.io/nutuk-salonu/', paylasMetni:"Nutuk Salonu: 1927'deki Meclis salonunda bir sıraya otur, kürsüde Nutuk satır satır. VR gözlükte, bilgisayarda ve telefonda.",
+  silMetni:'rehberde hangi ipuçlarını gördüğün (salon başka hiçbir şey kaydetmez).', ilerleme:() => V ? `bölüm ${durum.mi + 1}/${V.metinler.length}` : '',
+  renk:{ bant:'#132545', bant2:'#162b52', vurgu:'#e0b04a', kagit:'#fbf7ef', kagit2:'#f1eadc', murekkep:'#1c2a44', dugme:'#c8102e' },
+  temel:{ m:["<b>Nutuk Salonu</b>, 1927'deki Meclis salonudur. Bir sırada oturuyorsun; kürsünün üstündeki perdede Nutuk'un özgün satırları belirir, altında bugünün Türkçesi. Önündeki masada Kurtuluş Yolu haritası var.",
+      "<b>Başlamak için:</b> ▶ ile sonraki satıra geç, ◀ ile geri dön. Alttaki listeden bölüm seç ya da haritadaki altın iğnelere dokun. VR gözlüğün varsa üstteki 🥽 düğmesiyle salona gir."],
+    v:["Nutuk Salonu, 1927'deki Meclis salonu. Kürsünün üstündeki perdede Nutuk'un özgün satırları, altında bugünün Türkçesi; önündeki masada Kurtuluş Yolu.",
+      "Tetik: sonraki satır · kavrama: önceki satır. Perdeye, düğmelere, iğnelere ya da zemine nişan alıp tetikle. Sağ çubukla dön.",
+      "Bu pano: kumandada A, B, X ya da Y tuşu veya bel hizandaki ? düğmesi."] },
+  ipuclari:[
+    { id:'giris', b:'📜 Kürsüdeki perde', m:'▶ ya da boşluk tuşu sonraki satıra geçer, ◀ geri alır. Perdeye dokunmak da ilerletir. ⏵ Oto satırları okuma hızında kendiliğinden akıtır.', v:'Tetik sonraki satıra geçer, kavrama geri alır. Perdenin altındaki ◀ ⏵ ▶ düğmelerine nişan alıp da tetikleyebilirsin; ⏵ satırları kendiliğinden akıtır.' },
+    { id:'yuru', b:'🚶 Salonda dolaş', m:'Sürükleyerek etrafına bak. Zemine çift dokun ya da W A S D tuşlarıyla yürü; fare tekerleği yakınlaştırır.', v:'Zemine nişan alıp tetikle: oraya yürürsün. Sağ çubuğu yana itince 30° dönersin.' },
+    { id:'harita', b:'🗺️ Kurtuluş Yolu masası', m:'Önündeki masada Anadolu var. Altın iğneler Kurtuluş Yolu\'nun durakları: birine dokununca o durağın bölümü kürsüde açılır, kırmızı iz yolu gösterir.', v:'Önündeki masada Anadolu var. Altın iğnelerden birine nişan alıp tetikle: o durağın bölümü kürsüde açılır.' },
+    { id:'bolum', b:'📚 Bölümler', m:'Alttaki listeden istediğin bölüme atla. Bir bölüm bitince sıradaki kendiliğinden başlar; perdenin altındaki çubuk ne kadar ilerlediğini gösterir.', v:'Bir bölüm bitince sıradaki kendiliğinden başlar; perdenin altındaki çubuk ne kadar ilerlediğini gösterir.' },
+    { id:'panolar', b:'⏳ Duvar panoları', m:'Sol duvarda kronoloji, sağ duvarda "Biliyor muydun?" panosu birkaç saniyede bir yenilenir.' },
+    { id:'oto', b:'⏵ Oto', m:'Oto açıkken satırlar uzunluklarına göre kendiliğinden ilerler. ⏸ ile durdurursun.', v:'Oto açıkken satırlar uzunluklarına göre kendiliğinden ilerler. Ortadaki düğmeyle durdurursun.' },
+    { id:'yardim', b:'❓ Yardım hep yanında', m:'Üstteki ? düğmesi bu rehberi açar: bütün ipuçları, "Rehberi baştan göster", görüş yazma ve Verilerimi sil.', v:'Kumandadaki A, B, X ya da Y tuşu veya bel hizandaki ? düğmesi bu panoyu açar: bütün ipuçları ve Verilerimi sil.' },
+  ], sira:['giris', 'yuru', 'harita', 'yardim', 'bolum', 'panolar'], temelIpuclari:['giris', 'yuru'] });
 
 function kur(){
   // ışık
@@ -294,8 +317,9 @@ function tozlar(){
 // ── seçim: fare / dokunma / VR kumandası ──
 const ray = new THREE.Raycaster(), fare = new THREE.Vector2();
 function etkile(nesne, nokta, kaynak){
+  if(Y.etkile(nesne, nokta)) return;
   if(!nesne) { if(kaynak === 'vr') git(1); return; }
-  if(nesne.name === 'igne'){ const h = V.harita[nesne.userData.i]; const i = V.metinler.findIndex(m => m.id === h.metin); if(i >= 0) bolumAc(i); return; }
+  if(nesne.name === 'igne'){ Y.ipucu('harita'); const h = V.harita[nesne.userData.i]; const i = V.metinler.findIndex(m => m.id === h.metin); if(i >= 0) bolumAc(i); return; }
   if(nesne.name === 'ileri' || nesne.name === 'perde') return git(1);
   if(nesne.name === 'geri') return git(-1);
   if(nesne.name === 'oto') return otoAyarla(!durum.oto);
@@ -306,7 +330,7 @@ function yuru(n){
   const kafa = new THREE.Vector3(); camera.getWorldPosition(kafa);
   rig.position.x += x - kafa.x; rig.position.z += z - kafa.z;
 }
-function otoAyarla(v){ durum.oto = v; durum.sonraki = performance.now() + sure(); $('#oto').classList.toggle('on', v); $('#oto').textContent = v ? '⏸ Oto' : '⏵ Oto'; }
+function otoAyarla(v){ if(v) Y.ipucu('oto'); durum.oto = v; durum.sonraki = performance.now() + sure(); $('#oto').classList.toggle('on', v); $('#oto').textContent = v ? '⏸ Oto' : '⏵ Oto'; }
 
 // masaüstü/telefon: sürükleyerek bak, çift tıkla yürü
 let suruk = null, yaw = 0, pitch = 0.16; const eul = new THREE.Euler(0, 0, 0, 'YXZ');
@@ -358,6 +382,7 @@ renderer.setAnimationLoop(() => {
   iğneler.forEach(({ bas }, i) => { if(bas.scale.x > 1.2) bas.position.y = 0.13 + Math.sin(t * 4 + i) * 0.01; });
   if(tozP){ tozP.rotation.y = t * 0.01; tozP.position.y = Math.sin(t * 0.2) * 0.1; }
   if(durum.oto && V && performance.now() > durum.sonraki) git(1);
+  Y.dongu();
   renderer.render(scene, camera);
 });
 function boyut(){ camera.aspect = innerWidth / innerHeight; camera.fov = camera.aspect < 1 ? 88 : 70; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); }
@@ -385,6 +410,7 @@ function vrBaslat(){
   vrIstek = navigator.xr.requestSession('immersive-vr', { optionalFeatures:['local-floor', 'hand-tracking'] })
     .then(async s => {
       renderer.xr.setFoveation(1); await renderer.xr.setSession(s);
+      try { if(s.updateTargetFrameRate && s.supportedFrameRates && [...s.supportedFrameRates].includes(72)) s.updateTargetFrameRate(72); } catch(e){} // Quest: kararlı 72 Hz
       camera.position.set(0, 0, 0); const b = $('#vr'); if(b) b.textContent = '🚪 Çık';
       const g = $('#giris'); if(g) g.style.display = 'none';
       s.addEventListener('end', () => {
@@ -423,7 +449,7 @@ if(navigator.xr && navigator.xr.addEventListener) navigator.xr.addEventListener(
       // mağaza uygulaması: kart yalnızca VR'a girilemezse görünür, düğmesi doğrudan VR'a sokar
       if(renderer.xr.isPresenting) $('#giris').style.display = 'none'; else if(!vrIstek) kapiGoster();
     } else {
-      $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu') && $('#ipucu').remove(), 9000); };
+      $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu') && $('#ipucu').remove(), 9000); setTimeout(() => Y.basla(), 1200); };
     }
   } catch(e){
     console.error(e);

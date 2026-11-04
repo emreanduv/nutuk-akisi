@@ -1,6 +1,6 @@
-# Mağaza metinleri — Nutuk Akışı 1.0.2
+# Mağaza metinleri — Nutuk Akışı 1.0.3
 
-- **Paket / Bundle ID:** `com.anduv.nutukakisi` · **Sürüm:** 1.0.2
+- **Paket / Bundle ID:** `com.anduv.nutukakisi` · **Sürüm:** 1.0.3
 - **Gizlilik politikası:** https://emreanduv.github.io/nutuk-akisi/gizlilik.html
 - **Destek URL'si:** https://github.com/emreanduv/nutuk-akisi/issues
 - **Telif satırı:** 2026 Mr. Anduv!
@@ -15,7 +15,7 @@
 - **İnceleme notu:** Uygulama giriş gerektirmez, veri toplamaz. Bütün metinler (Nutuk'un Vikikaynak'taki tam metni dahil) uygulamanın içindedir; yalnız "Tarihte bugün" Türkçe Vikipedi'den okunur. Atatürk'ün eserleri kamu malıdır (ölüm 1938). Özgün satırlar Vikikaynak'taki Nutuk tam metniyle karşılaştırılmıştır; sadeleştirmeler ve anlatımlar geliştiriciye aittir. Bildirimler yalnız kullanıcı açarsa, cihazda yerel olarak kurulur.
 
 ### Açıklama
-Nutuk'u, Gençliğe Hitabe'yi ve Atatürk'ün söylevlerini özgün hâliyle oku; her cümlenin hemen altında bugünün Türkçesiyle ne dediğini gör.
+Atatürk'ün Nutuk'unu (1927) tam metin olarak, Gençliğe Hitabe'yi, Onuncu Yıl Nutku'nu ve söylevlerini özgün hâliyle oku; her cümlenin hemen altında bugünün Türkçesiyle ne dediğini gör. Kurtuluş Savaşı ve Cumhuriyet tarihi cebinde: internetsiz, reklamsız, ücretsiz.
 
 • Tam Metin: Nutuk'un tamamı, 1927 baskısının Latin harfli metni; 20 bölüm, vesikalar dahil. İnternetsiz okunur, baştan sona aranır, kaldığın yeri hatırlar.
 • Nutuk Dizisi: Samsun'dan Gençliğe Hitabe'ye 18 bölüm, her gün bir bölüm.
@@ -37,10 +37,21 @@ Bir Mr. Anduv! yapımıdır.
 
 ## Google Play
 - **Ad:** Nutuk Akışı
-- **Kısa açıklama (≤80):** Nutuk ve söylevler özgün hâliyle, altında bugünün Türkçesiyle.
+- **Kısa açıklama (≤80):** Atatürk'ün Nutuk'u tam metin, Gençliğe Hitabe, söylevler ve bugünün Türkçesi
 - **Kategori:** Kitaplar ve Kaynaklar · **İçerik derecelendirmesi:** Herkes · **Reklam:** yok
 - **Veri güvenliği:** veri toplanmıyor, paylaşılmıyor · **Hedef kitle:** 13+ · **Resmî kurum değil** · Haber uygulaması değil
 - **Tam açıklama:** App Store açıklamasının aynısı.
+
+## Sürüm notları — 1.0.3
+Kapalı test ekibimizin önerileriyle:
+- Rehber: bir sekmeyi ilk açtığında kısa bir ipucu kartı ("Anladım" ya da "Rehberi kapat").
+- Nasıl kullanılır: bütün ipuçları tek yerde, görmediklerin vurgulu; rehberi baştan gösterme.
+- Yeni Ayarlar sekmesi: Puan ver, Arkadaşına öner, Bize yaz (görüş ve öneri), Verilerimi sil.
+- Tam Metin'de bir bölümü bitirince kutlama ve paylaşma.
+- Gizlilik politikası güncellendi (veri silme yolu).
+Test ekibimize teşekkürler!
+
+(App Store "What's New" alanına bu metin emoji olmadan, olduğu gibi yazılır; Google Play'de de aynısı.)
 
 ## Testçiler
 - TestFlight: emreanduv@hotmail.com, zeynepbayramcavus@icloud.com, mbayramcavus@icloud.com, mebayramcavus@icloud.com

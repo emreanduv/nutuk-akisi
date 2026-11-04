@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
 <link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="app.css?v=1">
+<link rel="stylesheet" href="app.css?v=2">
 <link rel="stylesheet" href="yayin.css?v=1">
 </head>
 <body>
@@ -29,6 +29,7 @@
       <button data-tab="kadro" role="tab">🎖️ Kadro</button>
       <button data-tab="kron" role="tab">⏳ Kronoloji</button>
       <button data-tab="kayit" role="tab">⭐ Kaydettiklerim</button>
+      <button data-tab="ayar" role="tab">⚙️ Ayarlar</button>
       <a class="tab-yayin" href="?yayin=1" title="1920×1080 yayın görünümü (OBS)">📺 Yayın</a>
     </nav>
   </header>
@@ -37,6 +38,7 @@
     <section class="pane on" id="p-metin">
       <div id="daily"></div>
       <p class="made">Bir Mr. Anduv! yapımıdır.</p>
+      <div class="rh-ana"><button data-rh="nasil">❓ Nasıl kullanılır</button><button data-rh="oner">📣 Arkadaşına öner</button></div>
       <div class="search"><input id="q" type="search" placeholder="Ara: Sakarya, Hitabe, istiklal, telgraf…" autocomplete="off"></div>
       <div class="chips" id="kinds"></div>
       <div class="cards" id="list"></div>
@@ -77,6 +79,10 @@
       <div class="cards" id="saved"></div>
     </section>
 
+    <section class="pane" id="p-ayar">
+      <div class="ayarlar" id="ayarIc"></div>
+    </section>
+
     <p class="legal"><strong>Bir Mr. Anduv! yapımıdır.</strong> Nutuk Akışı bağımsız bir eğitim ve keşif uygulamasıdır. Atatürk'ün eserleri kamu malıdır; tırnak içindeki özgün satırlar Nutuk (1927) ve Atatürk'ün söylev ve demeçlerinden alınmıştır, altlarındaki karşılıklar bu uygulama için yazılmış sadeleştirmelerdir. Düz satırlar olayları günümüz Türkçesiyle anlatır. Nutuk'un tam metni Tam Metin sekmesindedir (Vikikaynak, 1927 baskısı). Wikipedia özetleri ve görselleri kendi lisanslarıyla gösterilir.</p>
   </main>
 
@@ -94,6 +100,7 @@
 <script src="app.js?v=1"></script>
 <script src="tam.js?v=1"></script>
 <script src="yayin.js?v=1"></script>
+<script src="rehber.js?v=1"></script>
 <script>NA.start();</script>
 </body>
 </html>

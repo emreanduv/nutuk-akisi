@@ -27,3 +27,13 @@ Vikikaynak'ta olmayan (karşılaştırılamayan) özgün satırlar: Onuncu Yıl 
 ## Güncelleme çıkarma
 1. `data/metinler.json` vb. değişti → `npm run veri` (iş akışları da çalıştırır)
 2. GitHub'a gönder → iOS ve Android iş akışlarını sürüm adını artırarak çalıştır
+
+## 4 Kasım 2026 · Test önerileri paketi (1.0.3 · Nutuk Salonu 1.0.2)
+- Rehber (`www/rehber.js`): sekme ilk açılınca ipucu kartı ("Anladım" / "Rehberi kapat"), eski kullanıcıya temel ipucu gösterilmez; ilerleme `nr.rehber` (yalnız cihazda).
+- Yeni ⚙️ Ayarlar sekmesi: Nasıl kullanılır, Rehberi baştan göster, ★ Puan ver (yalnız iOS/Android), Arkadaşına öner, Bize yaz (mailto, sürüm/platform/ilerleme hazır), Verilerimi sil (localStorage `na_*`/`nr.*`, Preferences, bekleyen bildirimler).
+- Metinler sekmesinde "❓ Nasıl kullanılır · 📣 Arkadaşına öner".
+- Olumlu an: 8. farklı metin ya da Tam Metin'de bir bölüm bitince kutlama kartı + Paylaş; mobilde nazik puan sorusu ("Puan ver / Önerim var / Sonra"), en çok 2 kez.
+- Eklenti: `@capacitor-community/in-app-review@7.1.0` (Capacitor 7 ile uyumlu; 8.0.0 Capacitor 8 ister). iş akışları `npm ci` + `cap sync` yaptığı için native projeye kendiliğinden girer. iOS mağaza yedek bağlantısı uygulama numarası bilinmediği için arama sayfası (rehber.js `MAGAZA`); numara belli olunca değiştir.
+- Gizlilik politikası (docs/gizlilik.html): sahip, işlenen/işlenmeyen veriler, barındırma, silme talebi (uygulama içi + e-posta, 30 gün), TR + EN.
+- Nutuk Salonu (emreanduv.github.io/nutuk-salonu + docs/salon kopyası): rehber + Nasıl kullanılır panosu (VR'da A/B/X/Y ya da bel hizasındaki ?), Verilerimi sil, framebuffer 0.9 + 72 Hz.
+- Derleme: Android/iOS iş akışı sürüm adı **1.0.3** (Android sürüm kodu **4**); Quest iş akışı **1.0.2 / 3**.

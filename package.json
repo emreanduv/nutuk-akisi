@@ -1,6 +1,6 @@
 {
   "name": "nutuk-akisi",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "description": "Nutuk Akışı — Nutuk, Gençliğe Hitabe ve söylevler, özgün hâliyle ve bugünün Türkçesiyle (iOS + Android, Capacitor). Bir Mr. Anduv! yapımıdır.",
   "scripts": {
@@ -12,6 +12,7 @@
     "android": "npx cap open android"
   },
   "dependencies": {
+    "@capacitor-community/in-app-review": "7.1.0",
     "@capacitor/core": "^7.6.9",
     "@capacitor/local-notifications": "^7.0.4",
     "@capacitor/preferences": "^7.0.4",

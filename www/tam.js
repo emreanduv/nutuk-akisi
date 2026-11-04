@@ -88,7 +88,7 @@
         ${snr ? `<button data-tam="${esc(snr.id)}" class="snr"><small>Sonraki →</small><span>${esc(snr.baslik)}</span></button>` : '<span class="tm-son">🇹🇷 Nutuk burada biter.</span>'}
       </div>
       <p class="note">Kaynak: <a href="${esc(T.url)}" target="_blank" rel="noopener">Vikikaynak · Nutuk</a>${k.w ? ` · <a href="https://tr.wikisource.org/wiki/${encodeURIComponent(('Nutuk/' + k.w).replace(/ /g, '_'))}" target="_blank" rel="noopener">bu kısım ↗</a>` : ''}</p>`;
-    if(!okundu(k.id)){ st.okunan.push(k.id); }
+    if(!okundu(k.id)){ st.okunan.push(k.id); if(bolumOkunan(k.b) === k.b.kisimlar.length && window.NR) NR.bolumBitti(k.b); } // bölüm bitti: kutlama + paylaş (rehber.js)
     st.son = { id:k.id }; kaydet();
     requestAnimationFrame(() => {
       const h = para != null && pane.querySelector(`[data-j="${para}"]`);

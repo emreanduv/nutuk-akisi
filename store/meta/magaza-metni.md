@@ -37,6 +37,13 @@ October 1927, Ankara. Take a seat in the parliament hall as light streams throug
 • Controllers or hand tracking; teleport and snap turn. Works offline. No ads, no accounts, no data collection.
 The app's text is in Turkish.
 
+## Sürüm notları — 1.0.2 (Quest)
+- Rehber: salonda ilk karşılaşmada kısa ipucu panosu ("Anladım" / "Rehberi kapat").
+- Nasıl kullanılır panosu: kumandada A/B/X/Y tuşu ya da bel hizasındaki ? düğmesi; bütün ipuçları, rehberi baştan gösterme.
+- Verilerimi sil: cihazdaki rehber kaydı tek dokunuşla silinir (Meta veri kullanımı kontrolü).
+- Quest performansı: daha akıcı görüntü (72 Hz, %90 çözünürlük).
+Test ekibimize teşekkürler!
+
 ## Görseller (store/meta/)
 - Hero 3000×900: `kapak-hero-3000x900.png`
 - Kapak yatay 2560×1440: `kapak-yatay-2560x1440.png`
