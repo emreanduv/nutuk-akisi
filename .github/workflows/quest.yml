@@ -37,7 +37,7 @@ jobs:
             "navigationDividerColorDark": "#132545",
             "backgroundColor": "#0c1426",
             "enableNotifications": false,
-            "startUrl": "/nutuk-salonu/index.html",
+            "startUrl": "/nutuk-salonu/index.html?quest=1",
             "iconUrl": "https://emreanduv.github.io/nutuk-salonu/simge-512.png",
             "maskableIconUrl": "https://emreanduv.github.io/nutuk-salonu/simge-512.png",
             "splashScreenFadeOutDuration": 300,

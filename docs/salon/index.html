@@ -48,6 +48,20 @@
   .kart .yuk{font-weight:800;color:#8a4a1c}
   .hata{color:#ffb4b4}
 </style>
+<script>
+// Quest uygulaması (immersive) olarak açıldıysa VR oturumunu HEMEN iste (Yaşam Rehberi VR ile aynı): simgeye dokunuş "kullanıcı etkileşimi" sayılır
+// ama birkaç saniye geçerlidir; 3B kütüphanesi yüklenene kadar beklenirse hak düşebilir. Salon arkadan hazırlanır; oturum alınamazsa giriş kartındaki düğme VR'a sokar.
+window.__hatalar = [];
+function __hataGoster(m){ try { window.__hatalar.push(String(m)); var y = document.getElementById('yuk'); if(y) y.innerHTML = '<span class="hata">Hata: ' + String(m).replace(/</g,'&lt;').slice(0,200) + '</span>'; } catch(e){} }
+addEventListener('error', function(e){ if(e && e.message) __hataGoster(e.message + (e.filename ? ' @' + e.filename.split('/').pop() + ':' + e.lineno : '')); });
+addEventListener('unhandledrejection', function(e){ __hataGoster(e.reason && (e.reason.message || e.reason)); });
+setTimeout(function(){ var y = document.getElementById('yuk'); if(y && /hazırlanıyor/i.test(y.textContent)) __hataGoster('Salon 20 saniyede açılmadı. İnternet bağlantını kontrol edip uygulamayı yeniden aç.'); }, 20000);
+(function(){ try {
+  var pwa = /[?&]quest=1/.test(location.search) || matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || 'getDigitalGoodsService' in window || document.referrer.indexOf('android-app://') === 0;
+  window.__pwa = pwa;
+  if (pwa && navigator.xr) window.__erkenXR = navigator.xr.requestSession('immersive-vr', { optionalFeatures:['local-floor','hand-tracking'] }).catch(function(e){ console.warn('erken VR', e); return null; });
+} catch(e){} })();
+</script>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
 </head>
 <body>
@@ -69,7 +83,7 @@
     <h2>Nutuk Salonu</h2>
     <p>Meclis salonunda bir sıraya otur. Kürsünün üstünde Nutuk'un özgün satırları belirir, altında bugünün Türkçesi. Önündeki masada Kurtuluş Yolu.</p>
     <ul>
-      <li><b>VR gözlükte:</b> tetik sonraki satır, kavrama önceki · iğneye ya da zemine nişan alıp tetik · çubukla dön</li>
+      <li><b>VR gözlükte:</b> sol el tetik sonraki satır, kavrama önceki; bileğinde kürsü panosu · sağ el ışınla iğneye, altın noktalara ya da zemine nişan alıp tetik · çubukla dön</li>
       <li><b>Bilgisayar ve telefonda:</b> sürükleyerek bak, zemine çift dokunup yürü · ◀ ▶ tuşları</li>
     </ul>
     <button id="basla"><span class="yuk" id="yuk">Salon hazırlanıyor…</span></button>
