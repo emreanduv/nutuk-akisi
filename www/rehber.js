@@ -18,7 +18,7 @@
   const IPUCU = {
     metin:['📜 Metinler', 'Günün metni en üstte. Ara kutusuna bir yer, kişi ya da kelime yaz; çiplerle türe göre süz. Bir karta dokununca okuyucu açılır.'],
     okuyucu:['📖 Okuyucu', '“ ile başlayan satırlar Atatürk\'ün özgün sözleri, ≈ altındakiler bugünün Türkçesi. ☆ Kaydet ile listene ekle, 📤 Paylaş ile sözü gönder; Nutuk\'tan gelen metinlerde "Nutuk\'ta oku" tam metindeki yerini açar.'],
-    salon:['🏛️ Salon', '1927\'deki Meclis salonu, VR gözlükteki Nutuk Salonu\'nun aynısı. Kürsüde Nutuk satır satır akar: ▶ ◀ ile ilerle ya da ⏵ Oto. Sürükleyerek bak, zemine çift dokunup yürü; masadaki iğneler ve altın noktalar hikâye açar. Salon kaldığın satırı hatırlar.'],
+    salon:['🏛️ Salon', '1927\'deki Meclis salonu, VR gözlükteki Nutuk Salonu\'nun aynısı. Kürsüde Nutuk satır satır akar: ▶︎ ◀︎ ile ilerle ya da ⏵︎ Oto. Sürükleyerek bak, zemine çift dokunup yürü; masadaki iğneler ve altın noktalar hikâye açar. Salon kaldığın satırı hatırlar.'],
     tam:['📖 Tam Metin', 'Nutuk\'un tamamı, 20 bölüm, internetsiz. Kaldığın yeri hatırlar; okuduğun kısımlar ✓ alır. A− A+ yazıyı küçültüp büyütür, arama kutusu bütün metinde arar.'],
     kesfet:['✨ Keşfet', 'Her sabah günün sözü bildirimi (isteğe bağlı), Tarihte bugün, 18 günlük Nutuk Dizisi, Doğru mu Uydurma mı, adını eski harflerle yazma ve Nutuk Salonu.'],
     kadro:['🎖️ Kadro', 'Millî Mücadele\'nin isimleri. Birine dokun: ne yaptığı ve geçtiği metinler.'],

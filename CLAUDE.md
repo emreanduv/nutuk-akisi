@@ -29,3 +29,9 @@ Yayın sırası: incelemedeki/testteki mağazada gönderilen sürüme onay gelen
   Bu repo: ürünün adı her yerde **Nutuk Salonu** (telefon uygulamasının eski adı "Nutuk Akışı" bırakılır; paket/bundle kimlikleri değişmez).
 - Teknik olarak mümkün olan her geliştirme, güncelleme ve iyileştirme **o ürünün bütün mağazalardaki sürümlerine** yapılır (telefon ↔ VR ↔ masaüstü). Bir platforma özgü olanlar (ör. VR kumanda titreşimi) karşılığı neyse onunla taşınır (telefonda dokunuş titreşimi).
 - Aynı kural bütün repolar için geçerlidir; yeni bir repoda çalışırken bu bölüm oranın CLAUDE.md'sine de eklenir.
+
+## Türkçe yazı ve iOS işaretleri (Emre'nin kuralı: hiçbir oyunda/uygulamada görülmesin)
+- Yazı dosyaları (fontsource woff2) kendi @font-face'imizle tanımlanıyorsa **Türkçe "ı" (U+0131) latin dosyasındadır, latin-ext'te değil.** Latin aralığı fontsource'un resmî aralığıyla yazılır (U+0000-00FF,U+0131,U+0152-0153,…); "U+0000-00FF,U+2000-206F" gibi kısa aralık yazılırsa iPhone/iPad'de "ı" boş görünür (Mayıs → "May s"). Chrome/Quest fark ettirmez, iOS ettirir.
+- Tuvale (canvas) yazmadan önce yazı dosyaları Türkçe harflerle yüklenir: `document.fonts.load(font, 'ıİşŞğĞçÇöÖüÜ')`; geç gelirse yeniden çizilir.
+- ◀ ▶ ⏵ ⏸ ⏭ ⏮ gibi işaretlerin hemen arkasına metin biçimi seçicisi **U+FE0E** konur; yoksa iOS bunları mavi emoji kutusu olarak çizer.
+- `araclar/yayin-kontrol.sh` ikisini de denetler; tutmazsa derleme durur. Aynı denetim bütün repolara eklenir.

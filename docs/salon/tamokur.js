@@ -47,7 +47,7 @@ export function tamKur(o){
     x.fillStyle = '#7d7461'; x.font = "700 26px 'DM Sans'"; x.textAlign = 'right'; x.fillText('Vikikaynak · kamu malı · Bir Mr. Anduv! yapımıdır.', Wc - 44, Hc - 28); x.textAlign = 'left';
   }
   function sayfaAlt(sira, toplam, geri, ileri){
-    dugme(60, Hc - 130, 180, 80, '◀', geri); dugme(260, Hc - 130, 180, 80, '▶', ileri, 'ana');
+    dugme(60, Hc - 130, 180, 80, '◀︎', geri); dugme(260, Hc - 130, 180, 80, '▶︎', ileri, 'ana');
     x.fillStyle = RENK.muted; x.font = "800 32px 'DM Sans'"; x.fillText(`${sira} / ${toplam}`, 470, Hc - 78);
   }
 
@@ -64,7 +64,7 @@ export function tamKur(o){
     if(T.g === 'liste'){
       cerceve('NUTUK · TAM METİN', `${B.length} bölüm · vesikalar dahil · 1927`);
       let y = 150;
-      if(T.kaldi && B[T.kaldi.b] && B[T.kaldi.b].kisimlar[T.kaldi.k]){ const K = B[T.kaldi.b].kisimlar[T.kaldi.k]; dugme(60, y, Wc - 120, 70, `▶ Kaldığın yerden: ${B[T.kaldi.b].romen}. bölüm · ${kisaltilmis(K.baslik, 900)}`, () => { Object.assign(T, { g:'oku', b:T.kaldi.b, k:T.kaldi.k, s:T.kaldi.s || 0 }); ciz(); }, 'ana'); y += 86; }
+      if(T.kaldi && B[T.kaldi.b] && B[T.kaldi.b].kisimlar[T.kaldi.k]){ const K = B[T.kaldi.b].kisimlar[T.kaldi.k]; dugme(60, y, Wc - 120, 70, `▶︎ Kaldığın yerden: ${B[T.kaldi.b].romen}. bölüm · ${kisaltilmis(K.baslik, 900)}`, () => { Object.assign(T, { g:'oku', b:T.kaldi.b, k:T.kaldi.k, s:T.kaldi.s || 0 }); ciz(); }, 'ana'); y += 86; }
       const yar = Math.ceil(B.length / 2), gen = (Wc - 140) / 2, boy = Math.min(80, (Hc - 170 - y) / yar);
       B.forEach((b, i) => { const sx = 60 + (i < yar ? 0 : gen + 20), sy = y + (i % yar) * boy;
         yuvarlak(x, sx, sy, gen, boy - 8, 12); x.fillStyle = '#fff'; x.fill(); x.strokeStyle = '#e2d8c6'; x.lineWidth = 2; x.stroke();

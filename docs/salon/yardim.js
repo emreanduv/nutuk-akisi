@@ -145,7 +145,7 @@ export function yardimKur(o){
         }
       }
       const by = CH - 112, bh = 80;
-      dug(40, by, 90, bh, '◀', 'geri'); dug(140, by, 90, bh, '▶', 'ileri', true);
+      dug(40, by, 90, bh, '◀︎', 'geri'); dug(140, by, 90, bh, '▶︎', 'ileri', true);
       dug(240, by, 250, bh, '↺ Baştan göster', 'bastan');
       dug(500, by, 290, bh, silOnay ? 'Emin misin? Sil' : '🗑 Verilerimi sil', 'sil', silOnay ? 'sil' : false);
       dug(800, by, 184, bh, '✕ Kapat', 'kapatYardim');

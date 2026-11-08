@@ -23,7 +23,7 @@
   root.innerHTML = `
     <div class="m-cal" id="mCal"></div>
     <div class="m-nav">
-      <span class="m-btn m-back">◀ Geri</span><span class="m-btn m-dim">İleri ▶</span>
+      <span class="m-btn m-back">◀︎ Geri</span><span class="m-btn m-dim">İleri ▶︎</span>
       <span class="m-btn m-ico">🏠</span><span class="m-btn">Nutuk ▾</span><span class="m-btn">Söylevler ▾</span><span class="m-btn">Telgraflar ▾</span><span class="m-btn">Devrimler ▾</span><span class="m-btn">Eserler ▾</span><span class="m-btn m-ico">?</span>
       <span class="m-search">🔍 <i id="mSearch"></i></span>
       <span class="m-btn m-fa">NA ▾</span>

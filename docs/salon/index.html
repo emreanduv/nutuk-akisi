@@ -10,14 +10,23 @@
 <title>Nutuk Salonu</title>
 <meta name="description" content="1927'deki Meclis salonunda bir sıraya otur: kürsüde Nutuk'un özgün satırları ve bugünün Türkçesi, masada Kurtuluş Yolu. VR gözlükte, bilgisayarda ve telefonda çalışır.">
 <style>
-  @font-face{font-family:'DM Sans';font-weight:500;src:url(fonts/dm-sans-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-024F,U+1E00-1EFF}
-  @font-face{font-family:'DM Sans';font-weight:500;src:url(fonts/dm-sans-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
-  @font-face{font-family:'DM Sans';font-weight:700;src:url(fonts/dm-sans-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-024F,U+1E00-1EFF}
-  @font-face{font-family:'DM Sans';font-weight:700;src:url(fonts/dm-sans-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
-  @font-face{font-family:'DM Sans';font-weight:900;src:url(fonts/dm-sans-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-024F,U+1E00-1EFF}
-  @font-face{font-family:'DM Sans';font-weight:900;src:url(fonts/dm-sans-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
-  @font-face{font-family:'Barlow Condensed';font-weight:800;src:url(fonts/barlow-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-024F,U+1E00-1EFF}
-  @font-face{font-family:'Barlow Condensed';font-weight:800;src:url(fonts/barlow-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+  /* Türkçe "ı" (U+0131) fontsource'ta latin dosyasındadır: aralıklar buna göre (iOS'ta ı boş görünüyordu) */
+  @font-face{font-family:'DM Sans';font-weight:800;src:url(fonts/dm-sans-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'DM Sans';font-weight:800;src:url(fonts/dm-sans-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:'Barlow Condensed';font-weight:600;src:url(fonts/barlow-condensed-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'Barlow Condensed';font-weight:600;src:url(fonts/barlow-condensed-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:'Barlow Condensed';font-weight:700;src:url(fonts/barlow-condensed-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'Barlow Condensed';font-weight:700;src:url(fonts/barlow-condensed-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:'Barlow Condensed';font-weight:900;src:url(fonts/barlow-condensed-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'Barlow Condensed';font-weight:900;src:url(fonts/barlow-condensed-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:'DM Sans';font-weight:500;src:url(fonts/dm-sans-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'DM Sans';font-weight:500;src:url(fonts/dm-sans-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:'DM Sans';font-weight:700;src:url(fonts/dm-sans-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'DM Sans';font-weight:700;src:url(fonts/dm-sans-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:'DM Sans';font-weight:900;src:url(fonts/dm-sans-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'DM Sans';font-weight:900;src:url(fonts/dm-sans-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:'Barlow Condensed';font-weight:800;src:url(fonts/barlow-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-0130,U+0132-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:'Barlow Condensed';font-weight:800;src:url(fonts/barlow-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
   :root{--ink:#1c2a44;--deep:#101c33;--red:#c8102e;--gold:#e0b04a;--paper:#fbf7ef;--teal:#0f766e}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;overflow:hidden;background:#0c1426;color:#fff;font:500 15px/1.4 'DM Sans',system-ui,sans-serif}
@@ -34,7 +43,9 @@
   .alt{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:8px;align-items:center;
     padding:8px;border-radius:14px;background:#101c33e6;box-shadow:0 0 0 1px #2a467a,0 6px 20px #0008;max-width:calc(100% - 24px)}
   .alt button,.alt select{border:0;border-radius:10px;padding:10px 13px;font:800 15px 'DM Sans',sans-serif;background:linear-gradient(#f7f2e8,#ddd3c1);color:var(--ink);box-shadow:0 2px 0 #0004;cursor:pointer}
-  .alt select{max-width:46vw}
+  .alt{max-width:calc(100vw - 20px);box-sizing:border-box}
+  .alt select{max-width:46vw;min-width:0;flex:1 1 auto}
+  @media (max-width:520px){ .alt{gap:6px} .alt button,.alt select{padding:9px 10px} .alt select{max-width:none} }
   .alt .on{background:linear-gradient(#ffe39a,#e0b04a)}
   body.tam-acik .alt,body.tam-acik .ipucu{display:none}
   .ipucu{position:fixed;left:12px;top:calc(66px + env(safe-area-inset-top,0px));z-index:4;font-size:12.5px;color:#d3def3;background:#101c33b3;padding:6px 10px;border-radius:8px;max-width:calc(100% - 24px)}
@@ -73,9 +84,9 @@ setTimeout(function(){ var y = document.getElementById('yuk'); if(y && /hazırla
 </header>
 <div class="ipucu" id="ipucu">Sürükle: etrafına bak · Zemine çift tıkla: oraya yürü · Masadaki iğneler: Kurtuluş Yolu durakları</div>
 <div class="alt">
-  <button id="geri" aria-label="Önceki satır">◀</button>
-  <button id="oto" aria-label="Kendiliğinden ilerlesin">⏵ Oto</button>
-  <button id="ileri" aria-label="Sonraki satır">▶</button>
+  <button id="geri" aria-label="Önceki satır">◀︎</button>
+  <button id="oto" aria-label="Kendiliğinden ilerlesin">⏵︎ Oto</button>
+  <button id="ileri" aria-label="Sonraki satır">▶︎</button>
   <select id="bolum" aria-label="Bölüm seç"></select>
   <button id="tamDug" aria-label="Tam Metin" title="Nutuk'un tamamı">📖</button>
 </div>
@@ -86,7 +97,7 @@ setTimeout(function(){ var y = document.getElementById('yuk'); if(y && /hazırla
     <p>Meclis salonunda bir sıraya otur. Kürsünün üstünde Nutuk'un özgün satırları belirir, altında bugünün Türkçesi. Önündeki masada Kurtuluş Yolu.</p>
     <ul>
       <li><b>VR gözlükte:</b> sol el tetik sonraki satır, kavrama önceki; bileğinde kürsü panosu · sağ el ışınla iğneye, altın noktalara ya da zemine nişan alıp tetik · çubukla dön</li>
-      <li><b>Bilgisayar ve telefonda:</b> sürükleyerek bak, zemine çift dokunup yürü · ◀ ▶ tuşları</li>
+      <li><b>Bilgisayar ve telefonda:</b> sürükleyerek bak, zemine çift dokunup yürü · ◀︎ ▶︎ tuşları</li>
     </ul>
     <button id="basla"><span class="yuk" id="yuk">Salon hazırlanıyor…</span></button>
     <p class="made">Bir Mr. Anduv! yapımıdır.</p>
