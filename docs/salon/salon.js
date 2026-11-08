@@ -15,6 +15,48 @@ const PODYUM_Z = ZON + 2.6, MASA_Z = -5.3, MASA_Y = 0.92;
 let V = null; // veri
 const durum = { mi:0, si:-1, oto:false, sonraki:0, secili:-1 };
 
+// ── kaldığın yer (yalnız bu cihazda; "Verilerimi sil" ns.* anahtarlarıyla birlikte siler) ──
+const KONUM = 'ns.konum';
+const konumOku = () => { try { const k = JSON.parse(localStorage.getItem(KONUM) || 'null'); return k && Number.isInteger(k.mi) && Number.isInteger(k.si) ? k : null; } catch(e){ return null; } };
+const konumYaz = () => { try { if(durum.mi || durum.si >= 0) localStorage.setItem(KONUM, JSON.stringify({ mi:durum.mi, si:durum.si })); } catch(e){} };
+
+// ── ses ve titreşim (Yaşam Rehberi VR'daki tesbih tıkı gibi): satır = kâğıt hışırtısı, bölüm başı = tokmak, iğne = çan ──
+let ses = null, sonKaynak = null;
+function sesHazir(){
+  if(ses) return ses;
+  try {
+    ses = new AudioContext();
+    const L = ses.sampleRate * 1.8, b = ses.createBuffer(2, L, ses.sampleRate); // salon yankısı
+    for(let c = 0; c < 2; c++){ const d = b.getChannelData(c); for(let i = 0; i < L; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / L, 3.4); }
+    ses.yanki = ses.createConvolver(); ses.yanki.buffer = b; const yg = ses.createGain(); yg.gain.value = .35; ses.yanki.connect(yg).connect(ses.destination);
+    const n = ses.sampleRate * .25, nb = ses.createBuffer(1, n, ses.sampleRate), nd = nb.getChannelData(0); for(let i = 0; i < n; i++) nd[i] = Math.random() * 2 - 1; ses.gurultu = nb;
+  } catch(e){ ses = null; }
+  return ses;
+}
+function tik(tur){
+  const A = sesHazir(); if(!A) return;
+  try {
+    if(A.state === 'suspended') A.resume();
+    const t0 = A.currentTime, cik = (g) => { g.connect(A.destination); g.connect(A.yanki); };
+    if(tur === 'satir'){ // kâğıt çevirme: kısa, filtreli hışırtı
+      const s = A.createBufferSource(), f = A.createBiquadFilter(), g = A.createGain(); s.buffer = A.gurultu; f.type = 'bandpass'; f.frequency.value = 2600; f.Q.value = .7;
+      g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(.07, t0 + .03); g.gain.exponentialRampToValueAtTime(.0001, t0 + .16);
+      s.connect(f).connect(g); cik(g); s.start(t0); s.stop(t0 + .2);
+    } else if(tur === 'bolum'){ // riyaset tokmağı: iki tok vuruş
+      for(const [d, k] of [[0, 1], [.24, .8]]){ const o = A.createOscillator(), g = A.createGain(); o.type = 'sine'; o.frequency.setValueAtTime(190, t0 + d); o.frequency.exponentialRampToValueAtTime(70, t0 + d + .12);
+        g.gain.setValueAtTime(.0001, t0 + d); g.gain.exponentialRampToValueAtTime(.35 * k, t0 + d + .005); g.gain.exponentialRampToValueAtTime(.0001, t0 + d + .22); o.connect(g); cik(g); o.start(t0 + d); o.stop(t0 + d + .25); }
+    } else { // çan (iğne, hikâye noktası)
+      const o = A.createOscillator(), g = A.createGain(); o.type = 'triangle'; o.frequency.value = 1180;
+      g.gain.setValueAtTime(.12, t0); g.gain.exponentialRampToValueAtTime(.0001, t0 + .5); o.connect(g); cik(g); o.start(t0); o.stop(t0 + .55);
+    }
+  } catch(e){}
+}
+function titres(src, guc, ms){ try { const h = src && src.gamepad && src.gamepad.hapticActuators && src.gamepad.hapticActuators[0]; if(h) h.pulse(guc, ms); } catch(e){} }
+
+// ── Ankara saati (UTC+3, yaz saati yok) ──
+const ankara = () => { const d = new Date(Date.now() + 3 * 3600e3); return { s:d.getUTCHours(), d:d.getUTCMinutes(), ay:d.getUTCMonth() + 1, gun:d.getUTCDate() }; };
+const iki = (n) => String(n).padStart(2, '0');
+
 // ── yardımcılar: tuval dokuları ──
 function tuval(w, h){ const c = document.createElement('canvas'); c.width = w; c.height = h; return [c, c.getContext('2d')]; }
 function sar(ctx, metin, genislik){
@@ -99,16 +141,18 @@ function perdeCiz(){
   perdeT.needsUpdate = true;
   $('#bolum').value = String(durum.mi);
   $('#alt').textContent = `${M.bolum}. bölüm · ${M.baslik}`;
+  konumYaz(); bilekCiz();
 }
-function git(adim){
+function git(adim, sessiz){
   if(!V) return; // veri henüz gelmediyse (VR erken açıldıysa) tetik boşa düşsün, hata atmasın
-  const M = V.metinler[durum.mi];
+  const M = V.metinler[durum.mi], once = durum.mi + ':' + durum.si;
   durum.si += adim;
   if(durum.si >= M.satirlar.length){ if(durum.mi < V.metinler.length - 1){ durum.mi++; durum.si = -1; } else durum.si = M.satirlar.length - 1; }
   if(durum.si < -1){ if(durum.mi > 0){ durum.mi--; durum.si = V.metinler[durum.mi].satirlar.length - 1; } else durum.si = -1; }
   durum.sonraki = performance.now() + sure(); perdeCiz(); vurguDurak();
+  if(!sessiz && once !== durum.mi + ':' + durum.si){ const bas = durum.si === -1; tik(bas ? 'bolum' : 'satir'); titres(sonKaynak, bas ? .8 : .25, bas ? 140 : 24); }
 }
-function bolumAc(i){ durum.mi = i; durum.si = -1; durum.sonraki = performance.now() + sure(); perdeCiz(); vurguDurak(); }
+function bolumAc(i){ durum.mi = i; durum.si = -1; durum.sonraki = performance.now() + sure(); perdeCiz(); vurguDurak(); tik('bolum'); titres(sonKaynak, .8, 140); }
 function sure(){ const M = V.metinler[durum.mi], s = durum.si >= 0 ? M.satirlar[durum.si] : null; const n = s ? (s.o || '').length + (s.s || '').length + (s.a || '').length : 120; return Math.max(6000, n * 70); }
 
 // ── duvar panoları (FM2010) ──
@@ -140,15 +184,15 @@ const BAS = new THREE.Vector3(0, 0, -1.4); rig.position.copy(BAS); camera.positi
 const tiklanir = []; // ışınla seçilebilen nesneler
 
 // ── rehber + nasıl kullanılır + verilerimi sil (yardim.js) ──
-const SURUM = '1.0.2';
+const SURUM = '1.0.3';
 const Y = yardimKur({ THREE, scene, camera, renderer, tiklanir, ad:'Nutuk Salonu', anahtar:'ns', surum:SURUM, onek:/^ns\./, dugmeOnu:'#vr', girisKart:'#giris .kart',
   url:'https://emreanduv.github.io/nutuk-salonu/', paylasMetni:"Nutuk Salonu: 1927'deki Meclis salonunda bir sıraya otur, kürsüde Nutuk satır satır. VR gözlükte, bilgisayarda ve telefonda.",
-  silMetni:'rehberde hangi ipuçlarını gördüğün (salon başka hiçbir şey kaydetmez).', ilerleme:() => V ? `bölüm ${durum.mi + 1}/${V.metinler.length}` : '',
+  silMetni:'rehberde hangi ipuçlarını gördüğün ve kaldığın satır (salon başka hiçbir şey kaydetmez).', eski:() => localStorage.getItem('ns.konum') != null, ilerleme:() => V ? `bölüm ${durum.mi + 1}/${V.metinler.length}` : '',
   renk:{ bant:'#132545', bant2:'#162b52', vurgu:'#e0b04a', kagit:'#fbf7ef', kagit2:'#f1eadc', murekkep:'#1c2a44', dugme:'#c8102e' },
   temel:{ m:["<b>Nutuk Salonu</b>, 1927'deki Meclis salonudur. Bir sırada oturuyorsun; kürsünün üstündeki perdede Nutuk'un özgün satırları belirir, altında bugünün Türkçesi. Önündeki masada Kurtuluş Yolu haritası var.",
       "<b>Başlamak için:</b> ▶ ile sonraki satıra geç, ◀ ile geri dön. Alttaki listeden bölüm seç ya da haritadaki altın iğnelere dokun. VR gözlüğün varsa üstteki 🥽 düğmesiyle salona gir."],
     v:["Nutuk Salonu, 1927'deki Meclis salonu. Kürsünün üstündeki perdede Nutuk'un özgün satırları, altında bugünün Türkçesi; önündeki masada Kurtuluş Yolu.",
-      "Tetik: sonraki satır · kavrama: önceki satır. Perdeye, düğmelere, iğnelere ya da zemine nişan alıp tetikle. Sağ çubukla dön.",
+      "Sol el: tetik sonraki satır, kavrama önceki; bileğindeki küçük pano bölümü ve ilerlemeyi gösterir. Sağ el: perdeye, düğmelere, iğnelere, altın noktalara ya da zemine nişan alıp tetikle. Çubukla dön.",
       "Bu pano: kumandada A, B, X ya da Y tuşu veya bel hizandaki ? düğmesi."] },
   ipuclari:[
     { id:'giris', b:'📜 Kürsüdeki perde', m:'▶ ya da boşluk tuşu sonraki satıra geçer, ◀ geri alır. Perdeye dokunmak da ilerletir. ⏵ Oto satırları okuma hızında kendiliğinden akıtır.', v:'Tetik sonraki satıra geçer, kavrama geri alır. Perdenin altındaki ◀ ⏵ ▶ düğmelerine nişan alıp da tetikleyebilirsin; ⏵ satırları kendiliğinden akıtır.' },
@@ -157,16 +201,21 @@ const Y = yardimKur({ THREE, scene, camera, renderer, tiklanir, ad:'Nutuk Salonu
     { id:'bolum', b:'📚 Bölümler', m:'Alttaki listeden istediğin bölüme atla. Bir bölüm bitince sıradaki kendiliğinden başlar; perdenin altındaki çubuk ne kadar ilerlediğini gösterir.', v:'Bir bölüm bitince sıradaki kendiliğinden başlar; perdenin altındaki çubuk ne kadar ilerlediğini gösterir.' },
     { id:'panolar', b:'⏳ Duvar panoları', m:'Sol duvarda kronoloji, sağ duvarda "Biliyor muydun?" panosu birkaç saniyede bir yenilenir.' },
     { id:'oto', b:'⏵ Oto', m:'Oto açıkken satırlar uzunluklarına göre kendiliğinden ilerler. ⏸ ile durdurursun.', v:'Oto açıkken satırlar uzunluklarına göre kendiliğinden ilerler. Ortadaki düğmeyle durdurursun.' },
+    { id:'sol', b:'✋ Sol elin kürsüde', m:'VR gözlükte sol el tetiği sonraki satıra geçer, kavrama geri alır; nişan almana gerek yok. Sol bileğindeki küçük pano bölümü, ilerlemeyi ve Ankara saatini gösterir.', v:'Sol el tetiği sonraki satıra geçer, kavrama geri alır; nişan almana gerek yok. Bileğine bak: bölüm, ilerleme ve Ankara saati orada.' },
+    { id:'hikaye', b:'✨ Altın noktalar', m:'Salondaki altın "i" noktalarına dokun: kürsünün, levhanın, binanın ve bayrağın kısa hikâyesi açılır. Kartı kapatmak için ona dokun.', v:'Altın "i" noktalarına nişan alıp tetikle: kürsünün, levhanın, binanın ve bayrağın hikâyesi açılır. Kartı kapatmak için ona tetikle.' },
+    { id:'kaldigin', b:'📌 Kaldığın yerden', m:'Salon en son okuduğun satırda açılır. Baştan başlamak istersen alttaki listeden 1. bölümü seç.', v:'Salon en son okuduğun satırda açıldı. Baştan başlamak için haritadaki ilk iğneye (Samsun) tetikle.' },
+    { id:'isik', b:'🕰️ Ankara saati', m:'Salonun ışığı Ankara\'daki saate göre değişir: sabah pencerelerden güneş girer, akşam avizeler yanar. Sol duvardaki kronoloji panosu bugünün tarihine denk gelen olayı öne çıkarır.' },
     { id:'yardim', b:'❓ Yardım hep yanında', m:'Üstteki ? düğmesi bu rehberi açar: bütün ipuçları, "Rehberi baştan göster", görüş yazma ve Verilerimi sil.', v:'Kumandadaki A, B, X ya da Y tuşu veya bel hizandaki ? düğmesi bu panoyu açar: bütün ipuçları ve Verilerimi sil.' },
-  ], sira:['giris', 'yuru', 'harita', 'yardim', 'bolum', 'panolar'], temelIpuclari:['giris', 'yuru'] });
+  ], sira:['giris', 'sol', 'yuru', 'harita', 'hikaye', 'yardim', 'bolum', 'panolar', 'isik'], temelIpuclari:['giris', 'yuru'] });
 
 function kur(){
   // ışık
-  scene.add(new THREE.HemisphereLight('#fff1d6', '#3a2412', 0.75));
+  const hemi = new THREE.HemisphereLight('#fff1d6', '#3a2412', 0.75); scene.add(hemi);
   const gunes = new THREE.DirectionalLight('#ffe2b0', 1.4); gunes.position.set(8, 9, 2); scene.add(gunes);
   const avize = [new THREE.PointLight('#ffcf8a', 14, 14, 1.6), new THREE.PointLight('#ffcf8a', 12, 14, 1.6)];
   avize[0].position.set(0, 5.6, -5); avize[1].position.set(0, 5.6, 4); avize.forEach(l => scene.add(l));
   const spot = new THREE.SpotLight('#fff3dc', 40, 16, 0.42, 0.6, 1.4); spot.position.set(0, 6.8, -3.5); spot.target.position.set(0, 1, PODYUM_Z + 0.9); scene.add(spot, spot.target);
+  Object.assign(ISIK, { hemi, gunes, avize, spot });
 
   // zemin, duvarlar, tavan
   const zeminMat = new THREE.MeshStandardMaterial({ map:doku(tahta(), [5, 8]), roughness:.7 });
@@ -186,6 +235,7 @@ function kur(){
   const pGeo = new THREE.ShapeGeometry(pSekil, 16);
   const [hc, hx] = tuval(64, 256); const hg = hx.createLinearGradient(0, 0, 0, 256); hg.addColorStop(0, 'rgba(255,236,190,.55)'); hg.addColorStop(1, 'rgba(255,236,190,0)'); hx.fillStyle = hg; hx.fillRect(0, 0, 64, 256);
   const huzmeMat = new THREE.MeshBasicMaterial({ map:doku(hc), transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide, opacity:.22 });
+  Object.assign(ISIK, { cam:camMat, huzme:huzmeMat });
   for(const sx of [-1, 1]) for(let i = 0; i < 6; i++){
     if(i === 2) continue; // bu aralıkta duvar panoları var
     const z = ZON + 3 + i * 3.2, p = new THREE.Mesh(pGeo, camMat); p.position.set(sx * (W / 2 - 0.02), 2.2, z); p.rotation.y = -sx * Math.PI / 2; scene.add(p);
@@ -251,8 +301,8 @@ function kur(){
   const [bc1, bx1] = tuval(1024, 1024); const bilT = doku(bc1);
   const bil = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.6), new THREE.MeshBasicMaterial({ map:bilT, toneMapped:false })); bil.position.set(W / 2 - 0.03, 3.0, ZON + 3 + 2 * 3.2); bil.rotation.y = -Math.PI / 2; scene.add(bil);
   let kb = 0; const panolar = () => {
-    const K = V.kronoloji, n = 6, s = K.slice(kb % K.length, kb % K.length + n); while(s.length < n) s.push(K[s.length - n + K.length]);
-    panoCiz(kc1, kx1, 'KRONOLOJİ', '⏳', s.map(k => [String(k.tarih).slice(0, 4), `${k.b}: ${k.m}`])); kronoT.needsUpdate = true;
+    const bg = bugunSatiri(), K = V.kronoloji, n = bg ? 5 : 6, s = K.slice(kb % K.length, kb % K.length + n); while(s.length < n) s.push(K[s.length - n + K.length]);
+    panoCiz(kc1, kx1, 'KRONOLOJİ', '⏳', (bg ? [bg] : []).concat(s.map(k => [String(k.tarih).slice(0, 4), `${k.b}: ${k.m}`]))); kronoT.needsUpdate = true;
     const B = V.biliyormu; panoCiz(bc1, bx1, 'BİLİYOR MUYDUN?', '💡', [0, 1, 2].map(i => ['•', B[(kb + i) % B.length]])); bilT.needsUpdate = true; kb += 1;
   };
   panolar(); setInterval(panolar, 7000);
@@ -263,6 +313,26 @@ function kur(){
 
   haritaMasasi();
   tozlar();
+  hikayeNoktalari();
+  isikAyarla(); setInterval(isikAyarla, 60000);
+}
+
+// ── Ankara saatine göre ışık (Yaşam Rehberi VR'daki vakit ışığı gibi): gece, sabah, öğle, ikindi, akşam ──
+const ISIK = {}; let isikDilim = -1;
+const DILIM_AD = ['gece', 'sabah', 'öğle', 'ikindi', 'akşam'];
+function dilimBul(){ const { s } = ankara(); return s < 6 || s >= 20 ? 0 : s < 10 ? 1 : s < 15 ? 2 : s < 18 ? 3 : 4; }
+function isikAyarla(){
+  const d = dilimBul(); bilekCiz(); if(d === isikDilim || !ISIK.hemi) return; isikDilim = d;
+  const P = [
+    { hemi:.4, gun:0, avize:[20, 18], spot:46, cam:'#26324c', huzme:0, renk:'#9fb4e0', exp:.98, gx:8 },
+    { hemi:.7, gun:1.15, avize:[9, 8], spot:40, cam:'#ffe6c8', huzme:.2, renk:'#ffd9b0', exp:1.04, gx:8 },
+    { hemi:.85, gun:1.6, avize:[6, 5], spot:38, cam:'#fff6e0', huzme:.26, renk:'#fff1d8', exp:1.06, gx:3 },
+    { hemi:.8, gun:1.35, avize:[8, 7], spot:40, cam:'#ffe9c0', huzme:.2, renk:'#ffe2b0', exp:1.05, gx:-6 },
+    { hemi:.55, gun:.5, avize:[16, 14], spot:44, cam:'#f0a868', huzme:.1, renk:'#ffc890', exp:1.0, gx:-8 },
+  ][d];
+  ISIK.hemi.intensity = P.hemi; ISIK.gunes.intensity = P.gun; ISIK.gunes.color.set(P.renk); ISIK.gunes.position.x = P.gx;
+  ISIK.avize[0].intensity = P.avize[0]; ISIK.avize[1].intensity = P.avize[1]; ISIK.spot.intensity = P.spot;
+  ISIK.cam.color.set(P.cam); ISIK.huzme.opacity = P.huzme; renderer.toneMappingExposure = P.exp;
 }
 
 // ── Kurtuluş Yolu masası: FM2010 taktik tahtası üstünde Anadolu ──
@@ -314,11 +384,95 @@ function tozlar(){
   tozP = new THREE.Points(geo, new THREE.PointsMaterial({ map:doku(pc), color:'#ffe9b8', size:0.018, transparent:true, opacity:.5, depthWrite:false, blending:THREE.AdditiveBlending })); scene.add(tozP);
 }
 
+// ── hikâye noktaları (Yaşam Rehberi VR'daki Ayasofya noktaları gibi; doğrulanmış, kısa) ──
+const HIKAYE = [
+  { id:'kursu', p:[1.5, 1.95, PODYUM_Z + 0.5], baslik:'Kürsü', alt:'15–20 Ekim 1927',
+    metin:"Mustafa Kemal Paşa Nutuk'u, Cumhuriyet Halk Fırkası'nın İkinci Büyük Kongresi'nde, Ankara'daki Meclis binasında altı gün boyunca okudu. Konuşma 19 Mayıs 1919'da Samsun'a çıkışla başlar, Cumhuriyet'in ilk yıllarına kadar gelir.",
+    not:'Okuma toplam 36,5 saat kadar sürdü ve 20 Ekim 1927\'de Gençliğe Hitabe ile bitti.' },
+  { id:'levha', p:[-2.6, 2.3, ZON + 1.2], baslik:'Hâkimiyet bilâkaydüşart milletindir', alt:'1921 Anayasası · 1. madde',
+    metin:"Kürsünün üstündeki söz bugünün Türkçesiyle \"Egemenlik kayıtsız şartsız milletindir\" demektir. Bu ilke, 20 Ocak 1921'de kabul edilen Teşkilât-ı Esasiye Kanunu'nun ilk maddesinde yer aldı.",
+    not:'Bugün TBMM Genel Kurul salonunda da kürsünün arkasında "Egemenlik kayıtsız şartsız milletindir" yazar.' },
+  { id:'bina', p:[0, 1.6, ZARKA - 1.3], baslik:'İkinci Meclis binası', alt:'1924 · Ankara, Ulus',
+    metin:"Meclis 1924'te Ulus'taki bu yeni binaya taşındı; Nutuk da 1927'de burada okundu. Bina 1960'a kadar Meclis olarak kullanıldı, bugün Cumhuriyet Müzesi'dir. Bu salon temsilîdir; ölçüler yaklaşıktır.",
+    not:"Birinci Meclis 23 Nisan 1920'de hemen yakındaki binada açıldı; orası bugün Kurtuluş Savaşı Müzesi'dir." },
+  { id:'bayrak', p:[-5.2, 2.0, ZON + 4.0], baslik:'Ay yıldız', alt:'1936 · Türk Bayrağı Kanunu',
+    metin:"Bayrağın ölçüleri 29 Mayıs 1936'da kabul edilen Türk Bayrağı Kanunu ile kesinleşti: ay ve yıldızın yeri ve büyüklüğü bayrağın genişliğine göre tanımlıdır. Salondaki bayraklar bu oranlarla çizildi.",
+    not:'Yani 1927\'de bayrağın kesin ölçüleri henüz kanunla belirlenmemişti.' },
+  { id:'kitap', p:[2.1, 1.35, MASA_Z + 0.5], baslik:'Nutuk kitabı', alt:'1927 · iki cilt',
+    metin:"Nutuk, okunduğu yıl Arap harfleriyle basıldı. Konuşmanın yanında Vesikalar adlı ikinci bir cilt vardı: Paşa'nın konuşmada dayandığı telgraf ve belgeler. Haritadaki her iğne bu yolculuğun bir durağıdır.",
+    not:"Nutuk Akışı uygulamasının Tam Metin sekmesinde, vesikalar dahil bütün metni okuyabilirsin." },
+];
+const noktalar = []; let acikKart = null, hkT, hkMesh;
+const [hkC, hkX] = tuval(1280, 900);
+function hikayeNoktalari(){
+  const [ic, ix] = tuval(128, 128); const g = ix.createRadialGradient(64, 64, 4, 64, 64, 62); g.addColorStop(0, 'rgba(255,240,180,1)'); g.addColorStop(.35, 'rgba(224,176,74,.92)'); g.addColorStop(1, 'rgba(224,176,74,0)');
+  ix.fillStyle = g; ix.fillRect(0, 0, 128, 128); ix.fillStyle = RENK.navy; ix.font = "900 56px 'DM Sans'"; ix.textAlign = 'center'; ix.textBaseline = 'middle'; ix.fillText('i', 64, 66);
+  const im = new THREE.SpriteMaterial({ map:doku(ic), toneMapped:false, depthWrite:false });
+  for(const h of HIKAYE){ const s = new THREE.Sprite(im); s.scale.set(.42, .42, 1); s.position.set(...h.p); s.name = 'nokta'; s.userData.h = h; scene.add(s); tiklanir.push(s); noktalar.push(s); }
+  hkT = doku(hkC); hkMesh = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 1.125), new THREE.MeshBasicMaterial({ map:hkT, transparent:true, toneMapped:false, depthTest:false }));
+  hkMesh.renderOrder = 10; hkMesh.visible = false; hkMesh.name = 'kart'; scene.add(hkMesh); tiklanir.push(hkMesh);
+}
+function kartAc(h){
+  Y.ipucu('hikaye'); acikKart = h; tik('can'); titres(sonKaynak, .4, 40);
+  if(!renderer.xr.isPresenting){ eul.set(pitch, yaw, 0); camera.quaternion.setFromEuler(eul); camera.updateMatrixWorld(true); }
+  const x = hkX, Wc = 1280, Hc = 900;
+  x.clearRect(0, 0, Wc, Hc); yuvarlak(x, 4, 4, Wc - 8, Hc - 8, 18); x.fillStyle = RENK.paper; x.fill();
+  x.save(); yuvarlak(x, 4, 4, Wc - 8, Hc - 8, 18); x.clip(); for(let i = 0; i < Wc; i += 80){ x.fillStyle = i / 80 % 2 ? RENK.navy2 : RENK.navy; x.fillRect(i, 0, 80, 110); } x.fillStyle = RENK.red; x.fillRect(0, 110, Wc, 8); x.restore();
+  x.strokeStyle = '#c8bc9a'; x.lineWidth = 4; yuvarlak(x, 4, 4, Wc - 8, Hc - 8, 18); x.stroke();
+  x.fillStyle = '#f2c870'; let bb = 46; do { x.font = `900 ${bb}px 'DM Sans'`; bb -= 2; } while(x.measureText(h.baslik.toLocaleUpperCase('tr')).width > 760 && bb > 26); x.fillText(h.baslik.toLocaleUpperCase('tr'), 40, 72);
+  x.textAlign = 'right'; x.fillStyle = '#d3def3'; x.font = "700 32px 'DM Sans'"; x.fillText(h.alt, Wc - 40, 70); x.textAlign = 'left';
+  x.fillStyle = RENK.ink; x.font = "500 42px 'DM Sans'"; let y = 190; for(const l of sar(x, h.metin, 1190).slice(0, 9)){ x.fillText(l, 46, y); y += 56; }
+  x.fillStyle = RENK.gold; x.fillRect(40, y + 2, 1200, 4); y += 58; x.fillStyle = RENK.teal; x.font = "800 32px 'DM Sans'"; x.fillText('BİLİYOR MUYDUN?', 46, y); y += 48;
+  x.fillStyle = '#3c4a5e'; x.font = "italic 500 36px 'DM Sans'"; for(const l of sar(x, h.not, 1190).slice(0, 3)){ x.fillText(l, 46, y); y += 48; }
+  x.textAlign = 'right'; x.fillStyle = '#7d7461'; x.font = "700 28px 'DM Sans'"; x.fillText('kapatmak için karta dokun · Bir Mr. Anduv! yapımıdır.', Wc - 40, Hc - 34); x.textAlign = 'left';
+  hkT.needsUpdate = true;
+  const kafa = new THREE.Vector3(), yon = new THREE.Vector3(); camera.getWorldPosition(kafa); camera.getWorldDirection(yon); yon.y = 0; yon.normalize();
+  hkMesh.position.copy(kafa).addScaledVector(yon, 1.5); hkMesh.position.y = kafa.y - .1; hkMesh.lookAt(kafa.x, hkMesh.position.y, kafa.z); hkMesh.visible = true;
+}
+function kartKapat(){ acikKart = null; if(hkMesh) hkMesh.visible = false; }
+
+// ── sol bilek panosu: bölüm, ilerleme, Ankara saati ──
+const [bkC, bkX] = tuval(768, 384); let bkT = null;
+function bilekCiz(){
+  if(!bkT || !V) return;
+  const x = bkX, M = V.metinler[durum.mi], S = M.satirlar, { s, d } = ankara();
+  x.clearRect(0, 0, 768, 384); yuvarlak(x, 4, 4, 760, 376, 26); x.fillStyle = '#0f1b31ee'; x.fill(); x.strokeStyle = '#e0b04a'; x.lineWidth = 5; x.stroke();
+  x.fillStyle = RENK.red; x.fillRect(4, 86, 760, 6);
+  x.fillStyle = '#f2c870'; x.font = "900 44px 'DM Sans'"; x.fillText(`NUTUK · ${M.bolum}. BÖLÜM`, 30, 62);
+  x.textAlign = 'right'; x.fillStyle = '#d3def3'; x.font = "800 40px 'Barlow Condensed', 'DM Sans'"; x.fillText(`🕰️ ${iki(s)}:${iki(d)}`, 738, 62); x.textAlign = 'left';
+  x.fillStyle = '#e8eefb'; x.font = "800 40px 'DM Sans'"; { const L = sar(x, `${M.simge} ${M.baslik}`, 670); x.fillText(L[0] + (L.length > 1 ? ' …' : ''), 30, 150); }
+  const oran = (durum.si + 1) / S.length; x.fillStyle = '#ffffff22'; yuvarlak(x, 30, 190, 708, 26, 13); x.fill();
+  const gr = x.createLinearGradient(30, 0, 738, 0); gr.addColorStop(0, RENK.red); gr.addColorStop(1, RENK.gold); x.fillStyle = gr; yuvarlak(x, 30, 190, Math.max(26, 708 * oran), 26, 13); x.fill();
+  x.fillStyle = '#d3def3'; x.font = "700 34px 'DM Sans'"; x.fillText(durum.si < 0 ? 'başlık kartı' : `satır ${durum.si + 1} / ${S.length}`, 30, 264);
+  x.textAlign = 'right'; x.fillText(`Ankara · ${DILIM_AD[dilimBul()]}`, 738, 264); x.textAlign = 'left';
+  x.fillStyle = '#e0b04a'; x.font = "800 30px 'DM Sans'"; x.fillText(durum.oto ? '⏸ oto açık · tetik ▶ · kavrama ◀' : 'tetik ▶ sonraki · kavrama ◀ önceki', 30, 334);
+  bkT.needsUpdate = true;
+}
+function bilekModeli(){
+  bkT = doku(bkC); bilekCiz();
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(.2, .1), new THREE.MeshBasicMaterial({ map:bkT, transparent:true, toneMapped:false, depthWrite:false }));
+  m.position.set(0, .06, .03); m.rotation.x = -1.0; return m;
+}
+
+// ── Bugün Nutuk'ta: kronolojide bugünün gün-ayına denk gelen olay (yoksa yaklaşan ilk olay) ──
+function bugunSatiri(){
+  const { ay, gun } = ankara(), bugun = ay * 100 + gun;
+  const tam = V.kronoloji.filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k.tarih)).map(k => { const [, m, g] = k.tarih.split('-').map(Number); return { k, md:m * 100 + g }; });
+  if(!tam.length) return null;
+  const esit = tam.find(o => o.md === bugun);
+  if(esit) return ['BUGÜN', `${tarihYaz(esit.k.tarih)}: ${esit.k.b}, ${esit.k.m}`];
+  const sonra = tam.filter(o => o.md > bugun).sort((a, b) => a.md - b.md)[0] || tam.sort((a, b) => a.md - b.md)[0];
+  const [, m, g] = sonra.k.tarih.split('-').map(Number);
+  return ['TAKVİM', `${g} ${AY[m - 1]} (${sonra.k.tarih.slice(0, 4)}): ${sonra.k.b}, ${sonra.k.m}`];
+}
+
 // ── seçim: fare / dokunma / VR kumandası ──
 const ray = new THREE.Raycaster(), fare = new THREE.Vector2();
 function etkile(nesne, nokta, kaynak){
   if(Y.etkile(nesne, nokta)) return;
+  if(acikKart){ kartKapat(); return; }
   if(!nesne) { if(kaynak === 'vr') git(1); return; }
+  if(nesne.name === 'nokta'){ kartAc(nesne.userData.h); return; }
   if(nesne.name === 'igne'){ Y.ipucu('harita'); const h = V.harita[nesne.userData.i]; const i = V.metinler.findIndex(m => m.id === h.metin); if(i >= 0) bolumAc(i); return; }
   if(nesne.name === 'ileri' || nesne.name === 'perde') return git(1);
   if(nesne.name === 'geri') return git(-1);
@@ -330,12 +484,12 @@ function yuru(n){
   const kafa = new THREE.Vector3(); camera.getWorldPosition(kafa);
   rig.position.x += x - kafa.x; rig.position.z += z - kafa.z;
 }
-function otoAyarla(v){ if(v) Y.ipucu('oto'); durum.oto = v; durum.sonraki = performance.now() + sure(); $('#oto').classList.toggle('on', v); $('#oto').textContent = v ? '⏸ Oto' : '⏵ Oto'; }
+function otoAyarla(v){ if(v) Y.ipucu('oto'); durum.oto = v; durum.sonraki = performance.now() + sure(); $('#oto').classList.toggle('on', v); $('#oto').textContent = v ? '⏸ Oto' : '⏵ Oto'; bilekCiz(); }
 
 // masaüstü/telefon: sürükleyerek bak, çift tıkla yürü
 let suruk = null, yaw = 0, pitch = 0.16; const eul = new THREE.Euler(0, 0, 0, 'YXZ');
 const el = renderer.domElement;
-el.addEventListener('pointerdown', (e) => { suruk = { x:e.clientX, y:e.clientY, t:performance.now(), m:0 }; el.setPointerCapture(e.pointerId); });
+el.addEventListener('pointerdown', (e) => { sonKaynak = null; sesHazir(); suruk = { x:e.clientX, y:e.clientY, t:performance.now(), m:0 }; el.setPointerCapture(e.pointerId); });
 el.addEventListener('pointermove', (e) => { if(!suruk || renderer.xr.isPresenting) return; const dx = e.clientX - suruk.x, dy = e.clientY - suruk.y; suruk.m += Math.abs(dx) + Math.abs(dy); suruk.x = e.clientX; suruk.y = e.clientY;
   yaw += dx * 0.004; pitch = THREE.MathUtils.clamp(pitch + dy * 0.004, -1.2, 1.2); });
 el.addEventListener('pointerup', (e) => { if(suruk && suruk.m < 8 && performance.now() - suruk.t < 400) secFare(e, 'tik'); suruk = null; });
@@ -348,7 +502,7 @@ function secFare(e, tur){
   if(tur === 'cift'){ if(h && h.object.name === 'zemin') yuru(h.point); return; }
   if(h) etkile(h.object, h.point, 'tik');
 }
-addEventListener('keydown', (e) => { if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); git(1); } if(e.key === 'ArrowLeft') git(-1);
+addEventListener('keydown', (e) => { sonKaynak = null; sesHazir(); if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); git(1); } if(e.key === 'ArrowLeft') git(-1);
   const hiz = 0.25, ileri = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), sag = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
   const k = e.key.toLowerCase(); if(k === 'w') yuru(rig.position.clone().addScaledVector(ileri, hiz)); if(k === 's') yuru(rig.position.clone().addScaledVector(ileri, -hiz)); if(k === 'a') yuru(rig.position.clone().addScaledVector(sag, -hiz)); if(k === 'd') yuru(rig.position.clone().addScaledVector(sag, hiz)); });
 
@@ -358,8 +512,15 @@ const isinGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0
 for(let i = 0; i < 2; i++){
   const k = renderer.xr.getController(i);
   const isin = new THREE.Line(isinGeo, new THREE.LineBasicMaterial({ color:'#f2c870', transparent:true, opacity:.8 })); isin.scale.z = 6; k.add(isin);
-  k.addEventListener('select', () => { const h = kumandaIsin(k); etkile(h && h.object, h && h.point, 'vr'); });
-  k.addEventListener('squeeze', () => git(-1));
+  // Yaşam Rehberi VR'daki el ayrımı: sol el kürsü kumandası (nişansız tetik/kavrama + bilek panosu), sağ el ışınla seçer
+  k.addEventListener('connected', (e) => { k.userData.el = e.data.handedness; k.userData.src = e.data;
+    if(e.data.handedness === 'left'){ isin.visible = false; if(!k.userData.bilek){ k.userData.bilek = bilekModeli(); k.add(k.userData.bilek); } k.userData.bilek.visible = true; Y.ipucu('sol'); }
+    else { isin.visible = true; if(k.userData.bilek) k.userData.bilek.visible = false; } });
+  k.addEventListener('disconnected', () => { k.userData.el = null; isin.visible = true; if(k.userData.bilek) k.userData.bilek.visible = false; });
+  k.addEventListener('select', (e) => { sonKaynak = e.data || k.userData.src; sesHazir();
+    if(k.userData.el === 'left' && !Y.acikMi() && !acikKart){ git(1); return; }
+    const h = kumandaIsin(k); etkile(h && h.object, h && h.point, 'vr'); });
+  k.addEventListener('squeeze', (e) => { sonKaynak = e.data || k.userData.src; git(-1); });
   rig.add(k); kumandalar.push({ k, isin });
   const tut = renderer.xr.getControllerGrip(i); tut.add(modelF.createControllerModel(tut)); rig.add(tut);
 }
@@ -377,11 +538,12 @@ const saat = new THREE.Clock();
 renderer.setAnimationLoop(() => {
   const t = saat.getElapsedTime(), dt = saat.getDelta();
   if(!renderer.xr.isPresenting){ eul.set(pitch, yaw, 0); camera.quaternion.setFromEuler(eul); }
-  else { cubuk(); for(const { k, isin } of kumandalar){ const h = kumandaIsin(k); isin.scale.z = h ? h.distance : 6; isin.material.color.set(h && h.object.name !== 'zemin' ? '#ffffff' : '#f2c870'); } }
+  else { cubuk(); for(const { k, isin } of kumandalar){ if(!isin.visible) continue; const h = kumandaIsin(k); isin.scale.z = h ? h.distance : 6; isin.material.color.set(h && h.object.name !== 'zemin' ? '#ffffff' : '#f2c870'); } }
   if(iz && isaretci){ isaretci.position.copy(iz.getPointAt((t * 0.04) % 1)); isaretci.position.y += 0.01; }
   iğneler.forEach(({ bas }, i) => { if(bas.scale.x > 1.2) bas.position.y = 0.13 + Math.sin(t * 4 + i) * 0.01; });
   if(tozP){ tozP.rotation.y = t * 0.01; tozP.position.y = Math.sin(t * 0.2) * 0.1; }
-  if(durum.oto && V && performance.now() > durum.sonraki) git(1);
+  if(durum.oto && V && performance.now() > durum.sonraki){ const ks = sonKaynak; sonKaynak = null; git(1); sonKaynak = ks; } // oto: ses var, titreşim yok
+  noktalar.forEach((n, i) => { n.material.opacity = .75 + Math.sin(t * 2 + i) * .25; });
   Y.dongu();
   renderer.render(scene, camera);
 });
@@ -389,7 +551,7 @@ function boyut(){ camera.aspect = innerWidth / innerHeight; camera.fov = camera.
 addEventListener('resize', boyut); boyut();
 
 // mağaza görselleri için kamera kancası (?cekim=1)
-if(new URLSearchParams(location.search).has('cekim')) window.__salon = { bak:(y, p) => { yaw = y; pitch = p; }, git:(x, z) => { rig.position.set(x, 0, z); }, bolumAc:(i) => bolumAc(i), ileri:(n) => { for(let k = 0; k < n; k++) git(1); }, fov:(f) => { camera.fov = f; camera.updateProjectionMatrix(); } };
+if(new URLSearchParams(location.search).has('cekim')) window.__salon = { bak:(y, p) => { yaw = y; pitch = p; }, git:(x, z) => { rig.position.set(x, 0, z); }, bolumAc:(i) => bolumAc(i), ileri:(n) => { for(let k = 0; k < n; k++) git(1); }, fov:(f) => { camera.fov = f; camera.updateProjectionMatrix(); }, kart:(i) => kartAc(HIKAYE[i]), kapat:() => kartKapat(), durum:() => ({ ...durum }), bugun:() => bugunSatiri(), dilim:() => DILIM_AD[dilimBul()], bilek:() => { if(!bkT) bilekModeli(); bilekCiz(); return bkC.toDataURL(); } };
 
 // ── VR düğmesi ──
 async function vrHazirla(){
@@ -401,60 +563,68 @@ async function vrHazirla(){
   b.onclick = () => { const s = renderer.xr.getSession(); if(s) s.end(); else vrBaslat(); };
 }
 
-// Tek VR giriş kapısı: düğme, giriş kartı, mağaza uygulamasının otomatik açılışı hep buradan geçer.
+// Tek VR giriş kapısı: düğme, giriş kartı, sayfa başındaki erken istek (__erkenXR) ve sessiongranted hep buradan geçer.
 // 'layers' ve 'bounded-floor' istenmez: Quest tarayıcısında bazı sürümlerde ilk karede donmaya yol açabiliyor.
+const PWA = !!window.__pwa || matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || 'getDigitalGoodsService' in window || document.referrer.startsWith('android-app://');
 let vrIstek = null;
+async function oturumaBaglan(s){
+  if(renderer.xr.isPresenting) return;
+  renderer.xr.setFoveation(1); await renderer.xr.setSession(s);
+  try { if(s.updateTargetFrameRate && s.supportedFrameRates && [...s.supportedFrameRates].includes(72)) s.updateTargetFrameRate(72); } catch(e){} // Quest: kararlı 72 Hz
+  camera.position.set(0, 0, 0); const b = $('#vr'); if(b) b.textContent = '🚪 Çık';
+  const g = $('#giris'); if(g) g.style.display = 'none';
+  s.addEventListener('end', () => {
+    camera.position.set(0, 1.25, 0); kartKapat(); const b2 = $('#vr'); if(b2) b2.textContent = '🥽 VR\'a gir';
+    if(PWA) kapiGoster(); // mağaza uygulamasında VR'dan çıkınca boş sayfada kalınmasın
+  });
+}
 function vrBaslat(){
   if(!navigator.xr || renderer.xr.isPresenting) return Promise.resolve(false);
   if(vrIstek) return vrIstek;
   vrIstek = navigator.xr.requestSession('immersive-vr', { optionalFeatures:['local-floor', 'hand-tracking'] })
-    .then(async s => {
-      renderer.xr.setFoveation(1); await renderer.xr.setSession(s);
-      try { if(s.updateTargetFrameRate && s.supportedFrameRates && [...s.supportedFrameRates].includes(72)) s.updateTargetFrameRate(72); } catch(e){} // Quest: kararlı 72 Hz
-      camera.position.set(0, 0, 0); const b = $('#vr'); if(b) b.textContent = '🚪 Çık';
-      const g = $('#giris'); if(g) g.style.display = 'none';
-      s.addEventListener('end', () => {
-        camera.position.set(0, 1.25, 0); const b2 = $('#vr'); if(b2) b2.textContent = '🥽 VR\'a gir';
-        if(PWA) kapiGoster(); // mağaza uygulamasında VR'dan çıkınca boş sayfada kalınmasın
-      });
-      return true;
-    })
+    .then(async s => { await oturumaBaglan(s); return true; })
     .catch(e => { console.warn('VR açılamadı', e); if(PWA) kapiGoster(); return false; })
     .finally(() => { vrIstek = null; });
   return vrIstek;
 }
-const PWA = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || 'getDigitalGoodsService' in window || document.referrer.startsWith('android-app://');
 // VR'a giremezsek ekranda tek, büyük bir "Salona gir" düğmesi kalsın (tetik/dokunuş = kullanıcı etkileşimi)
 function kapiGoster(){
   const g = $('#giris'); if(!g) return;
   g.style.display = ''; const d = $('#basla');
-  d.innerHTML = '🥽 Salona gir'; d.disabled = false; d.onclick = () => vrBaslat();
+  d.innerHTML = '🥽 Salona gir'; d.disabled = false; d.onclick = () => { sesHazir(); vrBaslat(); };
 }
 if(navigator.xr && navigator.xr.addEventListener) navigator.xr.addEventListener('sessiongranted', () => vrBaslat());
 
 // ── başlat ──
 (async () => {
-  // Mağaza uygulaması (immersive PWA): VR oturumunu hiç beklemeden, veri yüklenmeden önce iste.
-  // Simgeye dokunmak kullanıcı etkileşimi sayılır; beklersek bu hak düşüp gözlük yükleme ekranında asılı kalabiliyor.
-  if(PWA && navigator.xr) vrBaslat();
+  // Mağaza uygulaması: sayfa başında istenen oturum geldiyse veri beklemeden bağlan (salon arkadan kurulur).
+  // Erken istek hiç yapılamadıysa (eski paket) burada iste.
+  const erkenBag = window.__erkenXR ? window.__erkenXR.then(s => s ? oturumaBaglan(s).then(() => true) : false).catch(() => false) : (PWA && navigator.xr ? vrBaslat() : Promise.resolve(false));
   try {
     const yaziBekle = Promise.all([document.fonts.load("900 50px 'DM Sans'"), document.fonts.load("500 30px 'DM Sans'"), document.fonts.load("700 30px 'DM Sans'"), document.fonts.load("800 30px 'Barlow Condensed'")]).catch(() => {});
     await Promise.race([yaziBekle, new Promise(r => setTimeout(r, 2500))]);
     V = await (await fetch('veri.json')).json();
+    // kaldığın yer
+    const k = konumOku(), geri = !!(k && V.metinler[k.mi] && k.si < V.metinler[k.mi].satirlar.length && (k.mi > 0 || k.si >= 0));
+    if(geri){ durum.mi = k.mi; durum.si = k.si; }
     $('#bolum').innerHTML = V.metinler.map((m, i) => `<option value="${i}">${m.bolum}. ${m.baslik}</option>`).join('');
     $('#bolum').onchange = (e) => bolumAc(Number(e.target.value));
     $('#ileri').onclick = () => git(1); $('#geri').onclick = () => git(-1); $('#oto').onclick = () => otoAyarla(!durum.oto);
     kur(); perdeCiz(); vurguDurak(); vrHazirla();
+    const ipuclari = () => { if(geri) Y.ipucu('kaldigin'); setTimeout(() => Y.ipucu('isik'), 40000); };
     if(PWA && navigator.xr){
       // mağaza uygulaması: kart yalnızca VR'a girilemezse görünür, düğmesi doğrudan VR'a sokar
-      if(renderer.xr.isPresenting) $('#giris').style.display = 'none'; else if(!vrIstek) kapiGoster();
+      const ok = await erkenBag;
+      if(renderer.xr.isPresenting || ok) $('#giris').style.display = 'none'; else if(!vrIstek) kapiGoster();
+      setTimeout(ipuclari, 1500); // VR'da rehberi yardim.js kendisi başlatır
     } else {
-      $('#basla').innerHTML = 'Salona gir'; $('#basla').onclick = () => { $('#giris').remove(); setTimeout(() => $('#ipucu') && $('#ipucu').remove(), 9000); setTimeout(() => Y.basla(), 1200); };
+      $('#basla').innerHTML = geri ? `Kaldığın yerden: ${V.metinler[durum.mi].bolum}. bölüm` : 'Salona gir';
+      $('#basla').onclick = () => { sesHazir(); $('#giris').remove(); setTimeout(() => $('#ipucu') && $('#ipucu').remove(), 9000); setTimeout(() => { Y.basla(); ipuclari(); }, 1200); };
     }
   } catch(e){
     console.error(e);
     if(PWA && navigator.xr) kapiGoster(); // veri yüklenemese de uygulama donmuş görünmesin
-    else { const y = $('#yuk'); if(y) y.innerHTML = '<span class="hata">Salon açılamadı. Sayfayı yenile.</span>'; }
+    window.__hataGoster ? __hataGoster((e && e.message) || e) : (() => { const y = $('#yuk'); if(y) y.innerHTML = '<span class="hata">Salon açılamadı. Sayfayı yenile.</span>'; })();
   }
 })();
 
