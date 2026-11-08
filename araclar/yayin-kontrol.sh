@@ -26,20 +26,7 @@ grep -q "Nutuk Salonu" android/app/src/main/res/values/strings.xml && iyi "Andro
 grep -q "Nutuk Salonu" ios/App/App/Info.plist && iyi "iOS adı" || kotu "iOS görünen ad 'Nutuk Salonu' değil"
 
 # 5) Türkçe yazı (iOS): fontsource'ta "ı" (U+0131) latin dosyasındadır; latin @font-face aralığında U+0131 olmalı. ◀ ▶ ⏵ ⏸ işaretlerinin arkasında U+FE0E olmalı (yoksa iOS emoji resmi çizer).
-if python3 - <<'PY'
-import re, sys, glob
-bozuk = []
-for p in ['docs/salon/index.html', 'www/fonts.css']:
-    s = open(p, encoding='utf-8').read()
-    for b in re.findall(r'@font-face\{[^}]*\}', s):
-        if re.search(r'-latin-\d{3}-', b) and 'unicode-range' in b and 'U+0131' not in b: bozuk.append(p + ': latin yazı dosyasının aralığında U+0131 (ı) yok')
-R = re.compile('[\u25C0\u25B6\u23F5\u23F8\u23ED\u23EE](?![\uFE0E\uFE0F])')
-for p in glob.glob('docs/salon/*.js') + glob.glob('docs/salon/*.html') + glob.glob('www/*.js') + glob.glob('www/*.html'):
-    n = len(R.findall(open(p, encoding='utf-8').read()))
-    if n: bozuk.append(f'{p}: {n} işaret U+FE0E olmadan (iOS emoji çizer)')
-print('\n'.join(bozuk)); sys.exit(1 if bozuk else 0)
-PY
-then iyi "Türkçe yazı: ı aralığı ve işaretler iOS'ta doğru"; else kotu "Türkçe yazı / iOS işaret denetimi tutmadı (yukarıya bak)"; fi
+if python3 araclar/turkce-yazi-kontrol.py www docs/salon docs/gizlilik.html >/dev/null 2>&1 || python3 araclar/turkce-yazi-kontrol.py www docs; then iyi "Türkçe yazı: ı aralığı ve işaretler iOS'ta doğru"; else kotu "Türkçe yazı / iOS işaret denetimi tutmadı (yukarıya bak)"; fi
 
 # 5) sürüm geri gitmez
 SON=$(tr -d ' \n' < store/SON-SURUM 2>/dev/null || echo 0.0.0)
