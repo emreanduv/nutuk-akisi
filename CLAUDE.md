@@ -23,3 +23,9 @@ Yayın sırası: incelemedeki/testteki mağazada gönderilen sürüme onay gelen
 - Derlemeden önce depoyu güncelle (`git fetch`), başka bir oturumun son değişikliklerini ezme; birleştirmeden önce farkı kontrol et.
 - Mağaza incelemesine göndermeden önce derleme TestFlight / kapalı testte cihazda açılıp yeni özellikler gözle doğrulanır.
 - Yayınlanan her sürümden sonra `store/SON-SURUM` güncellenir.
+
+## Tek isim, tek gelişim (Emre'nin kuralı, bütün oyun ve uygulamalar)
+- Bir oyun/uygulamanın adı **her mağazada aynıdır**: App Store, Google Play, Meta Horizon (VR), Steam, saat uygulamaları. Mağazaya göre ek ("VR", "Mobile" vb.) konmaz.
+  Bu repo: ürünün adı her yerde **Nutuk Salonu** (telefon uygulamasının eski adı "Nutuk Akışı" bırakılır; paket/bundle kimlikleri değişmez).
+- Teknik olarak mümkün olan her geliştirme, güncelleme ve iyileştirme **o ürünün bütün mağazalardaki sürümlerine** yapılır (telefon ↔ VR ↔ masaüstü). Bir platforma özgü olanlar (ör. VR kumanda titreşimi) karşılığı neyse onunla taşınır (telefonda dokunuş titreşimi).
+- Aynı kural bütün repolar için geçerlidir; yeni bir repoda çalışırken bu bölüm oranın CLAUDE.md'sine de eklenir.
