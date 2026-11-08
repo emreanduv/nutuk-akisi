@@ -16,3 +16,10 @@ Her oyun/uygulamada olması gerekenler:
 8. **Mağaza başvurusu cevapları:** Kalıp metin değil, gerçek süreç ve testten sonra yapılan değişiklikler yazılır (örnek: malazgirt-akincilari `store/surum-1.6.md`).
 
 Yayın sırası: incelemedeki/testteki mağazada gönderilen sürüme onay gelene kadar dokunulmaz; onay gelince güncel sürüm yüklenir. Yayında olan mağazaya güncel sürüm hemen gönderilir. Derlemeler her zaman bütün değişiklikleri içeren daldan (main) alınır.
+
+### Yayın güvenliği (oyunlar artık mağazada; geri giden sürüm kabul edilemez)
+- Mağazaya/TestFlight'a/Play'e/Steam'e/Quest'e giden her derleme **yalnız `main` dalından** alınır. Başka dalda yapılan iş önce `main`'e birleştirilir, sonra derlenir.
+- Her derleme iş akışının başında bir **yayın öncesi kontrol** betiği çalışır (örnek: emreanduv/malazgirt-akincilari `araclar/yayin-kontrol.sh`): dal `main` mi, yukarıdaki standart özelliklerin hepsi kodda var mı, "Bir Mr. Anduv! yapımıdır." ana ekranda mı, sürüm numarası son yayınlanandan (`store/SON-SURUM`) küçük mü. Biri tutmazsa derleme durur. Bu repoda yoksa ilk işte eklenir.
+- Derlemeden önce depoyu güncelle (`git fetch`), başka bir oturumun son değişikliklerini ezme; birleştirmeden önce farkı kontrol et.
+- Mağaza incelemesine göndermeden önce derleme TestFlight / kapalı testte cihazda açılıp yeni özellikler gözle doğrulanır.
+- Yayınlanan her sürümden sonra `store/SON-SURUM` güncellenir.
