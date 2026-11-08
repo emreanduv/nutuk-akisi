@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>tr</string>
 	<key>CFBundleDisplayName</key>
-        <string>Nutuk Akışı</string>
+        <string>Nutuk Salonu</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

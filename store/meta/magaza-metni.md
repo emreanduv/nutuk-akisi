@@ -1,4 +1,4 @@
-# Meta Horizon Mağazası — Nutuk Salonu 1.0.0
+# Meta Horizon Mağazası — Nutuk Salonu 1.1.0 (App Store ve Google Play'de de aynı ad)
 
 - **Uygulama:** Nutuk Salonu · App ID 1486088641248406 · paket `com.anduv.nutuksalonu`
 - **Adres (PWA):** https://emreanduv.github.io/nutuk-salonu/ · **Gizlilik:** https://emreanduv.github.io/nutuk-salonu/gizlilik.html
@@ -16,6 +16,8 @@
 Ekim 1927, Ankara. Meclis salonunda, pencerelerden süzülen ışığın altında bir sıraya oturuyorsun. Kürsü boş; üstünde Nutuk'un satırları birer birer beliriyor.
 
 • Nutuk'tan 18 bölüm: Samsun'dan Gençliğe Hitabe'ye. Her özgün cümlenin altında bugünün Türkçesiyle ne dediği.
+• Tam Metin: masadaki kitaba dokun, Nutuk'un tamamı açılsın: 20 bölüm, vesikalar dahil; sanal klavyeyle bütün metinde ara.
+• Salonun ışığı Ankara saatine göre değişir; altın noktalar kürsünün, levhanın, binanın ve bayrağın hikâyesini anlatır.
 • Kurtuluş Yolu masası: taktik tahtasının üstünde kabartma Anadolu haritası; İstanbul'dan İzmir'e 12 durak. Bir iğneye dokun, kürsüde o bölüm açılsın.
 • Salonun duvarlarında kronoloji ve "Biliyor muydun?" panoları.
 • Kendi hızında oku ya da kendiliğinden ilerlesin.
@@ -31,7 +33,7 @@ Sit in the 1927 Turkish Parliament hall: original lines of Atatürk's Nutuk on t
 
 ## Description (EN)
 October 1927, Ankara. Take a seat in the parliament hall as light streams through the windows. The rostrum is empty; above it, the lines of Nutuk — Atatürk's great speech — appear one by one, each with its meaning in today's Turkish.
-• 18 chapters, from Samsun to the Address to the Youth.
+• 18 chapters, from Samsun to the Address to the Youth, plus the complete text of Nutuk (20 chapters with documents) in an in-hall reader with search.
 • A relief map of Anatolia on a tactics board with 12 stops of the War of Independence; touch a pin to open that chapter.
 • Timeline and "Did you know?" boards on the walls.
 • Controllers or hand tracking; teleport and snap turn. Works offline. No ads, no accounts, no data collection.
@@ -52,3 +54,6 @@ Test ekibimize teşekkürler!
 - Mini yatay 1080×360: `kapak-mini-1080x360.png`
 - Logo (saydam): `logo-2400x600.png` · Simge 512: `simge-512x512.png`
 - Ekran görüntüleri 2560×1440 (5): `ekran-1-kursu.png`, `ekran-2-harita.png`, `ekran-3-salon.png`, `ekran-4-pano.png`, `ekran-5-hitabe.png`
+
+## Not
+Telefon uygulaması (App Store, Google Play) da 1.1.0'dan itibaren Nutuk Salonu adını taşır ve aynı salonu içerir. Bir Mr. Anduv! yapımıdır.

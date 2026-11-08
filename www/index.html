@@ -7,7 +7,7 @@
 <meta name="description" content="Nutuk, Gençliğe Hitabe, söylevler ve telgraflar: Atatürk'ün sözleri özgün hâliyle ve bugünün Türkçesiyle, tek ekranda.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Nutuk Akışı | Gazi'nin Sözleri</title>
+<title>Nutuk Salonu | Gazi'nin Sözleri</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -19,11 +19,12 @@
 <div class="app">
   <header class="band">
     <div class="crest" id="crest"></div>
-    <div class="brand"><h1>Nutuk <em>Akışı</em></h1><small id="subline">Gazi'nin Sözleri</small></div>
+    <div class="brand"><h1>Nutuk <em>Salonu</em></h1><small id="subline">Gazi'nin Sözleri</small></div>
     <span class="demo" id="demo" hidden>DEMO</span>
     <div class="band-right"><span class="sess" id="sess">BAĞLANIYOR</span><time id="clock">--:--</time></div>
     <nav class="tabs" id="tabs" role="tablist">
       <button class="on" data-tab="metin" role="tab">📜 Metinler</button>
+      <button data-tab="salon" role="tab">🏛️ Salon</button>
       <button data-tab="tam" role="tab">📖 Tam Metin</button>
       <button data-tab="kesfet" role="tab">✨ Keşfet</button>
       <button data-tab="kadro" role="tab">🎖️ Kadro</button>
@@ -48,7 +49,7 @@
 
     <section class="pane" id="p-kesfet">
       <label class="kf-bildirim"><input type="checkbox" id="bildirim"><span><b>🔔 Her sabah günün sözü</b><small>Saat 09.00'da Nutuk'tan ve söylevlerden bir özgün cümle</small></span></label>
-      <a class="salon-kart" href="https://emreanduv.github.io/nutuk-akisi/salon/" target="_blank" rel="noopener"><span class="d-k">🥽 NUTUK SALONU · YENİ</span><b>1927'deki Meclis salonuna gir</b><span>Boş kürsünün üstünde Nutuk satır satır, masada Kurtuluş Yolu. VR gözlükte ya da tarayıcıda.</span><i>↗</i></a>
+      <a class="salon-kart" href="salon/index.html?uygulama=1" data-salon><span class="d-k">🏛️ SALON · 1927</span><b>Meclis salonuna gir</b><span>Kürsüde Nutuk satır satır, masada Kurtuluş Yolu, salonda altın hikâye noktaları. İnternetsiz; VR gözlükte de aynı salon.</span><i>›</i></a>
       <h3 class="sec">📌 Tarihte bugün</h3><div class="tb-app" id="bugunBox"></div>
       <h3 class="sec">📺 Nutuk Dizisi · her gün bir bölüm</h3><div class="kf-series" id="series"></div>
       <div class="kf-name" style="margin-top:14px"><h3>✍️ Adını eski harflerle yaz</h3><input id="myName" type="text" maxlength="16" placeholder="Adın…" autocomplete="off"><div class="kf-tab" id="myTab"></div></div>
@@ -68,7 +69,7 @@
       <div class="news yalniz-sunucu" id="news"></div>
       <details class="health yalniz-sunucu"><summary>Kaynak durumu</summary><div id="health"></div></details>
       <h3 class="sec">ℹ️ Hakkında</h3>
-      <div class="hakkinda"><p><b>Nutuk Akışı</b> · Nutuk, Gençliğe Hitabe, söylevler ve telgraflar: özgün hâliyle ve bugünün Türkçesiyle.</p>
+      <div class="hakkinda"><p><b>Nutuk Salonu</b> · Nutuk, Gençliğe Hitabe, söylevler ve telgraflar: özgün hâliyle ve bugünün Türkçesiyle.</p>
         <p>Atatürk'ün eserleri kamu malıdır. Tam Metin sekmesindeki Nutuk, 1927 baskısının Vikikaynak'taki (tr.wikisource.org) Latin harfli tam metnidir. Nutuk'tan alınan özgün satırlar Vikikaynak'taki tam metinle (tr.wikisource.org) harf harf karşılaştırılmıştır; "≈" ile başlayan karşılıklar ve düz anlatım satırları bu uygulama için yazılmıştır. "Tarihte bugün" Türkçe Vikipedi'den gelir.</p>
         <p>Uygulama hiçbir kişisel veri toplamaz; kaydettiklerin yalnız bu cihazda kalır. <a href="https://emreanduv.github.io/nutuk-akisi/gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></p>
         <p class="made">Bir Mr. Anduv! yapımıdır.</p></div>
@@ -83,7 +84,7 @@
       <div class="ayarlar" id="ayarIc"></div>
     </section>
 
-    <p class="legal"><strong>Bir Mr. Anduv! yapımıdır.</strong> Nutuk Akışı bağımsız bir eğitim ve keşif uygulamasıdır. Atatürk'ün eserleri kamu malıdır; tırnak içindeki özgün satırlar Nutuk (1927) ve Atatürk'ün söylev ve demeçlerinden alınmıştır, altlarındaki karşılıklar bu uygulama için yazılmış sadeleştirmelerdir. Düz satırlar olayları günümüz Türkçesiyle anlatır. Nutuk'un tam metni Tam Metin sekmesindedir (Vikikaynak, 1927 baskısı). Wikipedia özetleri ve görselleri kendi lisanslarıyla gösterilir.</p>
+    <p class="legal"><strong>Bir Mr. Anduv! yapımıdır.</strong> Nutuk Salonu bağımsız bir eğitim ve keşif uygulamasıdır. Atatürk'ün eserleri kamu malıdır; tırnak içindeki özgün satırlar Nutuk (1927) ve Atatürk'ün söylev ve demeçlerinden alınmıştır, altlarındaki karşılıklar bu uygulama için yazılmış sadeleştirmelerdir. Düz satırlar olayları günümüz Türkçesiyle anlatır. Nutuk'un tam metni Tam Metin sekmesindedir (Vikikaynak, 1927 baskısı). Wikipedia özetleri ve görselleri kendi lisanslarıyla gösterilir.</p>
   </main>
 
   <div class="ticker"><b class="tk-label">🇹🇷 KRONOLOJİ</b><div class="tk-win"><div class="tk-track" id="track"></div></div></div>
@@ -95,6 +96,7 @@
 </dialog>
 <div class="toast" id="toast" role="status"></div>
 
+<div class="salon-katman" id="salonKatman" hidden><iframe id="salonCerceve" title="Nutuk Salonu: 1927 Meclis salonu" allow="xr-spatial-tracking; fullscreen; autoplay"></iframe><button class="salon-kapat" id="salonKapat" aria-label="Uygulamaya dön">✕ Uygulamaya dön</button></div>
 <script src="config.js"></script>
 <script src="common.js?v=1"></script>
 <script src="app.js?v=1"></script>

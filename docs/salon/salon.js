@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
 import { yardimKur } from './yardim.js';
+import { tamKur } from './tamokur.js';
 
 const $ = (s) => document.querySelector(s);
 const AY = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
@@ -51,7 +52,13 @@ function tik(tur){
     }
   } catch(e){}
 }
-function titres(src, guc, ms){ try { const h = src && src.gamepad && src.gamepad.hapticActuators && src.gamepad.hapticActuators[0]; if(h) h.pulse(guc, ms); } catch(e){} }
+// Nutuk Salonu telefon uygulamasının içinde mi (iOS/Android, www/salon)? Orada VR kumandası yerine telefonun titreşimi kullanılır.
+const UYG = /[?&]uygulama=1/.test(location.search) && window.parent !== window;
+const telefonTitret = (guc) => { try {
+  const H = window.parent && window.parent.Capacitor && window.parent.Capacitor.Plugins && window.parent.Capacitor.Plugins.Haptics;
+  if(H) H.impact({ style:guc > .6 ? 'HEAVY' : 'LIGHT' }); else if(navigator.vibrate) navigator.vibrate(guc > .6 ? 30 : 10);
+} catch(e){} };
+function titres(src, guc, ms){ try { const h = src && src.gamepad && src.gamepad.hapticActuators && src.gamepad.hapticActuators[0]; if(h) h.pulse(guc, ms); else if(UYG && !renderer.xr.isPresenting) telefonTitret(guc); } catch(e){} }
 
 // ── Ankara saati (UTC+3, yaz saati yok) ──
 const ankara = () => { const d = new Date(Date.now() + 3 * 3600e3); return { s:d.getUTCHours(), d:d.getUTCMinutes(), ay:d.getUTCMonth() + 1, gun:d.getUTCDate() }; };
@@ -184,7 +191,7 @@ const BAS = new THREE.Vector3(0, 0, -1.4); rig.position.copy(BAS); camera.positi
 const tiklanir = []; // ışınla seçilebilen nesneler
 
 // ── rehber + nasıl kullanılır + verilerimi sil (yardim.js) ──
-const SURUM = '1.0.3';
+const SURUM = '1.1.0';
 const Y = yardimKur({ THREE, scene, camera, renderer, tiklanir, ad:'Nutuk Salonu', anahtar:'ns', surum:SURUM, onek:/^ns\./, dugmeOnu:'#vr', girisKart:'#giris .kart',
   url:'https://emreanduv.github.io/nutuk-salonu/', paylasMetni:"Nutuk Salonu: 1927'deki Meclis salonunda bir sıraya otur, kürsüde Nutuk satır satır. VR gözlükte, bilgisayarda ve telefonda.",
   silMetni:'rehberde hangi ipuçlarını gördüğün ve kaldığın satır (salon başka hiçbir şey kaydetmez).', eski:() => localStorage.getItem('ns.konum') != null, ilerleme:() => V ? `bölüm ${durum.mi + 1}/${V.metinler.length}` : '',
@@ -205,8 +212,19 @@ const Y = yardimKur({ THREE, scene, camera, renderer, tiklanir, ad:'Nutuk Salonu
     { id:'hikaye', b:'✨ Altın noktalar', m:'Salondaki altın "i" noktalarına dokun: kürsünün, levhanın, binanın ve bayrağın kısa hikâyesi açılır. Kartı kapatmak için ona dokun.', v:'Altın "i" noktalarına nişan alıp tetikle: kürsünün, levhanın, binanın ve bayrağın hikâyesi açılır. Kartı kapatmak için ona tetikle.' },
     { id:'kaldigin', b:'📌 Kaldığın yerden', m:'Salon en son okuduğun satırda açılır. Baştan başlamak istersen alttaki listeden 1. bölümü seç.', v:'Salon en son okuduğun satırda açıldı. Baştan başlamak için haritadaki ilk iğneye (Samsun) tetikle.' },
     { id:'isik', b:'🕰️ Ankara saati', m:'Salonun ışığı Ankara\'daki saate göre değişir: sabah pencerelerden güneş girer, akşam avizeler yanar. Sol duvardaki kronoloji panosu bugünün tarihine denk gelen olayı öne çıkarır.' },
+    { id:'tam', b:'📖 Tam Metin', m:'Nutuk\'un tamamı burada: 20 bölüm, vesikalar dahil. Bölüme, sonra kısma dokun; ◀ ▶ ya da ok tuşlarıyla sayfa çevir. 🔍 Ara ile bütün metinde ara (klavyeyle de yazabilirsin). Kaldığın yer hatırlanır.', v:'Nutuk\'un tamamı burada. Bölüme, sonra kısma nişan alıp tetikle. Okurken sol el tetiği sonraki sayfa, kavrama önceki. 🔍 Ara\'daki harflerle bütün metinde ara.' },
     { id:'yardim', b:'❓ Yardım hep yanında', m:'Üstteki ? düğmesi bu rehberi açar: bütün ipuçları, "Rehberi baştan göster", görüş yazma ve Verilerimi sil.', v:'Kumandadaki A, B, X ya da Y tuşu veya bel hizandaki ? düğmesi bu panoyu açar: bütün ipuçları ve Verilerimi sil.' },
-  ], sira:['giris', 'sol', 'yuru', 'harita', 'hikaye', 'yardim', 'bolum', 'panolar', 'isik'], temelIpuclari:['giris', 'yuru'] });
+  ], sira:['giris', 'sol', 'yuru', 'harita', 'hikaye', 'tam', 'yardim', 'bolum', 'panolar', 'isik'], temelIpuclari:['giris', 'yuru'] });
+
+// ── Tam Metin okuyucusu (telefon uygulamasındaki Tam Metin sekmesinin salondaki karşılığı) ──
+const TAM = tamKur({ THREE, scene, camera, renderer, tiklanir, doku, tuval, yuvarlak, sar, RENK,
+  url: UYG ? '../data/nutuk-tam.json' : 'tam.json', // uygulamanın içinde metin zaten telefonda
+  bakisGuncelle:() => { eul.set(pitch, yaw, 0); camera.quaternion.setFromEuler(eul); camera.updateMatrixWorld(true); },
+  tikla:() => { tik('satir'); titres(sonKaynak, .25, 24); }, cevrildi:() => titres(sonKaynak, .25, 24), kapandi:() => document.body.classList.remove('tam-acik') });
+function tamAc(){
+  if(UYG){ window.parent.postMessage('ns-tam', location.origin); return; } // telefonda uygulamanın kendi Tam Metin sekmesi açılır (telefona göre dizilmiş)
+  kartKapat(); Y.ipucu('tam'); TAM.ac(); tik('can'); document.body.classList.add('tam-acik');
+}
 
 function kur(){
   // ışık
@@ -371,6 +389,12 @@ function haritaMasasi(){
     const et = new THREE.Sprite(new THREE.SpriteMaterial({ map:doku(ec), depthTest:true, toneMapped:false })); et.scale.set(0.3, 0.075, 1); et.position.y = 0.23; ig.add(et);
     g.add(ig); iğneler.push({ h, bas, et });
   });
+  // Nutuk kitabı: dokununca Tam Metin okuyucusu açılır
+  const [kc2, kx2] = tuval(512, 384); kx2.fillStyle = '#7a0a1c'; kx2.fillRect(0, 0, 512, 384); kx2.strokeStyle = '#e0b04a'; kx2.lineWidth = 10; kx2.strokeRect(18, 18, 476, 348);
+  kx2.fillStyle = '#f2c870'; kx2.font = "900 92px 'DM Sans'"; kx2.textAlign = 'center'; kx2.fillText('NUTUK', 256, 200); kx2.font = "700 40px 'DM Sans'"; kx2.fillText('1927 · Tam Metin', 256, 280);
+  const kapakM = new THREE.MeshStandardMaterial({ map:doku(kc2), roughness:.6 }), sayfaM = new THREE.MeshStandardMaterial({ color:'#efe2bf', roughness:.9 }), sirtM = new THREE.MeshStandardMaterial({ color:'#5a0814', roughness:.6 });
+  const kitap = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.05, 0.17), [sayfaM, sirtM, kapakM, sirtM, sayfaM, sayfaM]); kitap.position.set(1.45, MASA_Y + 0.025, -0.62); kitap.rotation.y = 0.3; kitap.name = 'kitap'; g.add(kitap); tiklanir.push(kitap);
+  const kitapVur = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.2, 0.32), new THREE.MeshBasicMaterial({ transparent:true, opacity:0, depthWrite:false })); kitapVur.position.copy(kitap.position); kitapVur.name = 'kitap'; g.add(kitapVur); tiklanir.push(kitapVur);
   isaretci = new THREE.Mesh(new THREE.SphereGeometry(0.022, 12, 10), new THREE.MeshBasicMaterial({ color:'#fff1a8' })); g.add(isaretci);
 }
 function vurguDurak(){
@@ -398,9 +422,9 @@ const HIKAYE = [
   { id:'bayrak', p:[-5.2, 2.0, ZON + 4.0], baslik:'Ay yıldız', alt:'1936 · Türk Bayrağı Kanunu',
     metin:"Bayrağın ölçüleri 29 Mayıs 1936'da kabul edilen Türk Bayrağı Kanunu ile kesinleşti: ay ve yıldızın yeri ve büyüklüğü bayrağın genişliğine göre tanımlıdır. Salondaki bayraklar bu oranlarla çizildi.",
     not:'Yani 1927\'de bayrağın kesin ölçüleri henüz kanunla belirlenmemişti.' },
-  { id:'kitap', p:[2.1, 1.35, MASA_Z + 0.5], baslik:'Nutuk kitabı', alt:'1927 · iki cilt',
-    metin:"Nutuk, okunduğu yıl Arap harfleriyle basıldı. Konuşmanın yanında Vesikalar adlı ikinci bir cilt vardı: Paşa'nın konuşmada dayandığı telgraf ve belgeler. Haritadaki her iğne bu yolculuğun bir durağıdır.",
-    not:"Nutuk Akışı uygulamasının Tam Metin sekmesinde, vesikalar dahil bütün metni okuyabilirsin." },
+  { id:'kitap', p:[1.8, 1.3, MASA_Z - 0.8], baslik:'Nutuk kitabı', alt:'1927 · iki cilt',
+    metin:"Nutuk, okunduğu yıl Arap harfleriyle basıldı. Konuşmanın yanında Vesikalar adlı ikinci bir cilt vardı: Paşa'nın konuşmada dayandığı telgraf ve belgeler. Masadaki kırmızı kitaba dokun: bütün metin, vesikalar dahil, okuyucuda açılır.",
+    not:"Kürsüdeki perde 18 bölümlük özeti satır satır anlatır; kitap ise 1927 metninin tamamıdır." },
 ];
 const noktalar = []; let acikKart = null, hkT, hkMesh;
 const [hkC, hkX] = tuval(1280, 900);
@@ -470,7 +494,9 @@ function bugunSatiri(){
 const ray = new THREE.Raycaster(), fare = new THREE.Vector2();
 function etkile(nesne, nokta, kaynak){
   if(Y.etkile(nesne, nokta)) return;
+  if(nesne && nesne.name === 'tam'){ TAM.dokun(nokta); return; }
   if(acikKart){ kartKapat(); return; }
+  if(nesne && nesne.name === 'kitap'){ tamAc(); return; }
   if(!nesne) { if(kaynak === 'vr') git(1); return; }
   if(nesne.name === 'nokta'){ kartAc(nesne.userData.h); return; }
   if(nesne.name === 'igne'){ Y.ipucu('harita'); const h = V.harita[nesne.userData.i]; const i = V.metinler.findIndex(m => m.id === h.metin); if(i >= 0) bolumAc(i); return; }
@@ -502,7 +528,7 @@ function secFare(e, tur){
   if(tur === 'cift'){ if(h && h.object.name === 'zemin') yuru(h.point); return; }
   if(h) etkile(h.object, h.point, 'tik');
 }
-addEventListener('keydown', (e) => { sonKaynak = null; sesHazir(); if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); git(1); } if(e.key === 'ArrowLeft') git(-1);
+addEventListener('keydown', (e) => { sonKaynak = null; sesHazir(); if(TAM.acik() && TAM.tus(e)) return; if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); git(1); } if(e.key === 'ArrowLeft') git(-1);
   const hiz = 0.25, ileri = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), sag = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
   const k = e.key.toLowerCase(); if(k === 'w') yuru(rig.position.clone().addScaledVector(ileri, hiz)); if(k === 's') yuru(rig.position.clone().addScaledVector(ileri, -hiz)); if(k === 'a') yuru(rig.position.clone().addScaledVector(sag, -hiz)); if(k === 'd') yuru(rig.position.clone().addScaledVector(sag, hiz)); });
 
@@ -518,9 +544,9 @@ for(let i = 0; i < 2; i++){
     else { isin.visible = true; if(k.userData.bilek) k.userData.bilek.visible = false; } });
   k.addEventListener('disconnected', () => { k.userData.el = null; isin.visible = true; if(k.userData.bilek) k.userData.bilek.visible = false; });
   k.addEventListener('select', (e) => { sonKaynak = e.data || k.userData.src; sesHazir();
-    if(k.userData.el === 'left' && !Y.acikMi() && !acikKart){ git(1); return; }
+    if(k.userData.el === 'left' && !Y.acikMi() && !acikKart){ if(TAM.okuyorMu()) TAM.cevir(1); else git(1); return; }
     const h = kumandaIsin(k); etkile(h && h.object, h && h.point, 'vr'); });
-  k.addEventListener('squeeze', (e) => { sonKaynak = e.data || k.userData.src; git(-1); });
+  k.addEventListener('squeeze', (e) => { sonKaynak = e.data || k.userData.src; if(TAM.okuyorMu()) TAM.cevir(-1); else git(-1); });
   rig.add(k); kumandalar.push({ k, isin });
   const tut = renderer.xr.getControllerGrip(i); tut.add(modelF.createControllerModel(tut)); rig.add(tut);
 }
@@ -551,7 +577,7 @@ function boyut(){ camera.aspect = innerWidth / innerHeight; camera.fov = camera.
 addEventListener('resize', boyut); boyut();
 
 // mağaza görselleri için kamera kancası (?cekim=1)
-if(new URLSearchParams(location.search).has('cekim')) window.__salon = { bak:(y, p) => { yaw = y; pitch = p; }, git:(x, z) => { rig.position.set(x, 0, z); }, bolumAc:(i) => bolumAc(i), ileri:(n) => { for(let k = 0; k < n; k++) git(1); }, fov:(f) => { camera.fov = f; camera.updateProjectionMatrix(); }, kart:(i) => kartAc(HIKAYE[i]), kapat:() => kartKapat(), durum:() => ({ ...durum }), bugun:() => bugunSatiri(), dilim:() => DILIM_AD[dilimBul()], bilek:() => { if(!bkT) bilekModeli(); bilekCiz(); return bkC.toDataURL(); } };
+if(new URLSearchParams(location.search).has('cekim')) window.__salon = { bak:(y, p) => { yaw = y; pitch = p; }, git:(x, z) => { rig.position.set(x, 0, z); }, bolumAc:(i) => bolumAc(i), ileri:(n) => { for(let k = 0; k < n; k++) git(1); }, fov:(f) => { camera.fov = f; camera.updateProjectionMatrix(); }, kart:(i) => kartAc(HIKAYE[i]), tam:() => tamAc(), tamPx:(x, y) => TAM.dokunPx(x, y), tamTus:(k) => TAM.tus({ key:k, preventDefault(){} }), kapat:() => kartKapat(), durum:() => ({ ...durum }), bugun:() => bugunSatiri(), dilim:() => DILIM_AD[dilimBul()], bilek:() => { if(!bkT) bilekModeli(); bilekCiz(); return bkC.toDataURL(); } };
 
 // ── VR düğmesi ──
 async function vrHazirla(){
@@ -609,7 +635,7 @@ if(navigator.xr && navigator.xr.addEventListener) navigator.xr.addEventListener(
     if(geri){ durum.mi = k.mi; durum.si = k.si; }
     $('#bolum').innerHTML = V.metinler.map((m, i) => `<option value="${i}">${m.bolum}. ${m.baslik}</option>`).join('');
     $('#bolum').onchange = (e) => bolumAc(Number(e.target.value));
-    $('#ileri').onclick = () => git(1); $('#geri').onclick = () => git(-1); $('#oto').onclick = () => otoAyarla(!durum.oto);
+    $('#ileri').onclick = () => git(1); $('#geri').onclick = () => git(-1); $('#oto').onclick = () => otoAyarla(!durum.oto); $('#tamDug').onclick = () => TAM.acik() ? TAM.kapat() : tamAc();
     kur(); perdeCiz(); vurguDurak(); vrHazirla();
     const ipuclari = () => { if(geri) Y.ipucu('kaldigin'); setTimeout(() => Y.ipucu('isik'), 40000); };
     if(PWA && navigator.xr){
@@ -629,4 +655,15 @@ if(navigator.xr && navigator.xr.addEventListener) navigator.xr.addEventListener(
 })();
 
 // çevrimdışı önbellek (PWA: Quest'te ana ekrana eklenebilir, internetsiz açılır)
-if('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+// (uygulamanın içinde gerek yok: dosyalar zaten telefonda)
+if('serviceWorker' in navigator && !UYG) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+// uygulamanın içinde: armanın yerinde "‹ Uygulama" düğmesi; hazır olunca uygulamaya haber ver
+if(UYG){
+  const c = document.querySelector('.band .crest'), b = document.createElement('button');
+  b.className = 'geri-uyg'; b.textContent = '‹'; b.setAttribute('aria-label', 'Uygulamaya dön'); b.onclick = () => window.parent.postMessage('ns-kapat', location.origin);
+  if(c) c.replaceWith(b); else document.querySelector('.band').prepend(b);
+  const vr = document.getElementById('vr'); if(vr) vr.style.display = 'none'; // telefonda VR gözlük yok; VR için Meta Quest'teki Nutuk Salonu
+  const st = document.createElement('style'); st.textContent = '.geri-uyg{flex:none;width:40px;height:40px;border:0;border-radius:12px;font:900 26px/1 "DM Sans",sans-serif;color:#1c2a44;background:linear-gradient(#f7f2e8,#ddd3c1);box-shadow:0 2px 0 #00000040}';
+  document.head.appendChild(st);
+  window.parent.postMessage('ns-hazir', location.origin);
+}

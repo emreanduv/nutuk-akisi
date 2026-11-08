@@ -1,4 +1,4 @@
-// Nutuk Akışı — uygulama görünümü (telefon / tablet / masaüstü). Yayın görünümü için yayin.js.
+// Nutuk Salonu — uygulama görünümü (telefon / tablet / masaüstü). Yayın görünümü için yayin.js.
 (function(){
   if(NA.qs.get('yayin') === '1') return;
   const { esc, kindChip, kindColor, kindIcon, dateLabel } = NA;
@@ -24,10 +24,25 @@
   // ── sekmeler ──
   $('#tabs').addEventListener('click', (e) => {
     const b = e.target.closest('button[data-tab]'); if(!b) return;
+    if(b.dataset.tab === 'salon'){ salonAc(); return; } // salon tam ekran açılır, sekme değişmez
     document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('on', x === b));
     document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.id === 'p-' + b.dataset.tab));
     scrollTo({ top:0 });
   });
+
+  // ── Salon: VR'daki Nutuk Salonu'nun aynısı, uygulamanın içinde ve internetsiz (www/salon = docs/salon kopyası) ──
+  function salonAc(){
+    const k = $('#salonKatman'), f = $('#salonCerceve');
+    if(!f.getAttribute('src')) f.src = 'salon/index.html?uygulama=1';
+    k.hidden = false; document.documentElement.classList.add('salon-acik');
+    clearTimeout(salonAc.t); if(!salonAc.hazir) salonAc.t = setTimeout(() => k.classList.add('yedek'), 8000);
+    try { f.contentWindow && f.contentWindow.focus(); } catch(e){}
+  }
+  function salonKapat(){ $('#salonKatman').hidden = true; document.documentElement.classList.remove('salon-acik'); }
+  $('#salonKapat').addEventListener('click', salonKapat);
+  document.addEventListener('click', (e) => { const a = e.target.closest('[data-salon]'); if(a){ e.preventDefault(); salonAc(); } });
+  addEventListener('message', (e) => { if(e.origin !== location.origin) return; if(e.data === 'ns-kapat') salonKapat(); if(e.data === 'ns-tam'){ salonKapat(); const t = document.querySelector('#tabs button[data-tab="tam"]'); if(t) t.click(); } if(e.data === 'ns-hazir'){ salonAc.hazir = true; clearTimeout(salonAc.t); $('#salonKatman').classList.remove('yedek'); } });
+  NA.salonAc = salonAc;
 
   function header(){
     const n = NA.ist(), c = NA.state.corpus, S = NA.siradakiGun();
@@ -114,7 +129,7 @@
     const sh = e.target.closest('[data-share]');
     if(sh){
       const t = NA.metin(sh.dataset.share), O = NA.originals(t);
-      const text = `${t.baslik} (${dateLabel(t.tarih)})\n\n${O.length ? O.slice(0, 2).map(o => `“${o}”`).join('\n') : t.satirlar.slice(0, 2).map(NA.lineText).join(' ')}\n\n· Nutuk Akışı`;
+      const text = `${t.baslik} (${dateLabel(t.tarih)})\n\n${O.length ? O.slice(0, 2).map(o => `“${o}”`).join('\n') : t.satirlar.slice(0, 2).map(NA.lineText).join(' ')}\n\n· Nutuk Salonu`;
       if(ShareP) ShareP.share({ title:t.baslik, text, dialogTitle:'Paylaş' }).catch(() => {});
       else if(navigator.share) navigator.share({ title:t.baslik, text }).catch(() => {});
       else if(navigator.clipboard) navigator.clipboard.writeText(text).then(() => toast('📋 Panoya kopyalandı'), () => {});

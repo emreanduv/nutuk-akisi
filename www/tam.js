@@ -1,4 +1,4 @@
-// Nutuk Akışı — Tam Metin: Nutuk'un (1927) tamamı, Vikikaynak'tan; internetsiz okunur, aranır, kaldığın yer hatırlanır.
+// Nutuk Salonu — Tam Metin: Nutuk'un (1927) tamamı, Vikikaynak'tan; internetsiz okunur, aranır, kaldığın yer hatırlanır.
 (function(){
   if(NA.qs.get('yayin') === '1') return;
   const $ = (s) => document.querySelector(s), esc = NA.esc;

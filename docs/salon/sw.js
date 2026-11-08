@@ -1,8 +1,8 @@
 // Nutuk Salonu: çevrimdışı önbellek (gözlükte internetsiz açılsın)
 // Önbellek adı bulunduğu adrese göre ayrılır: deneme kopyası (/nutuk-salonu-test/) yayındaki salonun önbelleğine dokunmaz.
 const ONEK = /-test\//.test(new URL(self.registration.scope).pathname) ? 'salontest-' : 'salon-';
-const SURUM = ONEK + '4';
-const DOSYALAR = ['./', 'index.html', 'salon.js', 'veri.json', 'yardim.js', 'manifest.webmanifest', 'simge-192.png', 'simge-512.png',
+const SURUM = ONEK + '5';
+const DOSYALAR = ['./', 'index.html', 'salon.js', 'tamokur.js', 'veri.json', 'yardim.js', 'manifest.webmanifest', 'simge-192.png', 'simge-512.png',
   'vendor/three.module.js', 'vendor/addons/webxr/XRControllerModelFactory.js', 'vendor/addons/loaders/GLTFLoader.js',
   'vendor/addons/libs/motion-controllers.module.js', 'vendor/addons/utils/BufferGeometryUtils.js'];
 self.addEventListener('install', (e) => e.waitUntil(caches.open(SURUM).then(c => c.addAll(DOSYALAR)).then(() => self.skipWaiting())));

@@ -1,4 +1,4 @@
-// Nutuk Akışı — ortak veri katmanı (uygulama + yayın görünümü).
+// Nutuk Salonu — ortak veri katmanı (uygulama + yayın görünümü).
 // API_BASE: yerelde boş kalır. Telefon uygulamasında barındırılan sunucunun adresi yazılır (bkz. MAGAZA-YOL-HARITASI.md).
 window.NA = (function(){
   const qs = new URLSearchParams(location.search);

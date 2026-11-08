@@ -1,19 +1,21 @@
 {
   "name": "nutuk-akisi",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "private": true,
-  "description": "Nutuk Akışı — Nutuk, Gençliğe Hitabe ve söylevler, özgün hâliyle ve bugünün Türkçesiyle (iOS + Android, Capacitor). Bir Mr. Anduv! yapımıdır.",
+  "description": "Nutuk Salonu — Nutuk, Gençliğe Hitabe ve söylevler, özgün hâliyle ve bugünün Türkçesiyle (iOS + Android, Capacitor). Bir Mr. Anduv! yapımıdır.",
   "scripts": {
     "veri": "python3 tools/veri.py",
     "serve": "python3 -m http.server 8790 --directory www",
     "ikonlar": "capacitor-assets generate --ios --android --assetPath assets --iconBackgroundColor '#132545' --iconBackgroundColorDark '#132545' --splashBackgroundColor '#132545' --splashBackgroundColorDark '#132545'",
-    "sync": "npm run veri && npx cap sync",
+    "salon": "sh tools/salon_kopyala.sh",
+    "sync": "npm run veri && npm run salon && npx cap sync",
     "ios": "npx cap open ios",
     "android": "npx cap open android"
   },
   "dependencies": {
     "@capacitor-community/in-app-review": "7.1.0",
     "@capacitor/core": "^7.6.9",
+    "@capacitor/haptics": "^7.0.5",
     "@capacitor/local-notifications": "^7.0.4",
     "@capacitor/preferences": "^7.0.4",
     "@capacitor/share": "^7.0.4"

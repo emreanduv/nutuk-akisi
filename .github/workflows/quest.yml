@@ -4,14 +4,17 @@ name: Nutuk Salonu VR (Meta Quest APK)
 on:
   workflow_dispatch:
     inputs:
-      version_name: { description: "Sürüm adı", default: "1.0.0" }
-      version_code: { description: "Sürüm kodu", default: "1" }
+      version_name: { description: "Sürüm adı", default: "1.1.0" }
+      version_code: { description: "Sürüm kodu", default: "3" }
 permissions:
   contents: write
 jobs:
   apk:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: Yayın öncesi kontrol
+        run: sh araclar/yayin-kontrol.sh "${{ inputs.version_name }}"
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - uses: actions/setup-node@v4

@@ -13,3 +13,4 @@ data/cache.json.tmp
 data/ayarlar.yerel.json
 __pycache__/
 .DS_Store
+www/salon/

@@ -4,7 +4,7 @@ on:
     inputs:
       version_name:
         description: "Sürüm adı (ör. 1.0.0)"
-        default: "1.0.0"
+        default: "1.1.0"
 env:
   ASC_KEY_ID: DJSHKK6T3P
   ASC_ISSUER_ID: f4943ef8-df6f-42c8-a561-58554097ea35
@@ -21,9 +21,12 @@ jobs:
           X=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
           if [ -n "$X" ]; then sudo xcode-select -s "$X"; fi
           xcodebuild -version
+      - name: Yayın öncesi kontrol
+        run: sh araclar/yayin-kontrol.sh "${{ inputs.version_name }}"
       - run: npm ci
       - name: Uygulama içi veri paketi (data/ → www/data/corpus.json)
         run: python3 tools/veri.py
+      - run: sh tools/salon_kopyala.sh   # 3B salon uygulamanın içinde (VR ile aynı salon)
       - run: npx cap sync ios
       # Apple: en az iOS 15 (cap sync Package.swift'i yeniden yazabilir)
       - run: sed -i '' 's/\.iOS(\.v1[0-4])/.iOS(.v15)/' ios/App/CapApp-SPM/Package.swift

@@ -4,7 +4,7 @@ on:
     inputs:
       version_name:
         description: "Sürüm adı (ör. 1.0.0)"
-        default: "1.0.0"
+        default: "1.1.0"
 permissions:
   contents: write
 jobs:
@@ -16,9 +16,12 @@ jobs:
         with: { node-version: 22 }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 21 }
+      - name: Yayın öncesi kontrol
+        run: sh araclar/yayin-kontrol.sh "${{ inputs.version_name }}"
       - run: npm ci
       - name: Uygulama içi veri paketi (data/ → www/data/corpus.json)
         run: python3 tools/veri.py
+      - run: sh tools/salon_kopyala.sh   # 3B salon uygulamanın içinde (VR ile aynı salon)
       - run: npx cap sync android
       - name: AAB derle (imzasız; imza Mac'te imzala.sh ile yapılır)
         working-directory: android
