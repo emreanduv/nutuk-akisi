@@ -35,3 +35,6 @@ Yayın sırası: incelemedeki/testteki mağazada gönderilen sürüme onay gelen
 - Tuvale (canvas) yazmadan önce yazı dosyaları Türkçe harflerle yüklenir: `document.fonts.load(font, 'ıİşŞğĞçÇöÖüÜ')`; geç gelirse yeniden çizilir.
 - ◀ ▶ ⏵ ⏸ ⏭ ⏮ gibi işaretlerin hemen arkasına metin biçimi seçicisi **U+FE0E** konur; yoksa iOS bunları mavi emoji kutusu olarak çizer.
 - `araclar/yayin-kontrol.sh` ikisini de denetler; tutmazsa derleme durur. Aynı denetim bütün repolara eklenir.
+
+### Reklam panoları (Mr. Anduv! marka tutarlılığı)
+Herhangi bir oyunda/uygulamada reklam ya da reklam panosu (stadyum panosu, tabela, kayan şerit) varsa **yalnız Mr. Anduv! ortak pano seti** kullanılır. Kaynak: emreanduv/kaptan-mecit `km3/veri/takimlar.json` → `"panolar"` (Champion Battle Manager ile aynı). Aynı metinler, aynı zemin/yazı renkleri; dönen panolarda 7 saniyede bir değişim (`(i*5 + tur*3) % n`). Başka marka, kurum ya da uydurma marka yok. Listeye yeni oyun/hesap eklenince önce kaynak listeye eklenir, sonra bütün repolarda güncellenir.
