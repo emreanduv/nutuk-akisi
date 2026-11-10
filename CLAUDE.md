@@ -38,3 +38,11 @@ Yayın sırası: incelemedeki/testteki mağazada gönderilen sürüme onay gelen
 
 ### Reklam panoları (Mr. Anduv! marka tutarlılığı)
 Herhangi bir oyunda/uygulamada reklam ya da reklam panosu (stadyum panosu, tabela, kayan şerit) varsa **yalnız Mr. Anduv! ortak pano seti** kullanılır. Kaynak: emreanduv/kaptan-mecit `km3/veri/takimlar.json` → `"panolar"` (Champion Battle Manager ile aynı). Aynı metinler, aynı zemin/yazı renkleri; dönen panolarda 7 saniyede bir değişim (`(i*5 + tur*3) % n`). Başka marka, kurum ya da uydurma marka yok. Listeye yeni oyun/hesap eklenince önce kaynak listeye eklenir, sonra bütün repolarda güncellenir.
+
+### Mr. Anduv! evreni ve kaynak kuralları (Emre'nin kuralı, 11 Kasım 2026)
+Bütün oyun ve uygulamalar tek bir evrende yaşar: **Türk / Türk-İslam kaynağı → oyun, çizim, çizgi film → yeniden kaynağa dönen içerik.** Merkezde para değil karakter ve hikâye durur; her ürün ötekinin kapısıdır.
+- **Tek kaynak:** emreanduv/emreanduv-tamga-yolu `evren/EVREN.md` (zaman çizgisi, ortak karakterler, kaynaklar, saygı kuralları). Hayvan/yaratık listesi aynı repoda `src/veri.js` → `YARATIK` (ad, renk, Bitig yazısı; çizimler `src/cizimler*.js`). Yeni karakter, yaratık ya da hikâye önce evren kitabına yazılır, sonra oyuna girer.
+- **Ortak karakterler** (Dede Korkut, Temür ve Bozbörü, Tulpar, Keloğlan, Tepegöz, Yelbegen, Karakoncolos, Albastı…) her oyunda aynı ad, görünüş ve kişilikle yer alır. Yeni içerikte "bu karakter başka hangi oyunda yaşayabilir?" diye bakılır.
+- **Kaynak:** Yazılı kaynağı olan destan, yazıt, eser, halk inancı, gerçek tarih ve yerli hayvan/yer. Uydurma "eski Türk inancı" yok; tarihî bilgi doğrulanır.
+- **Saygı:** Peygamberimiz, ehl-i beyt ve sahabe tasvir edilmez (yüz, beden, ses taklidi yok). Kutsal varlık, mekân ve eşya (Burak, Kâbe, Kur'an, mescit) dövüşmez, yakalanmaz, satılmaz, hasar görmez; gerekirse adı anılmadan ışık ya da his olarak yer alır (örnek: Tamga Yolu 1923. basamak gecesindeki ışık). Ayet/hadis uydurulmaz, değiştirilmez. Tanrı ve kutsal sayılan varlıklar beden olarak çizilmez. Efsane efsane, tarih tarih olarak sunulur; tarihî kişiler karikatürleştirilmez; karşı taraf aşağılanmaz. Dış efsaneler yalnız konuk/rakip olarak, saygıyla.
+- **Tema yazıyla söylenmez, hissettirilir.** İmza her yerde: 1923 ve "Bir Mr. Anduv! yapımıdır.".
