@@ -20,6 +20,10 @@ grep -q "in-app-review" package.json && iyi "uygulama içi puan eklentisi" || ko
 grep -q "@capacitor/share" package.json && iyi "paylaş eklentisi" || kotu "@capacitor/share yok"
 for x in "Rehberi baştan göster" "Verilerimi sil"; do grep -q "$x" docs/salon/yardim.js && iyi "salon: $x" || kotu "salon: '$x' yok (docs/salon/yardim.js)"; done
 
+# 3b) dil seçimi (ilk ekranda Türkçe / English) ve İngilizce içerik
+grep -q 'dil.js' www/index.html && [ -f www/dil.js ] && [ -f www/dil-en.js ] && iyi "dil seçimi: dil.js + dil-en.js" || kotu "dil paketi yok (www/dil.js, www/dil-en.js, index.html)"
+[ -f www/data/nutuk-tam-en.json ] && [ -f www/data/corpus-en.json ] && iyi "İngilizce içerik: nutuk-tam-en.json + corpus-en.json" || kotu "İngilizce içerik dosyası eksik (www/data)"
+
 # 4) tek isim: her yerde Nutuk Salonu
 grep -q '"appName": "Nutuk Salonu"' capacitor.config.json && iyi "uygulama adı: Nutuk Salonu" || kotu "capacitor.config.json appName 'Nutuk Salonu' değil"
 grep -q "Nutuk Salonu" android/app/src/main/res/values/strings.xml && iyi "Android adı" || kotu "Android app_name 'Nutuk Salonu' değil"

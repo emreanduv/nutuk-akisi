@@ -27,7 +27,8 @@ window.NA = (function(){
 
   // ───────── tarihler: "1919-05-19" · "1919-05" · "1919" ─────────
   function parts(t){ const m = String(t || '').match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/); return m ? { y:+m[1], m:m[2] ? +m[2] : 0, d:m[3] ? +m[3] : 0 } : { y:0, m:0, d:0 }; }
-  function dateLabel(t, short){ const p = parts(t); if(!p.m) return String(p.y); const M = short ? MONTHS : MONTHS_LONG; return p.d ? `${p.d} ${M[p.m - 1]} ${p.y}` : `${M[p.m - 1]} ${p.y}`; }
+  const EN_AY = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function dateLabel(t, short){ const p = parts(t); if(!p.m) return String(p.y); const en = window.DIL && DIL.kod === 'en'; const M = en ? (short ? EN_AY.map(a => a.slice(0, 3)) : EN_AY) : (short ? MONTHS : MONTHS_LONG); return p.d ? `${p.d} ${M[p.m - 1]} ${p.y}` : `${M[p.m - 1]} ${p.y}`; }
   function decYear(t){ const p = parts(t); return p.y + (p.m ? (p.m - 1) / 12 + (p.d ? (p.d - 1) / 365 : 0) : .5); }
   const mmdd = (t) => { const p = parts(t); return p.m && p.d ? `${two(p.m)}-${two(p.d)}` : ''; };
   const yas = (t) => parts(t).y - 1881;   // Atatürk'ün o yılki yaşı (doğum günü kesin bilinmediği için yıl farkı)
@@ -41,7 +42,7 @@ window.NA = (function(){
   };
   const kindColor = (k) => (KIND[k] || ['#555'])[0];
   const kindIcon = (k) => (KIND[k] || ['', '📜'])[1];
-  const kindChip = (k, cls = 'kind') => `<i class="${cls}" style="--k:${kindColor(k)}">${kindIcon(k)} ${esc(k)}</i>`;
+  const kindChip = (k, cls = 'kind') => `<i class="${cls}" style="--k:${kindColor(k)}">${kindIcon(k)} ${esc(window.DIL ? DIL.t(k) : k)}</i>`;
   // Satırın sesi: telgraf/emir/genelge → Mors · söylev → mikrofon dalgası · diğer → daktilo
   const voiceOf = (tur) => ['Telgraf', 'Emir', 'Genelge'].includes(tur) ? 'mors' : ['Nutuk', 'Söylev', 'Hitabe'].includes(tur) ? 'mikrofon' : 'daktilo';
 
@@ -91,10 +92,11 @@ window.NA = (function(){
     return r.json();
   }
   function emit(){ state.listeners.forEach(f => { try { f(state); } catch(e){ console.error(e); } }); }
-  async function localCorpus(){ const r = await fetch('data/corpus.json', { cache:'no-store' }); if(!r.ok) throw new Error(r.status); return r.json(); }
+  const EN = () => !!(window.DIL && DIL.kod === 'en');
+  async function localCorpus(){ const r = await fetch(EN() ? 'data/corpus-en.json' : 'data/corpus.json', { cache:'no-store' }); if(!r.ok) throw new Error(r.status); return r.json(); }
   async function loadCorpus(){
     const prevBugun = state.corpus && state.corpus.cevrimdisi ? state.corpus.bugun : null;
-    try { state.corpus = OFFLINE ? await localCorpus() : await getJSON('/api/corpus'); state.corpusError = false; }
+    try { state.corpus = (OFFLINE || EN()) ? await localCorpus() : await getJSON('/api/corpus'); state.corpusError = false; }
     catch(e){ try { state.corpus = await localCorpus(); state.corpusError = false; } catch(e2){ state.corpusError = true; } }
     if(state.corpus && state.corpus.cevrimdisi){ state.corpus.bugun = prevBugun; loadBugun(); }
     emit();

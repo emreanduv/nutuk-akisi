@@ -10,15 +10,17 @@
   try { st = Object.assign(st, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e){}
   if(Prefs) Prefs.get({ key:KEY }).then(r => { if(r && r.value){ try { st = Object.assign(st, JSON.parse(r.value)); if(T && !aktif) liste(); } catch(e){} } }).catch(() => {});
   const kaydet = () => { const v = JSON.stringify(st); try { localStorage.setItem(KEY, v); } catch(e){} if(Prefs) Prefs.set({ key:KEY, value:v }).catch(() => {}); };
+  const EN = !!(window.DIL && DIL.kod === 'en');
+  const BL = (r) => EN ? `Chapter ${r}` : `${r}. bölüm`;
   const norm = (s) => (s || '').toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i').replace(/[’‘`]/g, "'");
 
   function yukle(){
     if(T) return Promise.resolve(T);
-    if(!yukleniyor) yukleniyor = fetch('data/nutuk-tam.json').then(r => r.json()).then(d => {
+    if(!yukleniyor) yukleniyor = fetch(EN ? 'data/nutuk-tam-en.json' : 'data/nutuk-tam.json').then(r => r.json()).then(d => {
       T = d; T.sira = [];
       T.bolumler.forEach(b => b.kisimlar.forEach(k => { k.b = b; k.i = T.sira.length; T.sira.push(k); }));
       T.harita = Object.fromEntries(T.sira.map(k => [k.id, k]));
-      T.vesika = Object.fromEntries(T.sira.filter(k => /^Vesika \d+$/.test(k.baslik)).map(k => [k.baslik.slice(7), k.id]));
+      T.vesika = Object.fromEntries(T.sira.filter(k => /^(Vesika|Document) \d+$/.test(k.baslik)).map(k => [k.baslik.replace(/\D+/, ''), k.id]));
       return T;
     });
     return yukleniyor;
@@ -35,17 +37,17 @@
       <button class="daily tm-kapak" ${son ? `data-tam="${esc(son.id)}" data-devam="1"` : `data-tam="${esc(T.sira[0].id)}"`}>
         <span class="d-k">📖 NUTUK · ${T.yil} · ${esc(T.yazar)}</span>
         <b>${son ? 'Kaldığın yerden devam et' : 'Baştan okumaya başla'}</b>
-        <span class="d-l">${son ? `${esc(son.b.romen)}. bölüm · ${esc(son.baslik)}` : '“1335 senesi Mayıs\'ının on dokuzuncu günü Samsun\'a çıktım.”'}</span>
-        <span class="d-m"><span class="tm-bar"><i style="width:${yuzde()}%"></i></span> <small>%${yuzde()} okundu · ${T.bolumler.length} bölüm · ${T.sira.length} kısım</small></span>
+        <span class="d-l">${son ? `${esc(BL(son.b.romen))} · ${esc(son.baslik)}` : (EN ? '“I landed at Samsoon on the 19th May, 1919.”' : '“1335 senesi Mayıs\'ının on dokuzuncu günü Samsun\'a çıktım.”')}</span>
+        <span class="d-m"><span class="tm-bar"><i style="width:${yuzde()}%"></i></span> <small>${EN ? `${yuzde()}% read · ${T.bolumler.length} chapters · ${T.sira.length} parts` : `%${yuzde()} okundu · ${T.bolumler.length} bölüm · ${T.sira.length} kısım`}</small></span>
       </button>
       <div class="search"><input id="tmQ" type="search" placeholder="Nutuk'un tamamında ara: Sakarya, misak, hâkimiyet…" autocomplete="off" value="${esc(araQ)}"></div>
       <div id="tmSonuc"></div>
       <div class="tm-bolumler" id="tmBolum">${T.bolumler.map(b => {
         const n = bolumOkunan(b), L = b.kisimlar.length;
-        return `<details class="tm-b${n === L && L ? ' bitti' : ''}"><summary><em>${esc(b.romen)}</em><b>${esc(b.baslik)}</b><small>${n ? `${n}/` : ''}${L} kısım</small></summary>
+        return `<details class="tm-b${n === L && L ? ' bitti' : ''}"><summary><em>${esc(b.romen)}</em><b>${esc(b.baslik)}</b><small>${n ? `${n}/` : ''}${L} ${EN ? 'parts' : 'kısım'}</small></summary>
           <div class="tm-k">${b.kisimlar.map(k => `<button data-tam="${esc(k.id)}" class="${okundu(k.id) ? 'ok' : ''}"><i>${esc(k.harf || '·')}</i><span>${esc(k.baslik)}</span>${okundu(k.id) ? '<b>✓</b>' : ''}</button>`).join('')}</div></details>`;
       }).join('')}</div>
-      <p class="note">Metin: Nutuk'un 1927 baskısının Latin harfli tam metni, <a href="${esc(T.url)}" target="_blank" rel="noopener">Vikikaynak</a>'tan (${esc(T.indirildi)}). ${esc(T.lisans)}. Telefonda internetsiz okunur.</p>`;
+      ${EN ? `<p class="note">Text: the English edition published by K. F. Koehler, Leipzig, 1929 (<a href="${esc(T.url)}" target="_blank" rel="noopener">Internet Archive</a>), arranged section by section alongside the Turkish chapters; section boundaries can differ by a sentence or two. Where the 1929 edition shortened the speech, a section may have no English text. The Documents (chapter XX) were printed in a separate French volume in 1929, so they are shown in Turkish. ${esc(T.lisans)}. Reads offline.</p>` : `<p class="note">Metin: Nutuk'un 1927 baskısının Latin harfli tam metni, <a href="${esc(T.url)}" target="_blank" rel="noopener">Vikikaynak</a>'tan (${esc(T.indirildi)}). ${esc(T.lisans)}. Telefonda internetsiz okunur.</p>`}`;
     const q = $('#tmQ');
     q.addEventListener('input', () => { araQ = q.value; clearTimeout(liste.t); liste.t = setTimeout(ara, 220); });
     if(araQ) ara();
@@ -65,7 +67,7 @@
     $('#tmBolum').hidden = true;
     kutu.innerHTML = `<p class="hint">${toplam ? `${toplam.toLocaleString('tr')} yerde geçiyor${toplam > S.length ? ` · ilk ${S.length} sonuç` : ''}` : 'Bu kelime Nutuk\'ta geçmiyor.'}</p>
       <div class="tm-sonuc">${S.map(r => { const p = r.k.p[r.j], a = Math.max(0, r.at - 60), z = Math.min(p.length, r.at + q.length + 80);
-        return `<button data-tam="${esc(r.k.id)}" data-p="${r.j}"><small>${esc(r.k.b.romen)}. bölüm · ${esc(r.k.baslik)}</small><span>${a ? '…' : ''}${esc(p.slice(a, r.at))}<mark>${esc(p.slice(r.at, r.at + q.length))}</mark>${esc(p.slice(r.at + q.length, z))}${z < p.length ? '…' : ''}</span></button>`; }).join('')}</div>`;
+        return `<button data-tam="${esc(r.k.id)}" data-p="${r.j}"><small>${esc(BL(r.k.b.romen))} · ${esc(r.k.baslik)}</small><span>${a ? '…' : ''}${esc(p.slice(a, r.at))}<mark>${esc(p.slice(r.at, r.at + q.length))}</mark>${esc(p.slice(r.at + q.length, z))}${z < p.length ? '…' : ''}</span></button>`; }).join('')}</div>`;
   }
 
   // ── okuyucu ──
@@ -73,13 +75,15 @@
     const k = T.harita[id]; if(!k) return;
     aktif = k;
     const onc = T.sira[k.i - 1], snr = T.sira[k.i + 1], q = norm(araQ.trim());
-    const vs = (h) => h.replace(/(Vesika(?:lar)?\s*:?\s*)((?:\d+(?:\s*(?:,|ve|-)\s*)?)+)/g, (m, a, nums) => a + nums.replace(/\d+/g, n => T.vesika[n] ? `<button class="vs" data-tam="${T.vesika[n]}">${n}</button>` : n));
+    const vs = (h) => h.replace(/((?:Vesika(?:lar)?|Documents?)\s*:?\s*)((?:\d+(?:\s*(?:,|ve|-)\s*)?)+)/g, (m, a, nums) => a + nums.replace(/\d+/g, n => T.vesika[n] ? `<button class="vs" data-tam="${T.vesika[n]}">${n}</button>` : n));
     const isaretle = (p, j) => { const h = esc(p); if(para == null || j !== para || q.length < 3) return vs(h); const n = norm(p), at = n.indexOf(q); return at < 0 ? vs(h) : esc(p.slice(0, at)) + '<mark>' + esc(p.slice(at, at + q.length)) + '</mark>' + esc(p.slice(at + q.length)); };
     pane.innerHTML = `
-      <div class="tm-bar-ust"><button data-tam-geri>← İçindekiler</button><span>${esc(k.b.romen)}. bölüm · ${k.i + 1}/${T.sira.length}</span><button data-boyut="-1" aria-label="Yazıyı küçült">A−</button><button data-boyut="1" aria-label="Yazıyı büyüt">A+</button></div>
+      <div class="tm-bar-ust"><button data-tam-geri>← İçindekiler</button><span>${esc(BL(k.b.romen))} · ${k.i + 1}/${T.sira.length}</span><button data-boyut="-1" aria-label="Yazıyı küçült">A−</button><button data-boyut="1" aria-label="Yazıyı büyüt">A+</button></div>
       <article class="tm-oku" style="font-size:${st.boyut}px">
-        <small class="tm-bb">${esc(k.b.romen)}. BÖLÜM · ${esc(k.b.baslik)}</small>
+        <small class="tm-bb">${EN ? `CHAPTER ${esc(k.b.romen)}` : `${esc(k.b.romen)}. BÖLÜM`} · ${esc(k.b.baslik)}</small>
         <h2>${k.harf ? `<em>${esc(k.harf)}.</em> ` : ''}${esc(k.baslik)}</h2>
+        ${EN && k.yok ? '<p class="hint">This section is not in the 1929 English edition, which shortened this part of the speech. Switch to Türkçe in Settings to read the full Turkish text.</p>' : ''}
+        ${EN && k.tr ? '<p class="hint">The documents were printed in a separate French volume in 1929; shown here in the original Turkish.</p>' : ''}
         ${k.p.map((p, j) => p.startsWith('## ') ? `<h4 data-j="${j}">${esc(p.slice(3))}</h4>` : `<p data-j="${j}"${j === para ? ' class="hedef"' : ''}>${isaretle(p, j)}</p>`).join('')}
         ${k.notlar ? `<ol class="tm-not">${k.notlar.map(n => `<li>${esc(n)}</li>`).join('')}</ol>` : ''}
       </article>
@@ -87,7 +91,7 @@
         ${onc ? `<button data-tam="${esc(onc.id)}"><small>← Önceki</small><span>${esc(onc.baslik)}</span></button>` : '<span></span>'}
         ${snr ? `<button data-tam="${esc(snr.id)}" class="snr"><small>Sonraki →</small><span>${esc(snr.baslik)}</span></button>` : '<span class="tm-son">🇹🇷 Nutuk burada biter.</span>'}
       </div>
-      <p class="note">Kaynak: <a href="${esc(T.url)}" target="_blank" rel="noopener">Vikikaynak · Nutuk</a>${k.w ? ` · <a href="https://tr.wikisource.org/wiki/${encodeURIComponent(('Nutuk/' + k.w).replace(/ /g, '_'))}" target="_blank" rel="noopener">bu kısım ↗</a>` : ''}</p>`;
+      ${EN ? `<p class="note">Source: <a href="${esc(T.url)}" target="_blank" rel="noopener">Nutuk, English edition, Leipzig 1929</a></p>` : `<p class="note">Kaynak: <a href="${esc(T.url)}" target="_blank" rel="noopener">Vikikaynak · Nutuk</a>${k.w ? ` · <a href="https://tr.wikisource.org/wiki/${encodeURIComponent(('Nutuk/' + k.w).replace(/ /g, '_'))}" target="_blank" rel="noopener">bu kısım ↗</a>` : ''}</p>`}`;
     if(!okundu(k.id)){ st.okunan.push(k.id); if(bolumOkunan(k.b) === k.b.kisimlar.length && window.NR) NR.bolumBitti(k.b); } // bölüm bitti: kutlama + paylaş (rehber.js)
     st.son = { id:k.id }; kaydet();
     requestAnimationFrame(() => {

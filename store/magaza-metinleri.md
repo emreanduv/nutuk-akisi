@@ -1,9 +1,20 @@
-# Mağaza metinleri — Nutuk Salonu 1.1.0 (App Store · Google Play · Meta Quest: her mağazada aynı ad)
+# Mağaza metinleri — Nutuk Salonu 1.2.0 (App Store · Google Play · Meta Quest: her mağazada aynı ad)
 
-- **Paket / Bundle ID:** `com.anduv.nutukakisi` (değişmez; eski adı Nutuk Akışı) · Quest: `com.anduv.nutuksalonu` · **Sürüm:** 1.1.0 (bütün mağazalarda aynı)
+- **Paket / Bundle ID:** `com.anduv.nutukakisi` (değişmez; eski adı Nutuk Akışı) · Quest: `com.anduv.nutuksalonu` · **Sürüm:** 1.2.0 (bütün mağazalarda aynı)
 - **Gizlilik politikası:** https://emreanduv.github.io/nutuk-akisi/gizlilik.html
 - **Destek URL'si:** https://github.com/emreanduv/nutuk-akisi/issues
 - **Telif satırı:** 2026 Mr. Anduv!
+
+## Bu sürümde yenilikler (1.2.0)
+**Türkçe:** Uygulama artık İngilizce de var: ilk açılışta dil sorulur, Ayarlar'dan değiştirilir. İngilizcede Tam Metin, Nutuk'un 1929'da Leipzig'de basılan İngilizce baskısıdır (kamu malı); metinlerde özgün Türkçe söz yerinde durur, altında İngilizce karşılığı gelir. Kadro, Kronoloji ve Doğru mu Uydurma mı da İngilizce.
+**English:** Nutuk Salonu now speaks English: choose your language on first launch or in Settings. In English, Full Text is the 1929 English edition of Nutuk (Leipzig, public domain), arranged alongside the Turkish chapters; every text keeps Atatürk's original Turkish words with an English rendering beneath. The cast, timeline and True or Made Up are in English too.
+
+### English listing (App Store / Google Play, English localisation)
+- **Name:** Nutuk Salonu
+- **Subtitle (≤30):** Atatürk's Nutuk in full
+- **Keywords (≤100):** ataturk,nutuk,speech,turkey,history,republic,independence,mustafa kemal,1927,youth
+- **Promotional text (≤170):** Atatürk's great 1927 speech in full, offline: the 1929 English edition side by side with the original Turkish, plus his best-known speeches with English renderings.
+- **Description (first lines):** Read Atatürk's Nutuk (1927), the speech that tells the story of Turkey's War of Independence and the birth of the Republic, in full and offline. The English text is the 1929 English edition; his speeches keep the original Turkish words with an English rendering beneath every line.
 
 ## App Store
 - **Ad:** Nutuk Salonu

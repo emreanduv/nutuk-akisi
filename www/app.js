@@ -47,7 +47,9 @@
   function header(){
     const n = NA.ist(), c = NA.state.corpus, S = NA.siradakiGun();
     $('#clock').textContent = `${NA.two(n.getHours())}:${NA.two(n.getMinutes())}`;
-    $('#subline').textContent = `Gazi'nin Sözleri · Cumhuriyet'in ${NA.cumhuriyetYili()}. yılı${S ? ` · ${S.ad}: ${S.gun === 0 ? 'bugün' : S.gun + ' gün'}` : ''}`;
+    $('#subline').textContent = (window.DIL && DIL.kod === 'en')
+      ? `The Gazi's Words · Year ${NA.cumhuriyetYili()} of the Republic${S ? ` · ${S.ad}: ${S.gun === 0 ? 'today' : 'in ' + S.gun + ' days'}` : ''}`
+      : `Gazi'nin Sözleri · Cumhuriyet'in ${NA.cumhuriyetYili()}. yılı${S ? ` · ${S.ad}: ${S.gun === 0 ? 'bugün' : S.gun + ' gün'}` : ''}`;
     $('#demo').hidden = !(c && c.demo);
     $('#sess').textContent = c ? `📜 ${c.metinler.length} METİN` : NA.state.corpusError ? 'SUNUCUYA ULAŞILAMADI' : 'BAĞLANIYOR';
   }
@@ -76,7 +78,7 @@
   }
   function renderKinds(){
     const T = NA.metinler(), K = [...new Set(T.map(t => t.tur))];
-    $('#kinds').innerHTML = [['', 'Tümü'], ['ozgun', '“ Özgün sözler'], ...K.map(k => [k, `${kindIcon(k)} ${k}`])].map(([k, l]) => `<button class="${k === kind ? 'on' : ''}" data-k="${esc(k)}">${l}</button>`).join('');
+    $('#kinds').innerHTML = [['', 'Tümü'], ['ozgun', '“ Özgün sözler'], ...K.map(k => [k, `${kindIcon(k)} ${window.DIL ? DIL.t(k) : k}`])].map(([k, l]) => `<button class="${k === kind ? 'on' : ''}" data-k="${esc(k)}">${l}</button>`).join('');
   }
   $('#kinds').addEventListener('click', (e) => { const b = e.target.closest('[data-k]'); if(!b) return; kind = b.dataset.k; renderKinds(); renderList(); });
   $('#q').addEventListener('input', (e) => { q = e.target.value.trim(); renderList(); });
@@ -92,7 +94,7 @@
     const t = NA.metin(id); if(!t) return;
     const w = t.live && t.live.wiki, v = t.live && t.live.vk, O = NA.originals(t).length;
     $('#sheetBody').innerHTML = `
-      <div class="sh-head" style="--c:${kindColor(t.tur)}"><small>${kindIcon(t.tur)} ${esc(t.tur)} · ${esc(t.eser)} · ${esc(dateLabel(t.tarih))}</small><h2>${esc(t.baslik)}</h2><em class="sh-oz">${esc(t.yer)} · ${esc(t.dinleyen || '')}</em><i class="sh-cu">${esc(NA.morse(t.baslik, 10))}</i></div>
+      <div class="sh-head" style="--c:${kindColor(t.tur)}"><small>${kindIcon(t.tur)} ${esc(window.DIL ? DIL.t(t.tur) : t.tur)} · ${esc(t.eser)} · ${esc(dateLabel(t.tarih))}</small><h2>${esc(t.baslik)}</h2><em class="sh-oz">${esc(t.yer)} · ${esc(t.dinleyen || '')}</em><i class="sh-cu">${esc(NA.morse(t.baslik, 10))}</i></div>
       <div class="sh-body">
         <p class="sh-ne">${esc(t.ne)}</p>
         ${readerLines(t.satirlar)}

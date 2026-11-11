@@ -5,7 +5,7 @@
 // Hiçbir veri toplanmaz: puan ve paylaşım telefonun/mağazanın kendi ekranlarıyla yapılır. Bir Mr. Anduv! yapımıdır.
 (function(){
   if(NA.qs.get('yayin') === '1') return;
-  const SURUM = '1.1.0';
+  const SURUM = '1.2.0';
   const $ = (s) => document.querySelector(s), esc = NA.esc;
   const Prefs = NA.plugin('Preferences'), ShareP = NA.plugin('Share'), Notif = NA.plugin('LocalNotifications');
   const platform = () => { try { const p = window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform(); if(p && p !== 'web') return p; } catch(e){} return 'web'; };
@@ -103,7 +103,7 @@
     L.push(id); yaz(SAYAC, L.slice(-400));
     if(L.length === 8) setTimeout(() => basari('8 metin okudun!', 'Nutuk Salonu\'nda 8 metin okudum: Nutuk, Hitabe ve söylevler özgün hâliyle, altında bugünün Türkçesiyle.'), 900);
   }
-  function bolumBitti(b){ setTimeout(() => basari(`Nutuk'un ${b.romen}. bölümünü bitirdin!`, `Nutuk'un ${b.romen}. bölümünü (${b.baslik}) baştan sona okudum. · Nutuk Salonu`), 600); }
+  function bolumBitti(b){ const en = window.DIL && DIL.kod === 'en'; setTimeout(() => basari(en ? `You finished chapter ${b.romen} of Nutuk!` : `Nutuk'un ${b.romen}. bölümünü bitirdin!`, en ? `I read chapter ${b.romen} of Nutuk (${b.baslik}) from start to finish. · Nutuk Salonu` : `Nutuk'un ${b.romen}. bölümünü (${b.baslik}) baştan sona okudum. · Nutuk Salonu`), 600); }
 
   // ── verilerimi sil: kaydedilenler, okuma yeri, bildirim, rehber; bu cihazdan ──
   async function verileriSil(){
@@ -120,6 +120,8 @@
   function ayarlar(){
     const el = $('#ayarIc'); if(!el) return;
     el.innerHTML = `
+      <div class="ay-grup"><h4>Dil · Language</h4>
+        <button class="ay-sat" data-rh="dil"><i>🌐</i><span><b>${window.DIL ? DIL.ad() : 'Türkçe'}</b><small>Türkçe · English</small></span></button></div>
       <div class="ay-grup"><h4>Rehber</h4>
         <button class="ay-sat" data-rh="nasil"><i>❓</i><span><b>Nasıl kullanılır</b><small>Bütün ipuçları, görmediklerin vurgulu</small></span></button>
         <button class="ay-sat" data-rh="bastan"><i>↺</i><span><b>Rehberi baştan göster</b><small>İpucu kartları sekmeleri ilk açışındaki gibi yeniden çıkar</small></span></button></div>
@@ -143,6 +145,7 @@
     if(a !== 'sil' && silOnay){ silOnay = false; ayarlar(); }
     if(a === 'tamam'){ const k = kartEl && kartEl.dataset.ekran; if(k){ D.gor[k] = 1; yaz(ANAHTAR, D); } kartKapat(); setTimeout(sonraki, 400); }
     else if(a === 'rhkapat'){ const k = kartEl && kartEl.dataset.ekran; if(k) D.gor[k] = 1; D.kapali = true; yaz(ANAHTAR, D); bekleyen = []; kartKapat(); }
+    else if(a === 'dil'){ if(window.DIL) DIL.degistir(); }
     else if(a === 'nasil') nasil();
     else if(a === 'bastan'){ D = { gor:{}, kapali:false }; yaz(ANAHTAR, D); bekleyen = []; kartKapat(); const d = $('#sheet'); if(d.open) d.close(); toast('↺ Rehber baştan başladı'); const on = document.querySelector('#tabs button.on'); setTimeout(() => ipucu(on ? on.dataset.tab : 'metin'), 300); }
     else if(a === 'oner') paylas();
