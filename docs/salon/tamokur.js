@@ -92,7 +92,7 @@ export function tamKur(o){
       dugme(60, 140, 200, 62, '‹ Bölümler', () => { T.g = 'liste'; ciz(); });
       yuvarlak(x, 280, 138, Wc - 340, 66, 14); x.fillStyle = '#fff'; x.fill(); x.strokeStyle = RENK.gold; x.lineWidth = 3; x.stroke();
       x.fillStyle = RENK.ink; x.font = "800 40px 'DM Sans'"; x.fillText((T.q || '') + '▏', 300, 186);
-      const H = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ'.split(''); const kw = 104, kh = 70;
+      const H = ((window.DIL && DIL.kod === 'en') ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ').split(''); const kw = 104, kh = 70;
       H.forEach((h, i) => { const r = Math.floor(i / 14), cc = i % 14; dugme(60 + cc * (kw + 4), 222 + r * (kh + 6), kw, kh, h, () => yaz(h)); });
       dugme(60 + 1 * (kw + 4), 222 + 2 * (kh + 6), kw * 3, kh, 'boşluk', () => yaz(' '));
       dugme(60 + 4 * (kw + 4), 222 + 2 * (kh + 6), kw * 2, kh, '⌫ sil', () => { T.q = T.q.slice(0, -1); ara(); });

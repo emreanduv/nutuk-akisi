@@ -5,5 +5,5 @@ set -e
 cd "$(dirname "$0")/.."
 rm -rf www/salon
 cp -R docs/salon www/salon
-rm -f www/salon/tam.json
+rm -f www/salon/tam.json www/salon/tam-en.json
 echo "salon kopyalandı: www/salon"

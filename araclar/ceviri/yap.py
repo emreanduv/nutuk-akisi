@@ -3,6 +3,7 @@ import json,re,os
 H=os.path.dirname(os.path.abspath(__file__)); g={}
 exec(open(os.path.join(H,'sozluk_arayuz.py')).read(),g)
 D=dict(g['D'])
+exec(open(os.path.join(H,'sozluk_salon.py')).read(),g); D.update(g['D2'])
 sp=lambda x: re.split(r'(?<=[.!?…])\s+',x)
 for k,v in list(D.items()):
     a,b=sp(k),sp(v)
@@ -11,4 +12,5 @@ for k,v in list(D.items()):
         for x,y in zip(a,b): D.setdefault(x,y)
 js='/* Nutuk Salonu — İngilizce arayüz sözlüğü (Mr. Anduv! dil paketi: dil.js). Üretim: araclar/ceviri/yap.py. Metinler: data/corpus-en.json, Nutuk tam metni: data/nutuk-tam-en.json (1929 İngilizce baskısı). */\n'
 js+='window.DIL_EN = '+json.dumps(D,ensure_ascii=False,indent=0)+';\n'
-open(os.path.join(H,'..','..','www','dil-en.js'),'w').write(js); print(len(D))
+for hedef in ('www','docs/salon'): open(os.path.join(H,'..','..',hedef,'dil-en.js'),'w').write(js)
+print(len(D))

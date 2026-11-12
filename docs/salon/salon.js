@@ -5,7 +5,8 @@ import { yardimKur } from './yardim.js';
 import { tamKur } from './tamokur.js';
 
 const $ = (s) => document.querySelector(s);
-const AY = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const EN_DIL = !!(window.DIL && DIL.kod === 'en');
+const AY = EN_DIL ? ['January','February','March','April','May','June','July','August','September','October','November','December'] : ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 const tarihYaz = (t) => { const [y, m, d] = String(t).split('-').map(Number); return d ? `${d} ${AY[m - 1]} ${y}` : m ? `${AY[m - 1]} ${y}` : String(y); };
 const RENK = { ink:'#1c2a44', deep:'#101c33', red:'#c8102e', gold:'#e0b04a', paper:'#fbf7ef', paper2:'#f1eadc', teal:'#0f766e', navy:'#132545', navy2:'#162b52', muted:'#6b7280' };
 
@@ -147,7 +148,7 @@ function perdeCiz(){
   x.textAlign = 'right'; x.fillText('▶︎ tetik · ◀︎ kavrama', Wc - 70, Hc - 72); x.textAlign = 'left';
   perdeT.needsUpdate = true;
   $('#bolum').value = String(durum.mi);
-  $('#alt').textContent = `${M.bolum}. bölüm · ${M.baslik}`;
+  $('#alt').textContent = EN_DIL ? `Part ${M.bolum} · ${M.baslik}` : `${M.bolum}. bölüm · ${M.baslik}`;
   konumYaz(); bilekCiz();
 }
 function git(adim, sessiz){
@@ -218,7 +219,7 @@ const Y = yardimKur({ THREE, scene, camera, renderer, tiklanir, ad:'Nutuk Salonu
 
 // ── Tam Metin okuyucusu (telefon uygulamasındaki Tam Metin sekmesinin salondaki karşılığı) ──
 const TAM = tamKur({ THREE, scene, camera, renderer, tiklanir, doku, tuval, yuvarlak, sar, RENK,
-  url: UYG ? '../data/nutuk-tam.json' : 'tam.json', // uygulamanın içinde metin zaten telefonda
+  url: (window.DIL && DIL.kod === 'en') ? (UYG ? '../data/nutuk-tam-en.json' : 'tam-en.json') : (UYG ? '../data/nutuk-tam.json' : 'tam.json'), // uygulamanın içinde metin zaten telefonda
   bakisGuncelle:() => { eul.set(pitch, yaw, 0); camera.quaternion.setFromEuler(eul); camera.updateMatrixWorld(true); },
   tikla:() => { tik('satir'); titres(sonKaynak, .25, 24); }, cevrildi:() => titres(sonKaynak, .25, 24), kapandi:() => document.body.classList.remove('tam-acik') });
 function tamAc(){
@@ -633,7 +634,7 @@ if(document.fonts && document.fonts.addEventListener) document.fonts.addEventLis
     const TR = 'AaıİşŞğĞçÇöÖüÜâÂîû', yuz = ["500 30px 'DM Sans'", "700 30px 'DM Sans'", "800 30px 'DM Sans'", "900 50px 'DM Sans'", "italic 500 30px 'DM Sans'", "800 30px 'Barlow Condensed'", "900 30px 'Barlow Condensed'"];
     const yaziBekle = Promise.all(yuz.map(f => document.fonts.load(f, TR))).catch(() => {});
     await Promise.race([yaziBekle, new Promise(r => setTimeout(r, 2500))]);
-    V = await (await fetch('veri.json')).json();
+    V = await (await fetch((window.DIL && DIL.kod === 'en') ? 'veri-en.json' : 'veri.json')).json();
     // kaldığın yer
     const k = konumOku(), geri = !!(k && V.metinler[k.mi] && k.si < V.metinler[k.mi].satirlar.length && (k.mi > 0 || k.si >= 0));
     if(geri){ durum.mi = k.mi; durum.si = k.si; }
