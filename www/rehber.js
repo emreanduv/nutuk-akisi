@@ -5,7 +5,7 @@
 // Hiçbir veri toplanmaz: puan ve paylaşım telefonun/mağazanın kendi ekranlarıyla yapılır. Bir Mr. Anduv! yapımıdır.
 (function(){
   if(NA.qs.get('yayin') === '1') return;
-  const SURUM = '1.2.0';
+  const SURUM = '1.2.1';
   const $ = (s) => document.querySelector(s), esc = NA.esc;
   const Prefs = NA.plugin('Preferences'), ShareP = NA.plugin('Share'), Notif = NA.plugin('LocalNotifications');
   const platform = () => { try { const p = window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform(); if(p && p !== 'web') return p; } catch(e){} return 'web'; };

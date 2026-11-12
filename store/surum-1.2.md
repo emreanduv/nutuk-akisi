@@ -11,3 +11,8 @@
 **Bu sürümde İngilizce olmayanlar:** 🏛️ Salon (3B Meclis salonu, kürsüde Nutuk'un Türkçe satırları) ve 📺 Yayın (OBS görünümü) şimdilik Türkçe. Quest sürümüne İngilizce bir sonraki adımda taşınacak.
 
 **Test:** Tarayıcıda (Chromium, 400×860) iki dilde bütün sekmeler açıldı, konsol hatası yok; Türkçe mod değişmedi.
+
+## 1.2.1 — Salon da İngilizce
+- 🏛️ Salon (3B Meclis salonu) İngilizce: giriş kartı, yardım ve ipuçları, kürsü perdesi (özgün Türkçe satır + İngilizce karşılık), duvar panoları (kronoloji, Biliyor muydun), harita iğneleri, masadaki Nutuk kitabı (1929 İngilizce baskısı) ve İngilizce harflerle arama klavyesi.
+- Aynı salon VR'da da İngilizce: önce deneme adresine (emreanduv.github.io/nutuk-salonu-test) kondu. Yayındaki Quest adresi (nutuk-salonu) Meta'daki inceleme durumu netleşince güncellenecek.
+- Kürsü üstündeki "Hâkimiyet bilâkaydüşart milletindir" levhası tarihî yazı olduğu için iki dilde de özgün hâliyle durur; İngilizcesi altın noktadaki kartta.
