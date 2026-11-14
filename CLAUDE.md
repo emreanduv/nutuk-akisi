@@ -36,6 +36,9 @@ Yayın sırası: incelemedeki/testteki mağazada gönderilen sürüme onay gelen
 - ◀ ▶ ⏵ ⏸ ⏭ ⏮ gibi işaretlerin hemen arkasına metin biçimi seçicisi **U+FE0E** konur; yoksa iOS bunları mavi emoji kutusu olarak çizer.
 - `araclar/yayin-kontrol.sh` ikisini de denetler; tutmazsa derleme durur. Aynı denetim bütün repolara eklenir.
 
+### Pazarlama Defteri (Emre'nin kuralı, 14 Kasım 2026)
+Reklam, satış ve pazarlama üretmek kadar önemlidir. Panolar, mağaza sayfaları (ASO, görseller, tanıtım videosu, İngilizce sayfa), "Diğer oyunlarımız" çapraz tanıtımı, sosyal medya paketleri ve haftalık ölçüm tek yerde takip edilir: emreanduv/emreanduv-tamga-yolu `evren/PAZARLAMA.md` (Gelişim Defteri'nin kardeşi; telefondan takip sayfasının bağlantısı defterde). Bu üründe işe başlarken bu ürünün sütunundaki `⏳` pazarlama işlerine bak; yeni bir pazarlama işi ya da dersi olunca deftere satır ekle, uygulayınca `✓` yap, bilmediğini `?` bırak. Mağazaya, sosyal medyaya ya da bir hesaba giden son adım Emre'nindir.
+
 ### Reklam panoları (Mr. Anduv! marka tutarlılığı)
 Herhangi bir oyunda/uygulamada reklam ya da reklam panosu (stadyum panosu, tabela, kayan şerit) varsa **yalnız Mr. Anduv! ortak pano seti** kullanılır. Kaynak: emreanduv/kaptan-mecit `km3/veri/takimlar.json` → `"panolar"` (Champion Battle Manager ile aynı). Aynı metinler, aynı zemin/yazı renkleri; dönen panolarda 7 saniyede bir değişim (`(i*5 + tur*3) % n`). Başka marka, kurum ya da uydurma marka yok. Listeye yeni oyun/hesap eklenince önce kaynak listeye eklenir, sonra bütün repolarda güncellenir.
 
