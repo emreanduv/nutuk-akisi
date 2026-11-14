@@ -51,3 +51,10 @@ Bütün oyun ve uygulamalar tek bir evrende yaşar: **Türk / Türk-İslam kayna
 - **Tema yazıyla söylenmez, hissettirilir.** İmza her yerde: 1923 ve "Bir Mr. Anduv! yapımıdır.".
 - **Şiar:** Türk tarihi, Türk kültürü, Türk-İslam sentezi (iç belge; oyunda yazmaz).
 - **Kendiliğinden yönet:** Claude bu mantığı Emre sormadan uygular. Evren kitabındaki "Seçim mantığı" altı kapısına (destan hayvanları, bugünün yerli simgeleri ör. Malaklı, yaşayan efsaneler ör. Van Gölü Canavarı, halk inançları, endemik doğa, ışıkla anılan kutsal) bakarak her oyunda ve her büyük sürümde yeni öneriler getirir, uyanları ekler, evren kitabının "Fikir defteri"ni günceller. Dinî hassasiyeti olan ya da tartışmalı öneri önce Emre'ye sorulur.
+
+### Klavye: WASD + oklar (Emre'nin kuralı, 14 Kasım 2026)
+FIFA nesli W-A-S-D'ye alışkın; bütün oyun ve uygulamalarda klavye bu alışkanlığa göre kurulur.
+- **W A S D, ok tuşlarıyla aynı işi yapar** (yukarı/sol/aşağı/sağ); oklar kalır. Tuş `e.code` ile okunur (`KeyW`, `KeyA`…): Caps Lock'ta, Türkçe F/Q ve AZERTY klavyede aynı yerdeki tuş çalışır. `e.key === 'a'` yazılmaz.
+- Ortak düzen: **Boşluk** ana eylem (vur/atla/ateş/ileri), **Enter** onay, **Esc / P** mola-geri, **Shift** hassas/koşu, **Q / E** ikinci eylemler (güç, etkileşim), **1–9** seçenek/birlik. Oyun bunlardan birini başka işe kullanıyorsa yardım ekranında yazılır.
+- Klavyesiz oyun bırakılmaz: tıkla-gez oyunlarında da WASD ile yürüme, E/Boşluk ile yakındaki şeye dokunma olur (örnek: Kırmızı Yalı `www/js/motor.js` "Klavye (WASD + oklar)").
+- Yardım / "Nasıl Oynanır" ekranında tuşlar Türkçe ve İngilizce yazılır. Gelişim Defteri G30.

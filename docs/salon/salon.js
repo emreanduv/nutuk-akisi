@@ -531,7 +531,7 @@ function secFare(e, tur){
 }
 addEventListener('keydown', (e) => { sonKaynak = null; sesHazir(); if(TAM.acik() && TAM.tus(e)) return; if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); git(1); } if(e.key === 'ArrowLeft') git(-1);
   const hiz = 0.25, ileri = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), sag = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
-  const k = e.key.toLowerCase(); if(k === 'w') yuru(rig.position.clone().addScaledVector(ileri, hiz)); if(k === 's') yuru(rig.position.clone().addScaledVector(ileri, -hiz)); if(k === 'a') yuru(rig.position.clone().addScaledVector(sag, -hiz)); if(k === 'd') yuru(rig.position.clone().addScaledVector(sag, hiz)); });
+  const k = {KeyW:'w', KeyA:'a', KeyS:'s', KeyD:'d'}[e.code] || ''; if(k === 'w') yuru(rig.position.clone().addScaledVector(ileri, hiz)); if(k === 's') yuru(rig.position.clone().addScaledVector(ileri, -hiz)); if(k === 'a') yuru(rig.position.clone().addScaledVector(sag, -hiz)); if(k === 'd') yuru(rig.position.clone().addScaledVector(sag, hiz)); });
 
 // VR kumandaları: ışın, tetik, kavrama, çubukla dönüş
 const kumandalar = [], modelF = new XRControllerModelFactory(), tmp = new THREE.Matrix4();
