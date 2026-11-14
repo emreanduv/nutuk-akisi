@@ -57,4 +57,4 @@ FIFA nesli W-A-S-D'ye alışkın; bütün oyun ve uygulamalarda klavye bu alış
 - **W A S D, ok tuşlarıyla aynı işi yapar** (yukarı/sol/aşağı/sağ); oklar kalır. Tuş `e.code` ile okunur (`KeyW`, `KeyA`…): Caps Lock'ta, Türkçe F/Q ve AZERTY klavyede aynı yerdeki tuş çalışır. `e.key === 'a'` yazılmaz.
 - Ortak düzen: **Boşluk** ana eylem (vur/atla/ateş/ileri), **Enter** onay, **Esc / P** mola-geri, **Shift** hassas/koşu, **Q / E** ikinci eylemler (güç, etkileşim), **1–9** seçenek/birlik. Oyun bunlardan birini başka işe kullanıyorsa yardım ekranında yazılır.
 - Klavyesiz oyun bırakılmaz: tıkla-gez oyunlarında da WASD ile yürüme, E/Boşluk ile yakındaki şeye dokunma olur (örnek: Kırmızı Yalı `www/js/motor.js` "Klavye (WASD + oklar)").
-- Yardım / "Nasıl Oynanır" ekranında tuşlar Türkçe ve İngilizce yazılır. Gelişim Defteri G30.
+- Yardım / "Nasıl Oynanır" ekranında tuşlar Türkçe ve İngilizce yazılır. Gelişim Defteri G43.
