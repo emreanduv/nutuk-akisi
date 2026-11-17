@@ -58,3 +58,6 @@ FIFA nesli W-A-S-D'ye alışkın; bütün oyun ve uygulamalarda klavye bu alış
 - Ortak düzen: **Boşluk** ana eylem (vur/atla/ateş/ileri), **Enter** onay, **Esc / P** mola-geri, **Shift** hassas/koşu, **Q / E** ikinci eylemler (güç, etkileşim), **1–9** seçenek/birlik. Oyun bunlardan birini başka işe kullanıyorsa yardım ekranında yazılır.
 - Klavyesiz oyun bırakılmaz: tıkla-gez oyunlarında da WASD ile yürüme, E/Boşluk ile yakındaki şeye dokunma olur (örnek: Kırmızı Yalı `www/js/motor.js` "Klavye (WASD + oklar)").
 - Yardım / "Nasıl Oynanır" ekranında tuşlar Türkçe ve İngilizce yazılır. Gelişim Defteri G43.
+
+### Ekran uyanık kalsın (Emre'nin kuralı, 17 Kasım 2026)
+Oyun/uygulama açıkken ekran, dokunulmadı diye kararmaz (CBM'de maç izlerken kapanıyordu). iOS `AppDelegate.swift`: `application.isIdleTimerDisabled = true` (açılışta ve `applicationDidBecomeActive`); Android `MainActivity`: `FLAG_KEEP_SCREEN_ON`; masaüstü (Electron): `powerSaveBlocker.start('prevent-display-sleep')`; web/VR: `navigator.wakeLock` (index.html sonundaki küçük betik); Godot: `keep_screen_on` varsayılan açık, kapatılmaz. Yeni her üründe ilk işte konur. Gelişim Defteri G75.
