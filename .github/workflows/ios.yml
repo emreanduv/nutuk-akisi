@@ -48,6 +48,23 @@ jobs:
               grep -E 'error:|error |No Account|No profiles|requires a provisioning|bundle identifier' $RUNNER_TEMP/arsiv.log | sort -u | head -15 | while IFS= read -r l; do echo "::error::$l"; done
               tail -5 $RUNNER_TEMP/arsiv.log | while IFS= read -r l; do echo "::warning::$l"; done
               exit 1; }
+      - name: Eşitleme yetkisi (iCloud anahtar-değer deposu) arşive işlenir
+        run: |
+          APP=$(ls -d $RUNNER_TEMP/*.xcarchive/Products/Applications/*.app | head -1)
+          BID=$(/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' "$APP/Info.plist")
+          cat > "$APP/archived-expanded-entitlements.xcent" <<X
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>application-identifier</key><string>${{ env.APPLE_TEAM_ID }}.$BID</string>
+            <key>com.apple.developer.team-identifier</key><string>${{ env.APPLE_TEAM_ID }}</string>
+            <key>com.apple.developer.ubiquity-kvstore-identifier</key><string>${{ env.APPLE_TEAM_ID }}.$BID</string>
+          </dict></plist>
+          X
+          # Arşiv imzasız alındığı için yetkiler ikilide yok; dışa aktarım yetkileri mevcut imzadan okur.
+          # Geçici (ad-hoc) imzayla yetkileri ikiliye koy; dışa aktarım asıl dağıtım imzasıyla yeniden imzalar.
+          codesign -f -s - --entitlements "$APP/archived-expanded-entitlements.xcent" "$APP"
+          codesign -d --entitlements - "$APP" 2>&1 | grep -i kvstore || true
       - name: App Store Connect'e yükle
         run: |
           cat > $RUNNER_TEMP/export.plist <<PL

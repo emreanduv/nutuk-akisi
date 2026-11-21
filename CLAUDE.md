@@ -61,3 +61,11 @@ FIFA nesli W-A-S-D'ye alışkın; bütün oyun ve uygulamalarda klavye bu alış
 
 ### Ekran uyanık kalsın (Emre'nin kuralı, 17 Kasım 2026)
 Oyun/uygulama açıkken ekran, dokunulmadı diye kararmaz (CBM'de maç izlerken kapanıyordu). iOS `AppDelegate.swift`: `application.isIdleTimerDisabled = true` (açılışta ve `applicationDidBecomeActive`); Android `MainActivity`: `FLAG_KEEP_SCREEN_ON`; masaüstü (Electron): `powerSaveBlocker.start('prevent-display-sleep')`; web/VR: `navigator.wakeLock` (index.html sonundaki küçük betik); Godot: `keep_screen_on` varsayılan açık, kapatılmaz. Yeni her üründe ilk işte konur. Gelişim Defteri G75.
+
+### Kayıt eşitleme: kaldığın yerden devam (Emre'nin kuralı, 21 Kasım 2026)
+Telefon değişince ya da iPhone, iPad, Mac arasında geçince oyunlar ve uygulamalar kaldığı yerden devam eder; hiçbir kayıt "çöp olmaz". Sunucu ve üyelik yok: kayıt kullanıcının kendi iCloud hesabında (iCloud anahtar-değer deposu, 1 MB'a kadar) durur.
+- Kurulum tek komut: emreanduv/malazgirt-akincilari `araclar/esitle_kur.py <uygulama kökü>` (esitle.js'i sayfaların başına koyar; iOS'a "Esitle" eklentisi, App.entitlements, pbxproj ve ios iş akışına "Eşitleme yetkisi arşive işlenir" adımı). Ortak dosya `www/esitle.js` oradadır; değişince bütün repolara yeniden kurulur.
+- App ID'de iCloud yeteneği açık olmalı (emreanduv/legend-heads `asc-icloud.yml`, girdi: virgülle bundle kimlikleri); yoksa dışa aktarım durur. Yeni ürün açılınca ilk işte yapılır.
+- Varsayılan: localStorage'daki bütün kayıtlar eşitlenir; cihaza özgü olanlar (kumanda ölçüsü, VR görünüşü, ekran) `ESITLE_HARIC` ile dışarıda kalır. En son değişen kazanır; ilk eşitlemede çakışırsa daha uzun (daha ilerlemiş) kayıt kalır, öteki `anahtar·eski` olarak saklanır. "Verilerimi sil" iCloud'daki kopyayı da siler.
+- Android: `android:allowBackup="true"` (Google yedeği) açık kalır. Steam: Steam Cloud (Steamworks ayarı Emre'nin). Kayıt 1 MB'ı aşarsa (CBM kariyeri) iCloud Belgeler'e geçilir.
+- Gizlilik politikasında "Cihazlar arası kayıt" paragrafı (TR + EN) bulunur. Gelişim Defteri G84.
