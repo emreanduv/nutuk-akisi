@@ -37,4 +37,7 @@ SON=$(tr -d ' \n' < store/SON-SURUM 2>/dev/null || echo 0.0.0)
 EN=$(printf '%s\n%s\n' "$SON" "$SURUM" | sort -V | tail -1)
 [ "$EN" = "$SURUM" ] && iyi "sürüm $SURUM ≥ son yayınlanan $SON" || kotu "sürüm $SURUM, son yayınlanandan ($SON) küçük"
 
+# Ses koruyucu (CLAUDE.md "Ses koruyucu"): arka plandan dönünce ses geri gelsin
+if grep -q 'ses-kurtarici.js' www/index.html && grep -q 'W.sesKurtar = later' www/ses-kurtarici.js && grep -q 'SesKoruyucu.shared.baslat' ios/App/App/AppDelegate.swift && grep -q 'window.sesKurtar' android/app/src/main/java/com/anduv/nutukakisi/MainActivity.java; then echo "✓ ses koruyucu (JS + iOS + Android)"; else echo "::error::Ses koruyucu eksik (ses-kurtarici.js, AppDelegate SesKoruyucu, MainActivity onResume)"; HATA=1; hata=1; fi
+# ses koruyucu sonu
 [ $hata -eq 0 ] && echo "Yayın öncesi kontrol geçti." || { echo "Yayın öncesi kontrol TUTMADI — derleme durduruldu."; exit 1; }

@@ -7,6 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        SesKoruyucu.shared.baslat() // ses koruyucu: arka plandan dönünce ses geri gelsin
         application.isIdleTimerDisabled = true // ekran uyanık kalsın (maç izlerken kararmasın)
         // Override point for customization after application launch.
         return true
@@ -101,3 +102,60 @@ class AnaViewController: CAPBridgeViewController {
     }
 }
 // MARK: Mr. Anduv! eşitleme (G84) sonu
+
+// MARK: Mr. Anduv! ses koruyucu başı (22 Kas 2026; kaynak: emreanduv/kervan-yolu)
+// Arka plandan (başka uygulama, bildirim, kilit ekranı, arama) dönünce ses geri gelsin.
+// Bildirim tabanlı: sahne (SceneDelegate) yaşam döngüsünde applicationDidBecomeActive çağrılmadığı için.
+import AVFoundation
+import WebKit
+final class SesKoruyucu: NSObject {
+    static let shared = SesKoruyucu()
+    private var basladi = false
+    func baslat() {
+        guard !basladi else { return }
+        basladi = true
+        oturumuAc()
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(dondu), name: UIApplication.didBecomeActiveNotification, object: nil)
+        nc.addObserver(self, selector: #selector(dondu), name: UIApplication.willEnterForegroundNotification, object: nil)
+        nc.addObserver(self, selector: #selector(dondu), name: AVAudioSession.mediaServicesWereResetNotification, object: nil)
+        nc.addObserver(self, selector: #selector(kesinti(_:)), name: AVAudioSession.interruptionNotification, object: nil)
+    }
+    func oturumuAc() {
+        let o = AVAudioSession.sharedInstance()
+        try? o.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+        try? o.setActive(true)
+    }
+    @objc func dondu() {
+        UIApplication.shared.isIdleTimerDisabled = true // ekran uyanık kalsın
+        oturumuAc()
+        webeHaberVer()
+    }
+    @objc func kesinti(_ n: Notification) {
+        guard let v = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let t = AVAudioSession.InterruptionType(rawValue: v), t == .ended else { return }
+        dondu()
+    }
+    private func webViews() -> [WKWebView] {
+        var sonuc: [WKWebView] = []
+        func tara(_ vc: UIViewController?) {
+            guard let vc = vc else { return }
+            if let b = vc as? CAPBridgeViewController, let w = b.bridge?.webView, !sonuc.contains(where: { $0 === w }) { sonuc.append(w) }
+            vc.children.forEach { tara($0) }
+            tara(vc.presentedViewController)
+        }
+        var pencereler: [UIWindow] = []
+        for s in UIApplication.shared.connectedScenes { if let ws = s as? UIWindowScene { pencereler += ws.windows } }
+        if let w = UIApplication.shared.delegate?.window ?? nil { pencereler.append(w) }
+        pencereler.forEach { tara($0.rootViewController) }
+        return sonuc
+    }
+    func webeHaberVer() {
+        for gecikme in [0.25, 1.0] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + gecikme) {
+                self.webViews().forEach { $0.evaluateJavaScript("window.sesKurtar&&window.sesKurtar()", completionHandler: nil) }
+            }
+        }
+    }
+}
+// MARK: Mr. Anduv! ses koruyucu sonu

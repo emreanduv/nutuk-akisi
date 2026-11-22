@@ -59,6 +59,13 @@ FIFA nesli W-A-S-D'ye alışkın; bütün oyun ve uygulamalarda klavye bu alış
 - Klavyesiz oyun bırakılmaz: tıkla-gez oyunlarında da WASD ile yürüme, E/Boşluk ile yakındaki şeye dokunma olur (örnek: Kırmızı Yalı `www/js/motor.js` "Klavye (WASD + oklar)").
 - Yardım / "Nasıl Oynanır" ekranında tuşlar Türkçe ve İngilizce yazılır. Gelişim Defteri G43.
 
+### Ses koruyucu (Emre'nin kuralı, 22 Kasım 2026; bütün oyun ve uygulamalar)
+Uygulama arka plana gidip (başka uygulama, bildirim, kilit ekranı, arama) geri gelince ses kaybolmaz; kapatıp açmak gerekmez. Üç parça, her üründe ilk işte konur ve yayın kontrolünde aranır (kaynak hep emreanduv/kervan-yolu, dosyalar birebir kopyalanır):
+- `ses-kurtarici.js` (v3) web kökünde, `index.html` `<head>`'inde **bütün betiklerden önce**: sayfadaki bütün AudioContext'leri (Phaser, Howler dahil) kayda alır; görünürlük/odak/Capacitor appStateChange/ilk dokunuşta birkaç kez `resume()` + sessiz dürtme, duran `<audio>/<video>`'yu sürdürür, `window.sesKurtar()` verir. İsteğe bağlı `SesKurtarici.yenidenKur(fn)`.
+- iOS `AppDelegate.swift`: dosya sonundaki `SesKoruyucu` sınıfı (`didFinishLaunching`'te `SesKoruyucu.shared.baslat()`). **Bildirimle** çalışır (didBecomeActive/willEnterForeground/kesinti bitişi/medya sıfırlanması), çünkü SceneDelegate kullanan uygulamada `applicationDidBecomeActive` hiç çağrılmaz. `AVAudioSession` `.playback` + `.mixWithOthers`, `setActive(true)`, sonra bütün sahnelerdeki Capacitor web görünümüne `window.sesKurtar()`.
+- Android `MainActivity`: `onResume`'da `webView.onResume()` + `resumeTimers()` + `window.sesKurtar()` (250 ms ve 1 sn).
+- Masaüstü (Electron) ve VR (Quest tarayıcı) aynı `ses-kurtarici.js` ile. Gelişim Defteri G90.
+
 ### Ekran uyanık kalsın (Emre'nin kuralı, 17 Kasım 2026)
 Oyun/uygulama açıkken ekran, dokunulmadı diye kararmaz (CBM'de maç izlerken kapanıyordu). iOS `AppDelegate.swift`: `application.isIdleTimerDisabled = true` (açılışta ve `applicationDidBecomeActive`); Android `MainActivity`: `FLAG_KEEP_SCREEN_ON`; masaüstü (Electron): `powerSaveBlocker.start('prevent-display-sleep')`; web/VR: `navigator.wakeLock` (index.html sonundaki küçük betik); Godot: `keep_screen_on` varsayılan açık, kapatılmaz. Yeni her üründe ilk işte konur. Gelişim Defteri G75.
 
