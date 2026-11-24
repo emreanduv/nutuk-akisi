@@ -1,0 +1,127 @@
+{
+ "adimlar": [],
+ "derlemeler": [
+  [
+   "1.2.3",
+   "10",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "IN_BETA_TESTING"
+  ],
+  [
+   "1.2.2",
+   "9",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "IN_BETA_TESTING"
+  ],
+  [
+   "1.2.1",
+   "8",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "IN_BETA_TESTING"
+  ],
+  [
+   "1.2.0",
+   "7",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "IN_BETA_TESTING"
+  ],
+  [
+   "1.1.0",
+   "6",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "IN_BETA_TESTING"
+  ],
+  [
+   "1.1.0",
+   "5",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "READY_FOR_BETA_SUBMISSION"
+  ],
+  [
+   "1.0.3",
+   "4",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "IN_BETA_TESTING"
+  ],
+  [
+   "1.0.2",
+   "3",
+   "VALID",
+   false,
+   "IN_BETA_TESTING",
+   "READY_FOR_BETA_SUBMISSION"
+  ]
+ ],
+ "gruplar": [
+  {
+   "ad": "Mr. Anduv! Testçiler",
+   "ic": true,
+   "tum_derlemeler": true,
+   "testciler": [
+    [
+     "emreanduv@hotmail.com",
+     "INSTALLED"
+    ]
+   ]
+  },
+  {
+   "ad": "Aile Testçileri",
+   "ic": false,
+   "tum_derlemeler": null,
+   "testciler": [
+    [
+     "mebayramcavus@icloud.com",
+     "INVITED"
+    ],
+    [
+     "mbayramcavus@icloud.com",
+     "INVITED"
+    ],
+    [
+     "zeynepbayramcavus@icloud.com",
+     "INVITED"
+    ]
+   ]
+  },
+  {
+   "ad": "Mr. Anduv! Dış Testçiler",
+   "ic": false,
+   "tum_derlemeler": null,
+   "testciler": [
+    [
+     "mebayramcavus@icloud.com",
+     "INVITED"
+    ],
+    [
+     "emreanduv@hotmail.com",
+     "INSTALLED"
+    ],
+    [
+     "mbayramcavus@icloud.com",
+     "INVITED"
+    ],
+    [
+     "zeynepbayramcavus@icloud.com",
+     "INVITED"
+    ]
+   ]
+  }
+ ],
+ "hatalar": [
+  "POST v1/betaGroups/8c39c065-15fc-429a-807e-bcc48c318f0b/relationships/builds -> 422 {\n  \"errors\" : [ {\n    \"id\" : \"bb196427-cc98-4904-8ac4-ee83165ad239\",\n    \"status\" : \"422\",\n    \"code\" : \"ENTITY_UNPROCESSABLE\",\n    \"title\" : \"Builds cannot be assigned to this internal group.\",\n    \"detail\" : \"Cannot add internal group to a build.\"\n  } ]\n}"
+ ]
+}
