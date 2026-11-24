@@ -16,16 +16,16 @@ def api(m, p, b=None):
     except urllib.error.HTTPError as e: log.append(f'{m} {p.split("?")[0]} -> {e.code} {e.read().decode()[:600]}'); return None
 AID = api('GET', f'v1/apps?filter[bundleId]={BUNDLE}')['data'][0]['id']
 # derlemeler
-q = f'v1/builds?filter[app]={AID}&sort=-uploadedDate&limit=8&include=preReleaseVersion,buildBetaDetail&fields[builds]=version,processingState,uploadedDate,expired'
+q = f'v1/builds?filter[app]={AID}&sort=-uploadedDate&limit=8&include=preReleaseVersion,buildBetaDetail&fields[builds]=version,processingState,uploadedDate,expired,preReleaseVersion,buildBetaDetail'
 bl = api('GET', q) or {'data': [], 'included': []}
 pre = {x['id']: x['attributes']['version'] for x in bl.get('included', []) if x['type'] == 'preReleaseVersions'}
 det = {x['id']: x['attributes'] for x in bl.get('included', []) if x['type'] == 'buildBetaDetails'}
 out['derlemeler'] = []
 for b in bl['data']:
-    pv = pre.get(((b['relationships'].get('preReleaseVersion') or {}).get('data') or {}).get('id'), '?')
-    d = det.get(((b['relationships'].get('buildBetaDetail') or {}).get('data') or {}).get('id'), {})
+    pv = pre.get(((b.get('relationships', {}).get('preReleaseVersion') or {}).get('data') or {}).get('id'), '?')
+    d = det.get(((b.get('relationships', {}).get('buildBetaDetail') or {}).get('data') or {}).get('id'), {})
     out['derlemeler'].append([pv, b['attributes']['version'], b['attributes']['processingState'], b['attributes'].get('expired'), d.get('internalBuildState'), d.get('externalBuildState')])
-hedef = next((b for b in bl['data'] if (not BNO or b['attributes']['version'] == BNO) and (not SURUM or pre.get(((b['relationships'].get('preReleaseVersion') or {}).get('data') or {}).get('id')) == SURUM)), None)
+hedef = next((b for b in bl['data'] if (not BNO or b['attributes']['version'] == BNO) and (not SURUM or pre.get(((b.get('relationships', {}).get('preReleaseVersion') or {}).get('data') or {}).get('id')) == SURUM)), None)
 # gruplar
 gr = (api('GET', f'v1/apps/{AID}/betaGroups?limit=20&fields[betaGroups]=name,isInternalGroup,hasAccessToAllBuilds') or {}).get('data', [])
 out['gruplar'] = []
