@@ -22,8 +22,11 @@ if APP['attributes'].get('contentRightsDeclaration') != 'USES_THIRD_PARTY_CONTEN
 # Nutuk Salonu Çin anakarasında dağıtılmaz; istenirse ileride bu belgelerle geri açılır.
 av = api('GET', f'v1/apps/{AID}/appAvailabilityV2')
 if av and av.get('data'):
-    ta = api('GET', f"v2/appAvailabilities/{av['data']['id']}/territoryAvailabilities?filter[territory]=CHN&limit=5&fields[territoryAvailabilities]=available") or {}
-    for t in ta.get('data', []):
+    ta = api('GET', f"v2/appAvailabilities/{av['data']['id']}/territoryAvailabilities?limit=200&include=territory") or {}
+    cin = [t for t in ta.get('data', []) if ((t.get('relationships') or {}).get('territory') or {}).get('data', {}).get('id') == 'CHN']
+    out['bolge_sayisi'] = len(ta.get('data', []))
+    if not cin: log.append('CHN bölgesi listede bulunamadı')
+    for t in cin:
         if t['attributes'].get('available'):
             if api('PATCH', f"v1/territoryAvailabilities/{t['id']}", {'data': {'type': 'territoryAvailabilities', 'id': t['id'], 'attributes': {'available': False}}}) is not None: ok('Çin anakarası dağıtımdan çıkarıldı (AIGC + güvenlik belgesi şartı)')
         else: ok('Çin anakarası zaten kapalı')
