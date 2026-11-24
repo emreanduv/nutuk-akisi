@@ -1,0 +1,31 @@
+name: TestFlight dağıtım (Nutuk Salonu)
+# İç test grubunu ve testçileri kontrol eder, derlemeyi iç gruba ekler. Mağaza incelemesine dokunmaz.
+on:
+  workflow_dispatch:
+    inputs:
+      surum: { description: "Sürüm (boş: en yeni)", required: false, default: "" }
+      build_number: { description: "Derleme no (boş: en yeni)", required: false, default: "" }
+      testciler: { description: "İç testçiler (virgülle)", required: false, default: "emreanduv@hotmail.com" }
+permissions:
+  contents: write
+env:
+  ASC_KEY_ID: DJSHKK6T3P
+  ASC_ISSUER_ID: f4943ef8-df6f-42c8-a561-58554097ea35
+jobs:
+  dagit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Anahtar
+        env: { P8: "${{ secrets.ASC_KEY_P8 }}" }
+        run: mkdir -p ~/private_keys && printf '%s' "$P8" > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
+      - run: pip3 install --quiet pyjwt cryptography
+      - name: Dağıt
+        env: { SURUM: "${{ inputs.surum }}", BUILD_NO: "${{ inputs.build_number }}", TESTCILER: "${{ inputs.testciler }}" }
+        run: python3 araclar/testflight_durum.py
+      - name: Durumu asc-durum dalına yaz
+        if: always()
+        run: |
+          mkdir -p /tmp/d && cp durum.json /tmp/d/ 2>/dev/null || echo '{}' > /tmp/d/durum.json; cd /tmp/d
+          git init -q -b asc-durum && git config user.name "github-actions" && git config user.email "actions@github.com"
+          git add . && git commit -qm "TestFlight durum" && git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" asc-durum
