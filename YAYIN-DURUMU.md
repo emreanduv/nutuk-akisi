@@ -37,3 +37,9 @@ Vikikaynak'ta olmayan (karşılaştırılamayan) özgün satırlar: Onuncu Yıl 
 - Gizlilik politikası (docs/gizlilik.html): sahip, işlenen/işlenmeyen veriler, barındırma, silme talebi (uygulama içi + e-posta, 30 gün), TR + EN.
 - Nutuk Salonu (emreanduv.github.io/nutuk-salonu + docs/salon kopyası): rehber + Nasıl kullanılır panosu (VR'da A/B/X/Y ya da bel hizasındaki ?), Verilerimi sil, framebuffer 0.9 + 72 Hz.
 - Derleme: Android/iOS iş akışı sürüm adı **1.0.3** (yapı/sürüm kodu iş akışı numarasından otomatik); Quest iş akışı **1.0.2 / 3**.
+
+## 24 Kasım 2026 · App Store: Nutuk Salonu 1.2.3 incelemede
+- App Store kaydının adı Nutuk Salonu (eski Nutuk Akışı; bundle com.anduv.nutukakisi aynı). Sürüm 1.0.2 → 1.2.3, derleme 10 bağlı.
+- Sayfa `asc-sayfa` iş akışıyla: TR + EN metin (`store/appstore/metin.json`), 32 yeni ekran görüntüsü (`store/appstore/ekran`, iPhone 6.9" + iPad 13"), inceleme notu.
+- Emre'nin isteğiyle `asc-gonder` iş akışı gönderdi: içerik hakları "üçüncü taraf içeriği var, haklar uygun" (kamu malı Nutuk + Vikipedi), **Çin anakarası dağıtım dışı** (Apple'ın yeni uygulamalardan istediği AIGC beyanı ve güvenlik değerlendirmesi raporu olmadan gönderim kilitliydi; 174 ülke). Durum: WAITING_FOR_REVIEW.
+- Onay gelince: `store/SON-SURUM` → 1.2.3. Sıradaki mağaza: Google Play (kayıt adı Nutuk Salonu yapılacak, 1.2.3 AAB imzası Emre'de, kapalı test 12 kişi × 14 gün), sonra Meta Quest güncellemesi.
