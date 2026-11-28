@@ -1,0 +1,20 @@
+name: App Store gizlilik/destek bağlantısı güncelle
+on:
+  workflow_dispatch:
+    inputs:
+      bundle: { required: true }
+      gizlilik: { required: false, default: '' }
+      destek: { required: false, default: '' }
+env:
+  ASC_KEY_ID: DJSHKK6T3P
+  ASC_ISSUER_ID: f4943ef8-df6f-42c8-a561-58554097ea35
+jobs:
+  guncelle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env: { P8: "${{ secrets.ASC_KEY_P8 }}" }
+        run: mkdir -p ~/private_keys && printf '%s' "$P8" > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
+      - run: pip3 install --quiet pyjwt cryptography
+      - env: { BUNDLE: "${{ inputs.bundle }}", GIZLILIK: "${{ inputs.gizlilik }}", DESTEK: "${{ inputs.destek }}" }
+        run: python3 araclar/asc_url.py
