@@ -79,3 +79,9 @@ Telefon değişince ya da iPhone, iPad, Mac arasında geçince oyunlar ve uygula
 
 ### Web sayfaları vitrinde (28 Kasım 2026)
 Bu reponun yayınlanan sayfaları (gizlilik politikaları, önizleme, VR salonu) **emreanduv/emreanduv.github.io** reposunda, aynı adreste durur (`emreanduv.github.io/<repo-adı>/…`). Repo private olduğu için buradaki `docs/` (ya da `gh-pages`) artık yayınlanmaz; bir sayfa değişince vitrindeki kopyası da güncellenir.
+
+### Repolar private, vitrin public (Emre'nin kuralı, 28 Kasım 2026)
+- **Bütün repolar private.** Yalnız iki repo public: `emreanduv/emreanduv` (profil) ve `emreanduv/emreanduv.github.io` (vitrin). Yeni bir oyun/uygulama reposu açılırken ilk günden private açılır.
+- Herkesin görmesi gereken her şey vitrine işlenir: gizlilik politikaları, destek sayfası, web/VR sürümleri, önizlemeler, tanıtım metinleri ve bağlantılar → `emreanduv.github.io/<ürün-adı>/…`. Oyun/uygulamanın ana klasörü (kod) private repoda kalır.
+- Mağazalara (App Store, Google Play, Meta, Steam) verilen gizlilik/destek/pazarlama bağlantısı **asla** `github.com/emreanduv/<repo>/…` (blob, issues, docs) olmaz; her zaman vitrin adresi. Bir sayfa repoda değişirse vitrindeki kopyası da aynı gün güncellenir.
+- İstisna (yalnız Emre'nin kararıyla): GitHub Actions bütçesi bitip iş durursa, bir repo ay başında dakikalar yenilenene kadar **kısa süreli** public yapılabilir. Açmadan önce repoda anahtar/şifre/.env/imza dosyası olmadığı denetlenir; ay dönünce yeniden private yapılır.
