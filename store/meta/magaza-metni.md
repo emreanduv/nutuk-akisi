@@ -2,7 +2,7 @@
 
 - **Uygulama:** Nutuk Salonu · App ID 1486088641248406 · paket `com.anduv.nutuksalonu`
 - **Adres (PWA):** https://emreanduv.github.io/nutuk-salonu/ · **Gizlilik:** https://emreanduv.github.io/nutuk-salonu/gizlilik.html
-- **Destek:** emreanduvart@gmail.com · https://github.com/emreanduv/nutuk-akisi/issues
+- **Destek:** emreanduvart@gmail.com · https://emreanduv.github.io/nutuk-salonu/
 - **Fiyat:** Ücretsiz · reklam yok · uygulama içi satın alma yok · veri toplanmaz
 - **Kategori:** Eğitim (Education) · Türler: Eğitici, Tarih/Kültür, Simülasyon
 - **Rahatlık:** Rahat (Comfortable) — oturarak/ayakta, ışınla yürüme (ışınlanma), 30° adımlı dönüş

@@ -15,6 +15,6 @@
  },
  "inceleme_notu": "Nutuk Salonu (formerly listed as Nutuk Akisi; same bundle com.anduv.nutukakisi) needs no sign-in and collects no data. All texts are bundled in the app, including the full text of Nutuk (1927, Turkish Wikisource) and its 1929 English edition (Internet Archive); both are in the public domain (Ataturk died in 1938). Only 'On this day' reads Turkish Wikipedia's public API. How to review: on first launch choose a language. Texts: tap a card to read the original words with the modern rendering beneath. Hall (second tab): a 3D 1927 Assembly hall drawn on the device; use the arrow buttons or Auto to advance Nutuk on the rostrum, drag to look around, double-tap the floor to walk, tap the golden 'i' points; the back button at top left returns to the app. Full Text: chapters, search and reading position. Settings: language, how to use, rate, share, contact, delete my data. The optional daily notification is local (no server). The same hall is also published as Nutuk Salonu on the Meta Horizon Store (VR).",
  "telif": "2026 Mr. Anduv!",
- "destek": "https://github.com/emreanduv/nutuk-akisi/issues",
+ "destek": "https://emreanduv.github.io/nutuk-salonu/",
  "gizlilik": "https://emreanduv.github.io/nutuk-akisi/gizlilik.html"
 }

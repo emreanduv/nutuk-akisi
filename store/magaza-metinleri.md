@@ -2,7 +2,7 @@
 
 - **Paket / Bundle ID:** `com.anduv.nutukakisi` (değişmez; eski adı Nutuk Akışı) · Quest: `com.anduv.nutuksalonu` · **Sürüm:** 1.2.0 (bütün mağazalarda aynı)
 - **Gizlilik politikası:** https://emreanduv.github.io/nutuk-akisi/gizlilik.html
-- **Destek URL'si:** https://github.com/emreanduv/nutuk-akisi/issues
+- **Destek URL'si:** https://emreanduv.github.io/nutuk-salonu/
 - **Telif satırı:** 2026 Mr. Anduv!
 
 ## Bu sürümde yenilikler (1.2.0)
