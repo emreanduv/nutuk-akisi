@@ -76,3 +76,6 @@ Telefon değişince ya da iPhone, iPad, Mac arasında geçince oyunlar ve uygula
 - Varsayılan: localStorage'daki bütün kayıtlar eşitlenir; cihaza özgü olanlar (kumanda ölçüsü, VR görünüşü, ekran) `ESITLE_HARIC` ile dışarıda kalır. En son değişen kazanır; ilk eşitlemede çakışırsa daha uzun (daha ilerlemiş) kayıt kalır, öteki `anahtar·eski` olarak saklanır. "Verilerimi sil" iCloud'daki kopyayı da siler.
 - Android: `android:allowBackup="true"` (Google yedeği) açık kalır. Steam: Steam Cloud (Steamworks ayarı Emre'nin). Kayıt 1 MB'ı aşarsa (CBM kariyeri) iCloud Belgeler'e geçilir.
 - Gizlilik politikasında "Cihazlar arası kayıt" paragrafı (TR + EN) bulunur. Gelişim Defteri G84.
+
+### Web sayfaları vitrinde (28 Kasım 2026)
+Bu reponun yayınlanan sayfaları (gizlilik politikaları, önizleme, VR salonu) **emreanduv/emreanduv.github.io** reposunda, aynı adreste durur (`emreanduv.github.io/<repo-adı>/…`). Repo private olduğu için buradaki `docs/` (ya da `gh-pages`) artık yayınlanmaz; bir sayfa değişince vitrindeki kopyası da güncellenir.
